@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ToDoList</title>
+    <style>
+        :root {
+            --bg-color: #f4f7fa;
+            --container-bg: white;
+            --text-color: #2c3e50;
+            --sub-text: #7f8c8d;
+            --primary-color: #3498db;
+            --primary-hover: #2980b9;
+            --border-color: #eee;
+        }
+
+        body.dark-mode {
+            --bg-color: #1a1a2e;
+            --container-bg: #16213e;
+            --text-color: #e94560;
+            --sub-text: #95a5a6;
+            --primary-color: #0f3460;
+            --primary-hover: #1a1a2e;
+            --border-color: #2c3e50;
+        }
+
+        body {
+            font-family: "Meiryo", sans-serif;
+            margin: 30px;
+            background: var(--bg-color);
+            line-height: 1.6;
+            color: var(--text-color);
+            transition: all 0.3s;
+        }
+
+        h1 {
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        details {
+            margin: 15px 0;
+            background: var(--container-bg);
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        summary {
+            padding: 16px 20px;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        summary:hover {
+            background: var(--primary-hover);
+        }
+
+        .category {
+            padding: 10px 25px 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            padding: 12px 0;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        input[type="checkbox"] {
+            transform: scale(1.4);
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .item-text {
+            flex: 1;
+            cursor: pointer;
+        }
+
+        .timestamp {
+            font-size: 0.8em;
+            color: var(--sub-text);
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .done .item-text {
+            text-decoration: line-through;
+            color: #95a5a6;
+        }
+
+        .progress-bar-container {
+            width: 150px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-left: 15px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #2ecc71;
+            transition: width 0.3s;
+        }
+
+        .priority-badge {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-right: 10px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .priority-high {
+            background: #e74c3c;
+        }
+
+        .priority-medium {
+            background: #f39c12;
+        }
+
+        .priority-low {
+            background: #2ecc71;
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .actions {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        button {
+            padding: 12px 24px;
+            margin: 0 10px;
+            background: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #27ae60;
+        }
+
+        button.export {
+            background: #9b59b6;
+        }
+
+        button.export:hover {
+            background: #8e44ad;
+        }
+
+        button.delete {
+            background: #e74c3c;
+        }
+
+        button.delete:hover {
+            background: #c0392b;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 350px;
+            font-size: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        .add-item {
+            margin: 15px 25px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #27ae60;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: 9999;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>ToDoList</h1>
+        <button class="dark-mode-toggle" onclick="toggleDarkMode()" id="darkModeBtn">🌙</button>
+        <!--<p style="text-align:center;color:#7f8c8d;">軽量ToDoList</p>-->
+
+        <div id="categories"></div>
+
+        <div class="actions">
+            <input type="text" id="newCategory" placeholder="新しいカテゴリ名を入力">
+            <button onclick="addCategory()">＋ 新しいカテゴリを追加</button>
+        </div>
+
+        <div class="actions">
+            <button class="export" onclick="exportToMarkdown()">
+                MarkDownでCopy
+            </button>
+        </div>
+    </div>
+
+    <div class="notification" id="notify">コピー完了！</div>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('todo_dark_mode', isDark);
+            document.getElementById('darkModeBtn').textContent = isDark ? '☀️' : '🌙';
+        }
+
+        const STORAGE_KEY = 'vba_reverse_dictionary_todo';
+
+        function now() {
+            return new Date().toLocaleString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).replace(/\//g, '/');
+        }
+
+        function loadData() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                const data = JSON.parse(saved);
+                data.forEach(cat => {
+                    cat.items = cat.items.map(item => {
+                        if (typeof item === 'string') {
+                            return { text: item, checked: false, added: '不明（旧データ）' };
+                        }
+                        if (!item.added) item.added = '不明（旧データ）';
+                        return item;
+                    });
+                });
+                return data;
+            }
+            return [];
+        }
+
+        let categories = loadData();
+
+        function saveData() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(categories));
+        }
+
+        function render() {
+            const container = document.getElementById('categories');
+            container.innerHTML = '';
+            categories.forEach((cat, catIndex) => {
+                const details = document.createElement('details');
+                if (cat.open) details.open = true;
+
+                const summary = document.createElement('summary');
+                const titleSpan = document.createElement('span');
+                titleSpan.textContent = cat.name;
+
+                // Progress Bar
+                const total = cat.items.length;
+                const done = cat.items.filter(i => i.checked).length;
+                const percent = total === 0 ? 0 : Math.round((done / total) * 100);
+
+                const progressContainer = document.createElement('div');
+                progressContainer.className = 'progress-bar-container';
+                const progressFill = document.createElement('div');
+                progressFill.className = 'progress-fill';
+                progressFill.style.width = `${percent}%`;
+                progressContainer.appendChild(progressFill);
+
+                const ratioText = document.createElement('span');
+                ratioText.style.fontSize = '12px';
+                ratioText.style.marginLeft = '10px';
+                ratioText.textContent = `${done}/${total} (${percent}%)`;
+
+                const summaryRight = document.createElement('div');
+                summaryRight.style.display = 'flex';
+                summaryRight.style.alignItems = 'center';
+                summaryRight.append(ratioText, progressContainer);
+
+                summary.append(titleSpan, summaryRight);
+
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category';
+
+                const ul = document.createElement('ul');
+                cat.items.forEach((item, i) => {
+                    const li = document.createElement('li');
+                    if (item.checked) li.classList.add('done');
+
+                    const cb = document.createElement('input');
+                    cb.type = 'checkbox';
+                    cb.checked = item.checked || false;
+                    cb.addEventListener('change', () => {
+                        item.checked = cb.checked;
+                        li.classList.toggle('done', cb.checked);
+                        saveData();
+                        render(); // Re-render for progress bar
+                    });
+
+                    // Priority Badge
+                    if (item.priority) {
+                        const badge = document.createElement('span');
+                        badge.className = `priority-badge priority-${item.priority}`;
+                        badge.textContent = item.priority.toUpperCase();
+                        li.appendChild(badge);
+                    }
+
+                    const textSpan = document.createElement('span');
+                    textSpan.className = 'item-text';
+                    textSpan.textContent = item.text;
+                    textSpan.onclick = () => cb.click();
+
+                    const timeSpan = document.createElement('span');
+                    timeSpan.className = 'timestamp';
+                    timeSpan.textContent = item.added || '不明';
+
+                    const del = document.createElement('span');
+                    del.textContent = ' ×';
+                    del.style.marginLeft = 'auto'; del.style.color = '#e74c3c'; del.style.cursor = 'pointer'; del.style.paddingLeft = '10px';
+                    del.onclick = e => { e.stopPropagation(); cat.items.splice(i, 1); saveData(); render(); };
+
+                    li.append(cb, textSpan, timeSpan, del);
+                    ul.appendChild(li);
+                });
+
+                // 項目追加（ここで日時を自動記録！）
+                const addDiv = document.createElement('div');
+                addDiv.className = 'add-item';
+                const inp = document.createElement('input');
+                inp.type = 'text'; inp.placeholder = '新しい項目を追加…';
+
+                const prio = document.createElement('select');
+                prio.style.padding = '10px'; prio.style.borderRadius = '6px';
+                prio.innerHTML = `
+                    <option value="low">低</option>
+                    <option value="medium">中</option>
+                    <option value="high">高</option>
+                `;
+
+                const btn = document.createElement('button');
+                btn.textContent = '＋追加';
+                btn.onclick = () => {
+                    if (inp.value.trim()) {
+                        cat.items.push({
+                            text: inp.value.trim(),
+                            checked: false,
+                            added: now(),
+                            priority: prio.value
+                        });
+                        inp.value = '';
+                        saveData();
+                        render();
+                    }
+                };
+                inp.addEventListener('keypress', e => { if (e.key === 'Enter') btn.click(); });
+                addDiv.append(inp, prio, btn);
+
+                const delCat = document.createElement('button');
+                delCat.textContent = 'このカテゴリ全体を削除';
+                delCat.className = 'delete';
+                delCat.style.margin = '15px 0';
+                delCat.onclick = () => {
+                    if (confirm(`「${cat.name}」を削除しますか？`)) {
+                        categories.splice(catIndex, 1);
+                        saveData();
+                        render();
+                    }
+                };
+
+                categoryDiv.append(ul, addDiv, delCat);
+                details.append(summary, categoryDiv);
+                container.appendChild(details);
+            });
+        }
+
+        function addCategory() {
+            const input = document.getElementById('newCategory');
+            const name = input.value.trim();
+            if (name) {
+                categories.push({ name, items: [], open: true });
+                input.value = '';
+                saveData();
+                render();
+            }
+        }
+
+        document.getElementById('newCategory').addEventListener('keypress', e => {
+            if (e.key === 'Enter') addCategory();
+        });
+
+        function exportToMarkdown() {
+            let md = `# バックアップ\n`;
+            md += `_エクスポート日時: ${now()}_\n\n`;
+
+            categories.forEach(cat => {
+                md += `## ${cat.name}\n\n`;
+                cat.items.forEach(item => {
+                    const mark = item.checked ? '[x]' : '[ ]';
+                    const time = item.added ? ` _(${item.added})_` : '';
+                    md += `- ${mark} ${item.text}${time}\n`;
+                });
+                md += `\n`;
+            });
+
+            navigator.clipboard.writeText(md).then(() => {
+                const notify = document.getElementById('notify');
+                notify.textContent = '日時付きでコピー完了！';
+                notify.style.opacity = 1;
+                setTimeout(() => notify.style.opacity = 0, 2500);
+            });
+        }
+
+        if (localStorage.getItem('todo_dark_mode') === 'true') {
+            document.body.classList.add('dark-mode');
+            const btn = document.getElementById('darkModeBtn');
+            if (btn) btn.textContent = '☀️';
+        }
+
+        render();
+    </script>
+</body>
+
+</html>

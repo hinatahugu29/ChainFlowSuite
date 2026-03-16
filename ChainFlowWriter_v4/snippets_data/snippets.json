@@ -1,0 +1,117 @@
+[
+    {
+        "id": "7f236c26-bb1f-4d5b-9290-d64e86ef9d7d",
+        "title": "Warning Block (Callout)",
+        "tags": [
+            "callout",
+            "warning",
+            "block"
+        ],
+        "content": "<div class='warning'>\n**Warning!**\n\nTake note of this important information.\n</div>",
+        "thumbnail": "default_ebcbe58e.png",
+        "created_at": "2026-03-11T21:33:38.672228"
+    },
+    {
+        "id": "0e54e099-c8a4-4f28-aadc-3c7d899d212d",
+        "title": "Info Block (Callout)",
+        "tags": [
+            "callout",
+            "info",
+            "block"
+        ],
+        "content": "<div class='info'>\n**Tip:**\n\nHere is a helpful tip or contextual note.\n</div>",
+        "thumbnail": "default_04d00918.png",
+        "created_at": "2026-03-11T21:33:38.707190"
+    },
+    {
+        "id": "5770e256-d4df-4402-9d9e-5b552b46f8a9",
+        "title": "2-Column Layout (Flex)",
+        "tags": [
+            "layout",
+            "columns",
+            "flex"
+        ],
+        "content": "<div style='display: flex; gap: 20px;'>\n<div style='flex: 1;'>\n\n### Left Column\nContent goes here.\n\n</div>\n<div style='flex: 1;'>\n\n### Right Column\nContent goes here.\n\n</div>\n</div>",
+        "thumbnail": "default_09fb6c63.png",
+        "created_at": "2026-03-11T21:33:38.783700"
+    },
+    {
+        "id": "2d5def44-8dd3-4074-bbfe-54e8912e4bf0",
+        "title": "Standard Basic Table",
+        "tags": [
+            "table",
+            "markdown"
+        ],
+        "content": "| ID | Name | Role |\n|:---|:---|:---|\n| 1 | Alice | Admin |\n| 2 | Bob | Editor |",
+        "thumbnail": "default_c384a093.png",
+        "created_at": "2026-03-11T21:33:38.832132"
+    },
+    {
+        "id": "c8323727-b2c4-4ffd-920c-544424a3a7bc",
+        "title": "Image with Caption",
+        "tags": [
+            "image",
+            "caption",
+            "layout"
+        ],
+        "content": "<div style=\"text-align: center; margin: 20px 0;\">\n<img src=\"https://via.placeholder.com/600x300\" style=\"max-width: 100%; border-radius: 8px;\">\n<p style=\"color: #666; font-size: 0.9em; margin-top: 8px;\"><b>図1:</b> 画像の説明文をここに記載します</p>\n</div>",
+        "thumbnail": "b3d56bfa.png",
+        "created_at": "2026-03-11T21:45:12.641757"
+    },
+    {
+        "id": "95078dc4-a65e-41e0-b03a-1ed146a1b927",
+        "title": "Code with Filename",
+        "tags": [
+            "code",
+            "development"
+        ],
+        "content": "<div style=\"background: #333; color: #eee; padding: 5px 15px; border-radius: 4px 4px 0 0; font-family: monospace; font-size: 0.8em;\">main.py</div>\n\n```python\ndef hello_world():\n    print(\"Hello from ChainFlow!\")\n```",
+        "thumbnail": "a083e359.png",
+        "created_at": "2026-03-11T21:45:23.196992"
+    },
+    {
+        "id": "798bc98c-042b-40b2-aee8-45639b4cb7a7",
+        "title": "Critical Alert (Danger)",
+        "tags": [
+            "alert",
+            "danger",
+            "warning"
+        ],
+        "content": "<div style=\"background-color: #fff0f0; border: 1px solid #ff4d4f; border-left: 5px solid #ff4d4f; padding: 15px; color: #a8071a;\">\n\n**重要:** この操作は取り消せません。実行前に必ずバックアップを確認してください。\n\n</div>",
+        "thumbnail": "f98bed23.png",
+        "created_at": "2026-03-11T21:45:38.570944"
+    },
+    {
+        "id": "f9807d78-11b7-4ff1-b0b7-5a9520188ee5",
+        "title": "Quote with Author",
+        "tags": [
+            "quote",
+            "typography"
+        ],
+        "content": "<blockquote style=\"font-style: italic; border-left: 4px solid #0E639C; padding: 10px 20px; background: #f9f9f9;\">\n\"創造性は、知識を無駄にしないための最良の方法だ。\"\n<p style=\"text-align: right; font-style: normal; color: #555;\">— 著名なクリエイター</p>\n</blockquote>",
+        "thumbnail": "d8438ca2.png",
+        "created_at": "2026-03-11T21:45:39.710946"
+    },
+    {
+        "id": "3e524bfa-3551-4da9-9835-fe31a4d111f2",
+        "title": "Gradient Divider",
+        "tags": [
+            "divider",
+            "style"
+        ],
+        "content": "<hr style=\"border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0,0,0,0), #0E639C, rgba(0,0,0,0)); margin: 30px 0;\">",
+        "thumbnail": "10ecd4ca.png",
+        "created_at": "2026-03-11T21:45:39.793795"
+    },
+    {
+        "id": "e89fc834-0fc7-4afe-8a63-5676c912b3bd",
+        "title": "Simple Progress Bar",
+        "tags": [
+            "ui",
+            "progress"
+        ],
+        "content": "### 進捗状況: 75%\n<div style=\"width: 100%; background: #eee; border-radius: 10px; height: 12px;\">\n<div style=\"width: 75%; background: #0E639C; border-radius: 10px; height: 100%;\"></div>\n</div>",
+        "thumbnail": "076049df.png",
+        "created_at": "2026-03-11T21:45:39.850160"
+    }
+]
