@@ -1,34 +1,48 @@
-# ChainFlowWriter v6
+# ChainFlow Writer (v6)
 
-Markdownの機動力と、ビジネス報告書に求められる緻密なレイアウト自由度を両立させた「次世代ライブラリ・ライター」です。
+[Japanese] | [English]
 
-## プロジェクトの思想
-「Wordのレイアウト調整に浪費する時間を、思考と執筆の時間に変える」
-Markdownで構造を書き、プロパティパネルで直感的にスタイルを整える。最終的には、そのまま提出可能なレベルの美しいPDF/印刷物を生成します。
+## 🌟 Overview / 概要
 
-## UI構成 (3-Column Layout)
-1. **編集ペイン (Left)**: 文筆に集中するためのミニマルなMarkdownエディタ。
-2. **プレビューペイン (Center)**: 実際の紙（A4等）を模した「ペーパーモック」表示。余白や改ページをリアルタイムに確認可能。
-3. **プロパティパネル (Right)**: 用紙サイズ、余白、フォント、行間、表の調整などを直感的に操作できるインスペクタ。
+**ChainFlow Writer** is a professional-grade Markdown editor designed to bridge the gap between simple text editing and desktop publishing (DTP). It is built for writers, researchers, and creators who need document precision along with Markdown's efficiency.
 
-## 主要機能
-- **高精度リアルタイム・ペーパープレビュー**: 
-  - 画面上の用紙ピクセルと物理的なミリメートルを動的に同期し、100%正確な境界線を表示。
-  - スペーサー挿入方式による、マージン相殺（Margin Collapse）に影響されない確実な改ページ制御。
-- **インテリジェント・レンダリング同期**: 
-  - 画像の読み込み完了や MathJax の数式描画完了を自動検知してレイアウトを再計算。
-  - **マルチスレッド処理**: 重いレンダリングを別スレッドで実行。画像が多い環境でもエディタのレスポンス（カーソル追従）を損なわない爆速設計。
-- **論理的絶対配置（スタンプ機能）**: 
-  - Markdownのフローを維持しつつ、署名の横への印影配置などを自由な座標指定で実現。
-  - CSSブレンドモード（乗算）によるリアルな重なり再現。
-- **緻密なレイアウト制御**: CSS Paged Media技術を活用し、PDF出力時にも動的な調整を最適化して反映。
-- **ビジネス・テンプレート**: 報告書、企画書、議事録など、標準で美しいスタイルプリセットを同梱。
-- **ChainFlowエコシステム連携**: Filerからの画像D&D、ImageToolでの即時加工、Designerパーツの埋め込み。
+**ChainFlow Writer** は、テキスト編集の手軽さと DTP（デスクトップパブリッシング）の精密さを融合させた、プロフェッショナル向け Markdown エディタです。文章の効率的な執筆と、見た目の美しさ・正確さを両立させたい執筆者や研究者のために開発されました。
 
-## 技術スタック
-- **Core**: Python 3.12+ / PySide6
-- **Preview Engine**: QtWebEngine (Chromiumベース)
-- **Styling**: Vanilla CSS / CSS Paged Media
-- **Markdown**: markdown-it-py (CommonMark準拠)
-- **Diagrams**: Mermaid.js v11 (ESM対応)
-- **Math**: KaTeX v0.16
+---
+
+## 🚀 Beyond Typora: Why ChainFlow Writer? / Typoraを超えて
+
+While tools like Typora are excellent for writing, ChainFlow Writer excels in **layout precision**:
+Typora等の優れたツールが執筆に特化しているのに対し、ChainFlow Writer は**「レイアウトの正確性」**において圧倒的な強みを持ちます：
+
+*   **1:1 Fidelity PDF**: What you see is exactly what you get. No more layout shifts when exporting to PDF.
+*   **Real-time Page Breaks**: Unlike standard web-based editors, it calculates page breaks in real-time with printable guides.
+*   **Absolute "Stamp" Syntax**: Position images, signatures, or notes exactly where you want them using absolute positioning.
+*   **Modern Engine**: Full support for Mermaid v11 (XY Charts, etc.) and KaTeX math rendering.
+*   **1:1の再現性**: プレビュー画面がそのまま PDF に。出力時のズレに悩まされることはありません。
+*   **リアルタイム改ページ**: 印刷時の境界線を執筆中に確認可能。
+*   **「スタンプ」構文**: 印影や署名、注釈などを、絶対座標で「いい感じ」の場所に配置可能。
+*   **最新のエンジン**: Mermaid v11（XYチャート等）や KaTeX による数式表示をフルサポート。
+
+---
+
+## ✨ Features / 機能
+
+*   **Variable System**: Use macros/variables to automate repetitive text or document metadata.
+*   **Rich Ecosystem**: Seamless integration with ChainFlow Filer for workflow management.
+*   **変数/マクロ**: 繰り返し使うフレーズや文書メタデータを変数化して自動化。
+*   **エコシステム**: ChainFlow Filer との連携による効率的なファイル管理。
+
+---
+
+## 🚀 How to Run / 実行方法
+
+```bash
+python app/main_window.py
+```
+*(Requires PySide6, markdown-it-py)*
+
+---
+
+Developed by **hinatahugu29**.
+Project log managed by **Antigravity AI**.
