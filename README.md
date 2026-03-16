@@ -18,9 +18,12 @@ A keyboard-centric, high-performance file manager with asynchronous processing.
 *   **キー機能**: 高速ナビゲーション、マルチペイン、永続的なマークシステム、プラグイン拡張。
 
 ### ✍️ ChainFlow Writer (v6)
-A professional-grade Markdown editor bridging the gap between simple text and DTP.
-*   **Key Features**: Mermaid v11 & KaTeX support, 1:1 fidelity PDF export, "Stamp" syntax for absolute positioning, and dynamic page guides.
-*   **キー機能**: Mermaid v11/KaTeX対応、1:1のPDF出力、絶対配置「スタンプ」構文、リアルタイム改ページガイド。
+A high-end Markdown editor that goes beyond general-purpose tools like Typora. It provides professional-grade layout control while maintaining the simplicity of Markdown.
+*   **Beyond Typora**: Unlike typical editors, it features a real-time page-break engine, absolute "Stamp" positioning, and advanced DTP-like layouts.
+*   **Key Features**: 1:1 fidelity PDF export, Mermaid v11 & KaTeX support, and an automated variable/macro system.
+*   **Typoraを超えて**: 定評ある Typora 等のツールより一歩進んだ、レイアウト志向の Markdown エディタ。Markdown の手軽さと、DTP ツールのような自由な配置を両立します。
+*   **独自の強み**: リアルタイム改ページエンジン、絶対配置の「スタンプ」構文、そして執筆時の見た目がそのまま PDF になる 1:1 の再現性。
+*   **キー機能**: 1:1出力、Mermaid v11/KaTeX対応、変数/マクロによるドメイン駆動ドキュメント。
 
 ### 🎨 ChainFlow Designer
 A lightweight DTP tool for creating structured documents and layouts.
