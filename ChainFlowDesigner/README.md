@@ -1,38 +1,22 @@
-# ChainFlow Designer
+# ChainFlow Designer 🎨
 
-[Japanese] | [English]
+**ChainFlow Designer** は、思考を形にするための直感的な操作性と、プロフェッショナルな精度を両立させた軽量DTP・レイアウトエディタです。
 
-## 🌟 Overview / 概要
+### ✨ 主な機能 / Key Features
+- **Smart Snapping**: オブジェクトの端点、中心、あるいは他のオブジェクトとの幾何学的な整合性を自動検知し、磁石のように吸着。
+- **Excel-like Tables**: 表形式のオブジェクトにおいて、各行の高さや列の幅を個別にドラッグでリサイズ可能。構造変更もコンテキストメニューから自在に。
+- **Unified Undo Stack**: すべての移動、リサイズ、属性変更（色、不透明度、影）を完全に元に戻すことが可能な、堅牢なアンドゥ・リドゥシステム。
+- **Advanced Export**: 用途に合わせたDPI設定での画像出力や、グリッド込のPDF出力。
+- **Layer & Swatches**: 階層管理が可能なレイヤーパネルと、色の一貫性を保つスウォッチパネルを搭載。
 
-**ChainFlow Designer** is a lightweight DTP (Desktop Publishing) and layout tool for creating structured documents, diagrams, and cards. It focuses on intuitive manipulation with smart snapping and advanced table support.
+### 🛠️ 技術情報 / Technical Info
+- **Framework**: PySide6 (Qt GraphicsView Framework)
+- **Architecture**: `QUndoStack` によるコマンドパターンベースの手順管理.
+- **Filing**: XMLベースの独自保存形式により、全てのDTP要素を正確に保持。
 
-**ChainFlow Designer** は、構造化された文書や図解、カード形式のレイアウトを直感的に作成できる軽量 DTP ツールです。スマートスナップ機能や高度なテーブル操作により、思い通ールの配置をストレスなく実現することに特化しています。
-
----
-
-## ✨ Key Features / 特徴
-
-*   **Smart Snapping**: Align objects perfectly using grid snapping and object-to-object alignment.
-*   **Advanced Table Item**: Manipulate tables with Excel-like flexibility, including per-column/row resizing and context menu controls.
-*   **Rich Items**: Support for Text, Images, Shapes, and complex Table structures.
-*   **Undo/Redo System**: Full command-based history for worry-free editing.
-*   **High Performance**: Smooth and responsive canvas interaction.
-*   **スマートスナップ**: グリッドや他のオブジェクトへの吸着により、寸分の狂いなく整列。
-*   **高度なテーブル**: 列幅・行高の個別調整や挿入・削除など、Excel風の柔軟な操作。
-*   **多彩なアイテム**: テキスト、画像、図形、そして構造化されたテーブルをサポート。
-*   **Undo/Redo**: 全ての操作を履歴管理。失敗を恐れず試行錯誤が可能。
-*   **高パフォーマンス**: 多数のアイテムを配置しても軽快に動作するキャンバス。
-
----
-
-## 🚀 How to Run / 実行方法
-
-```bash
-python main.py
-```
-*(Requires PySide6)*
-
----
-
-Developed by **hinatahugu29**.
-Project log managed by **Antigravity AI**.
+### ⌨️ 操作方法 / Shortcuts
+- `Ctrl + G`: グループ化 / `Ctrl + Shift + G`: 解除
+- `Ctrl + L`: ロック / `Ctrl + Shift + L`: 全て解除
+- `Ctrl + C / V`: アイテムの複製
+- `Ctrl + Z / Y`: 元に戻す / やり直し
+- `F11`: フルスクリーン（ZENモード）

@@ -1,36 +1,22 @@
-# ChainFlow Search
+# ChainFlow Search 🔍
 
-[Japanese] | [English]
+**ChainFlow Search** は、爆速の初動と、思考を止めないインテリジェンスな絞り込みを両立させた、プロフェッショナル向けファイル検索エンジンです。
 
-## 🌟 Overview / 概要
+### ✨ 主な機能 / Key Features
+- **Hybrid Engine**: `os.scandir` を活用した超高速な「非同期スキャン」と、確定した結果に対する瞬時な「メモリ内ストリームフィルタリング」を統合。
+- **Advanced Query Syntax**: Space (AND), `|` (OR), `-` (NOT), `*` (Wildcard) を組み合わせた、正規表現に迫る高度なクエリ発行が可能。
+- **Multi-Tab Interface**: 異なるディレクトリや条件を複数のタブで並行して検索。タブの複製やパスの引き継ぎもサポート。
+- **Smart History**: ディレクトリの訪問履歴を自動追跡。Filerのお気に入りとも連動し、よく使う場所へ即座に移動。
+- **External Drag & Drop**: 検索結果をエクスプローラーや他のアプリケーションへ直接ドラッグ、あるいはコピー(`Ctrl+C`)して連携。
 
-**ChainFlow Search** is a lightning-fast, asynchronous file search engine built with PySide6. It is designed to find files instantly across large directories and network drives without freezing the UI.
+### 🛠️ 技術情報 / Technical Info
+- **Framework**: PySide6
+- **Architecture**: 双方向通信シグナルを用いた完全非同期ワーカースレッド。
+- **Optimization**: バッチ通信によるUIへの段階的反映で、数万件のヒット時も操作性を維持。
 
-**ChainFlow Search** は、PySide6 で構築された爆速の非同期ファイル検索エンジンです。UI をフリーズさせることなく、大容量のディレクトリやネットワークドライブから目的のファイルを瞬時に見つけ出すために設計されています。
-
----
-
-## ✨ Key Features / 特徴
-
-*   **Asynchronous Scan**: Real-time results update as it scans. Uses `os.scandir` for maximum performance.
-*   **Smart Refinement**: Instantly filter existing results with additional keywords (AND search) without re-scanning.
-*   **Filer Integration**: Copy found files directly to clipboard to paste into ChainFlow Filer or Explorer.
-*   **Visual Feedback**: Real-time progress bar and scan count.
-*   **非同期スキャン**: スキャン中もリアルタイムに結果を更新。`os.scandir` による最高速度の検索。
-*   **スマート絞り込み**: 再スキャンなしで、既存の結果をキーワード（AND条件）で瞬時にフィルタリング。
-*   **ファイラー連携**: 見つかったファイルをクリップボードにコピーし、そのままファイラーやエクスプローラーへ。
-*   **視覚的フィードバック**: リアルタイムのプログレスバーと処理件数表示。
-
----
-
-## 🚀 How to Run / 実行方法
-
-```bash
-python main.py
-```
-*(Requires PySide6)*
-
----
-
-Developed by **hinatahugu29**.
-Project log managed by **Antigravity AI**.
+### ⌨️ 操作方法 / Shortcuts
+- `Ctrl + T`: 新しい検索タブ
+- `Enter`: ファイルを開く / `Ctrl + C`: ファイルをコピー
+- `Ctrl + F`: 入力エリアへフォーカス
+- `Tab`: タブ間の移動
+- `/`: クエリのクリア

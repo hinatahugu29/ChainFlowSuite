@@ -1,34 +1,23 @@
-# ChainFlow Tool
+# ChainFlow Tool (Editor/Viewer) 🛠️📖
 
-[Japanese] | [English]
+**ChainFlow Tool** は、Suite全体の基盤となる共通機能を備え、特に Markdown と HTML の「閲覧」と「簡易編集」に特化したインテリジェンスな汎用 hub です。
 
-## 🌟 Overview / 概要
+### ✨ 主な機能 / Key Features
+- **Dual-Role Engine**:
+    - **Editor Mode**: Markdown2 ベースの高速な Markdown 編集とリアルタイムプレビュー。
+    - **Viewer Mode**: `QWebEngineView` (Chromiumベース) による、HTML、PDF、および高度なWebコンテンツの忠実な再現。
+- **Integrated Logic**: `Ctrl+P` (Slash Menu) を通じて Suite の他ツールと密接に連携。
+- **Snippet & Help**: よく使う Markdown 構文やショートカットをサイドパネルに常備。ダブルクリックで即座にエディタへ挿入可能。
+- **Professional PDF Export**: 印刷用 CSS を動的に適用し、Web ページや Markdown を美しい等幅 PDF として出力。
+- **Geometry Memory**: Filer から呼び出された際のウィンドウ位置やサイズをスマートに管理。
 
-**ChainFlow Tool** serves as a versatile utility hub within the ChainFlow Suite. It includes specialized editors and viewers used across the ecosystem to handle various data formats and internal tasks.
+### 🛠️ 技術情報 / Technical Info
+- **Framework**: PySide6 + QtWebEngine (+ QtPrintSupport)
+- **Rendering**: Chromium エンジンによる最高峰の Web 互換性。
+- **Stability**: Windows AppUserModelID 搭載により、Filer と同じブランドアイコンをタスクバーに正しく表示。
 
-**ChainFlow Tool** は、ChainFlow Suite における多才なユーティリティ・ハブです。エコシステム全体で使用される専門的なエディタやビューワーを含み、様々なデータ形式や内部タスクを処理するために機能します。
-
----
-
-## ✨ Key Features / 特徴
-
-*   **Versatile Editor**: Integrated text and data handling capabilities.
-*   **Dark Mode Native**: Consistent aesthetic with the rest of the suite.
-*   **Component Architecture**: Provides core UI and logic patterns used in other tools.
-*   **多目的エディタ**: テキストやデータ処理機能を統合。
-*   **ネイティブ・ダークモード**: スイート全体で統一された美しい外観。
-*   **コンポーネント・アーキテクチャ**: 他のツールでも使用されるコアなUIとロジックパターンを提供。
-
----
-
-## 🚀 How to Run / 実行方法
-
-```bash
-python editor.py
-```
-*(Requires PySide6)*
-
----
-
-Developed by **hinatahugu29**.
-Project log managed by **Antigravity AI**.
+### ⌨️ 操作方法 / Shortcuts
+- `Ctrl + S`: 保存
+- `Ctrl + P`: スラッシュメニュー（ツール連携 / スニペット）
+- `Ctrl + E`: PDF エクスポート
+- `F1`: ヘルプパネルの表示 / 非表示

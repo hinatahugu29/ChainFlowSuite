@@ -1,75 +1,59 @@
-# ChainFlow Suite
+# ChainFlow Suite 📂✨
 
-[日本語] | [English]
-
-## 🌟 Overview / 概要
-
-**ChainFlow Suite** is an integrated collection of high-performance desktop productivity tools designed for power users who value speed, keyboard-first operations, and aesthetic precision. From file management to document editing and DTP design, every tool in this suite is built to work seamlessly as a unified ecosystem.
-
-**ChainFlow Suite** は、スピード、キーボード操作、そして精緻な美意識を重視するパワーユーザーのために設計された、高性能デスクトップツール群です。ファイル管理から文書編集、DTPデザインに至るまで、すべてのツールが統一されたエコシステムとしてシームレスに機能するように構築されています。
+**ChainFlow Suite** は、Windows環境でのワークフローを極限まで効率化するために設計された、プロフェッショナル向けツール群のコレクションです。
+個別のツールが独立して動作しつつも、共通の設計思想（キーボード主体、ダークテーマ、高速レスポンス）と、統一されたブランドアイデンティティ（AppUserModelIDによるタスクバー統合）により、シームレスな体験を提供します。
 
 ---
 
-## 🛠 Included Applications / 収録アプリケーション
+## 🚀 収録アプリケーション / Included Applications
 
-### 🗂 ChainFlow Filer
-A keyboard-centric, high-performance file manager with asynchronous processing.
-*   **Key Features**: Fast navigation, multi-pane layout, persistent marking system, and plugin support.
-*   **キー機能**: 高速ナビゲーション、マルチペイン、永続的なマークシステム、プラグイン拡張。
+### 📁 ChainFlow Filer (v21)
+**超高速・キーボード主体の次世代ファイラー**
+- **Slash Menu (`Ctrl+P`)**: 全てのSuiteツールやカスタムプラグインを瞬時に呼び出し。
+- **Asynchronous Engine**: 数十万ファイルもフリーズさせない完全非同期スキャン。
+- **Smart Logic**: フォルダとファイルを混在させてソートする独自のインテリジェンス。
 
 ### ✍️ ChainFlow Writer (v6)
-A high-end Markdown editor that goes beyond general-purpose tools like Typora. It provides professional-grade layout control while maintaining the simplicity of Markdown.
-*   **Beyond Typora**: Unlike typical editors, it features a real-time page-break engine, absolute "Stamp" positioning, and advanced DTP-like layouts.
-*   **Key Features**: 1:1 fidelity PDF export, Mermaid v11 & KaTeX support, and an automated variable/macro system.
-*   **Typoraを超えて**: 定評ある Typora 等のツールより一歩進んだ、レイアウト志向の Markdown エディタ。Markdown の手軽さと、DTP ツールのような自由な配置を両立します。
-*   **独自の強み**: リアルタイム改ページエンジン、絶対配置の「スタンプ」構文、そして執筆時の見た目がそのまま PDF になる 1:1 の再現性。
-*   **キー機能**: 1:1出力、Mermaid v11/KaTeX対応、変数/マクロによるドメイン駆動ドキュメント。
+**DTPレベルのレイアウト精度を持つ究極のMarkdownエディタ**
+- **Beyond Typora**: リアルタイム改ページレンダリングにより、編集画面がそのままPDFの完成図に。
+- **Stamp Syntax**: `<stamp>` 構文による絶対座標指定で、自由自在なレイアウト。
+- **High Fidelity**: 1:1の再現性を誇るPDF出力エンジンを搭載。
 
 ### 🎨 ChainFlow Designer
-A lightweight DTP tool for creating structured documents and layouts.
-*   **Key Features**: Smart snapping, table manipulation with Excel-like resizing, and undo/redo support.
-*   **キー機能**: スマートスナップ、直感的なテーブルリサイズ（Excel風）、Undo/Redo対応。
+**直感的な操作とインテリジェンスが融合したDTPエディタ**
+- **Smart Snap**: オブジェクト間の端点、中心点、中心線を検知して吸着。
+- **Pro Table**: セル単位のドラッグリサイズや構造変更（Excel風操作）に対応。
+- **Advanced Export**: DPI指定可能な画像出力や、グリッド込のPDF出力。
 
 ### 🔍 ChainFlow Search
-A lightning-fast file search engine.
-*   **Key Features**: Real-time results, smart refinement (AND search), and direct integration with Filer.
-*   **キー機能**: リアルタイム検索、スマートな絞り込み（AND条件）、ファイラーとの直接連携。
+**「探す」を「見つける」に変えるハイブリッド検索エンジン**
+- **Scan & Stream**: 高速スキャンとリアルタイムなメモリ内フィルタリングの二段構え。
+- **Advanced Query**: AND/OR/NOT/- 記法をフルサポートした高度な絞り込み。
+- **History & Tabs**: 検索履歴からの即時復旧と、複数タブによる並行検索。
 
-### 🧪 And More...
-*   **ChainFlow ToDo**: Minimalist productivity tracker.
-*   **ChainFlow Image**: Swift image processing utility.
-*   **PDF Studio / Compare**: specialized tools for PDF manipulation and analysis.
+### 📝 ChainFlow ToDo
+**思考を妨げないミニマルなタスク管理**
+- **MD Integration**: 全てのタスクをMarkdown形式で瞬時にバックアップ・共有。
+- **Progress Tracking**: カテゴリごとの進捗率をリアルタイムに可視化。
 
----
-
-## 🚀 Getting Started / はじめに
-
-### Requirements / 必要条件
-*   Windows 10/11
-*   Python 3.10+ (for source execution)
-*   PySide6 (Qt for Python)
-
-### Installation / インストール
-1.  Clone this repository / このリポジトリをクローン:
-    ```bash
-    git clone https://github.com/hinatahugu29/ChainFlowSuite.git
-    ```
-2.  Install dependencies / 依存関係のインストール:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-### Building / ビルド
-Pre-configured batch files are provided for creating standalone executables:
-単独の実行ファイルを生成するためのバッチファイルが用意されています：
-*   `build_v21.bat`: Build entire suite / スイート全体を一括ビルド
-*   `build_v21_filer_standalone.bat`: Build Filer only / ファイラーのみビルド
+### 📄 ChainFlow PDF Studio & Compare
+**PDFを「読む」から「解析・検証する」へ**
+- **Sync View (Studio)**: サムネイル、全ページ、プロパティを同期表示する3ペイン構成。
+- **Multi-View Diff (Compare)**: 最大4画面の同期スクロール比較とZENモード。
 
 ---
 
-## 📄 License and Credits / ライセンス
+## 🛠️ 技術スタック / Technical Stack
+- **Language**: Python 3.10+
+- **GUI Framework**: PySide6 (Qt for Python)
+- **PDF Engine**: PyMuPDF, QtWebEngine
+- **Graphics**: PIL (Pillow), QtGraphicsScene
+- **Distribution**: PyInstaller (Windows AppUserModelID supported)
 
-Developed by **hinatahugu29**.
-Project log managed by **Antigravity AI**.
+## 📦 インストール / Installation
+1. `git clone https://github.com/hinatahugu29/ChainFlowSuite.git`
+2. 各ディレクトリ内の `main.py` を実行するか、ビルド済みのEXEを使用してください。
+3. `py -m pip install -r requirements.txt` で必要な依存関係を解消してください。
 
-© 2026 ChainFlow Suite Development Team.
+## 📄 ライセンス / License
+© 2026 hinatahugu29. All rights reserved. 個人利用および開発コミュニティへの貢献を歓迎します。

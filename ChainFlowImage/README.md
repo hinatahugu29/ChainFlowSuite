@@ -1,34 +1,20 @@
-# ChainFlow Image Tool
+# ChainFlow Image Tool 🖼️⚡
 
-[Japanese] | [English]
+**ChainFlow Image Tool** は、大量の画像に対する一括リサイズや形式変換を爆速で処理する、パフォーマンス重視のユーティリティです。
 
-## 🌟 Overview / 概要
+### ✨ 主な機能 / Key Features
+- **Multi-threaded Processing**: `ThreadPoolExecutor` を活用し、CPUコア数を最大限に引き出した並列処理により、数千枚の画像も一瞬で完了。
+- **Drag & Drop Workflow**: エクスプローラーや Filer から直接画像をドロップし、変換設定を選んで実行するだけの極めてシンプルなフロー。
+- **Independant Resize Modes**: 指定ピクセルへの幅固定、またはパーセント指定による比率維持リサイズをサポート。
+- **Smart Format Conversion**: JPG, PNG, WEBP への相互変換。JPEG変換時の透過背景の白埋め処理などを自動で実行。
+- **Processed Logging**: 各ファイルの結果（成功・失敗・出力先）をリアルタイムにログ表示し、完了時に一括通知。
 
-**ChainFlow Image Tool** is a swift, no-nonsense utility for basic image processing tasks. It is designed to handle common operations like resizing and format conversion instantly.
+### 🛠️ 技術情報 / Technical Info
+- **Framework**: PySide6
+- **Processing Core**: PIL (Pillow) による高品質・高速な画像エンコード/デコード。
+- **Efficiency**: 非同期 GUI アーキテクチャにより、数百枚の処理中もメインウィンドウが応答を維持。
 
-**ChainFlow Image Tool** は、基本的な画像処理タスクを迷いなく遂行するための迅速なユーティリティです。リサイズやフォーマット変換といった日常的な操作を、瞬時に完了できるように設計されています。
-
----
-
-## ✨ Key Features / 特徴
-
-*   **Drag & Drop Interface**: Simply drop images to start processing.
-*   **Quick Batch Actions**: Resize and convert multiple images simultaneously.
-*   **Suite Integration**: Works as an external plugin for ChainFlow Filer via the Slash Menu.
-*   **ドラッグ＆ドロップ**: 画像を落とすだけで処理を開始。
-*   **クイック一括処理**: 複数の画像を瞬時にリサイズ、フォーマット変換。
-*   **スイート連携**: スラッシュメニュー経由で ChainFlow Filer の外部プラグインとして機能。
-
----
-
-## 🚀 How to Run / 実行方法
-
-```bash
-python image_tool.py
-```
-*(Requires PySide6, Pillow)*
-
----
-
-Developed by **hinatahugu29**.
-Project log managed by **Antigravity AI**.
+### ⌨️ 操作方法 / Shortcuts
+- `Delete`: リストから選択項目を削除
+- `Esc`: 処理のキャンセル
+- `Enter`: 処理の開始（ボタンにフォーカスがある場合）
