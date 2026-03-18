@@ -626,7 +626,7 @@ class PreviewPane(QWidget):
             </script>
             <style>
                 html, body { background-color: #252526; margin: 0; padding: 0; }
-                body { display: flex; justify-content: center; padding: 40px 20px 200px 20px; }
+                body { display: flex; justify-content: center; padding: 60px 500px 400px 500px; }
                 .paper {
                     background: white; width: var(--page-width); box-sizing: border-box;
                     padding: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
@@ -705,7 +705,7 @@ class PreviewPane(QWidget):
                 u { text-underline-offset: 3px; }
                 @media print {
                     .ignore-print-break { page-break-before: auto !important; break-before: auto !important; }
-                    @page { size: var(--page-width) var(--page-height); }
+                    /* @page size will be injected dynamically or defined by printer */
                     html, body {
                         background-color: white !important; margin: 0 !important; padding: 0 !important;
                         display: block !important; width: 100% !important; height: auto !important;
@@ -825,19 +825,45 @@ class PreviewPane(QWidget):
             {original_styles}
             <style>
                 {css_root}
-                @page {{ size: var(--page-width) var(--page-height); margin: 0 !important; }}
+                @page {{ 
+                    size: {self._page_width} {self._page_height}; 
+                }}
                 html, body {{ background-color: white !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }}
                 .paper {{ 
                     width: 100% !important; height: auto !important; 
-                    padding: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left) !important;
+                    /* フル・フィディリティ方式: 物理余白を0にし、CSSで余白を再現することで、スタンプの欠けを防ぐ */
+                    padding-top: var(--margin-top) !important;
+                    padding-left: var(--margin-left) !important;
+                    padding-right: var(--margin-right) !important;
+                    padding-bottom: var(--margin-bottom) !important; /* 最終ページの底を確保 */
                     margin: 0 !important;
-                    display: flow-root; position: relative; box-sizing: border-box;
+                    position: relative; box-sizing: border-box;
+                    display: block;
                 }}
                 
-                /* 印刷時の改ページ断裂防止 */
+                /* 印刷時の改ページ断裂防止と強制改ページの安定化 */
                 h1, h2, h3, h4, h5, h6 {{ page-break-after: avoid; break-after: avoid; }}
                 table, pre, code, blockquote, img, canvas {{ page-break-inside: avoid; break-inside: avoid; }}
-                p, li, td, div {{ orphans: 3; widows: 3; }}
+                
+                /* 改ページ要素（自動同期および手動div）の制御 */
+                /* 2ページ目以降の上部余白を、padding-top によって完璧に再現する */
+                .synced-print-break, 
+                div[style*="page-break-before"]:empty, 
+                div[style*="break-before"]:empty {{
+                    page-break-before: always !important;
+                    break-before: page !important;
+                    display: block !important;
+                    height: auto !important;
+                    min-height: 0 !important;
+                    padding-top: var(--margin-top) !important; /* これが次ページ冒頭の余白になる */
+                    margin: 0 !important;
+                    visibility: visible !important; /* マージンとして機能させるため可視化（中身は空なら透明） */
+                }}
+
+                /* スタンプ位置: フル・フィディリティ方式により起点（0,0）が紙の端に戻ったため、補正は不要 */
+                .stamp {{
+                    /* 補正なし */
+                }}
                 
                 /* 不要な空要素の不可視化 */
                 p:empty {{ display: none; }}
@@ -861,7 +887,8 @@ class PreviewPane(QWidget):
                 elif "A5" in self._page_size: sz = QPageSize.A5
                 elif "Letter" in self._page_size: sz = QPageSize.Letter
                 
-                # プリンタ側のマージンを0にし、CSS側のpaddingでマージンを制御する（座標系の一致のため）
+                # フル・フィディリティ方式: 描画範囲を最大化（マージン0）にし、
+                # すべての余白制御をHTML/CSS側（紙の端からの距離）で行う
                 margins_f = QMarginsF(0, 0, 0, 0)
                 layout = QPageLayout(QPageSize(sz), QPageLayout.Landscape if "Landscape" in self._orientation else QPageLayout.Portrait, margins_f, QPageLayout.Unit.Millimeter)
                 

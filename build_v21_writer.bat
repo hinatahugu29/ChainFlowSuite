@@ -6,7 +6,7 @@ setlocal enabledelayedexpansion
 :: ==========================================
 
 set "PROJECT_ROOT=%~dp0"
-set "SOURCE_DIR=%PROJECT_ROOT%ChainFlowWriter_v6"
+set "SOURCE_DIR=%PROJECT_ROOT%ChainFlowWriter_v7"
 set "OUTPUT_DIR=%PROJECT_ROOT%ChainFlow_V21_Suite"
 set "APP_ICON=%PROJECT_ROOT%app_icon.ico"
 
