@@ -171,6 +171,9 @@ class MainWindow(QMainWindow):
         self.property_pane.export_pdf_requested.connect(self._handle_pdf_export)
         self.property_pane.refresh_requested.connect(self._handle_preview_refresh)
         
+        # PDF出力完了通知
+        self.preview_pane.pdf_export_finished.connect(self._on_pdf_export_finished)
+        
         # Connect settings changes to modification tracking
         self.property_pane.margins_changed.connect(lambda: self._set_modified(True))
         self.property_pane.typography_changed.connect(lambda: self._set_modified(True))
@@ -391,6 +394,13 @@ class MainWindow(QMainWindow):
     def _handle_preview_refresh(self):
         # ブラウザのリロード処理を実行（右クリックメニューのReloadと同じ効果）
         self.preview_pane.web_view.reload()
+        
+    def _on_pdf_export_finished(self, success, message):
+        """PDF出力の完了通知を受け取り、ユーザーに結果を表示する。"""
+        if success:
+            QMessageBox.information(self, "PDF Export", message)
+        else:
+            QMessageBox.critical(self, "PDF Export Error", message)
         
     def _on_text_changed(self, text):
         self.preview_pane.update_preview(text, self.last_dir)

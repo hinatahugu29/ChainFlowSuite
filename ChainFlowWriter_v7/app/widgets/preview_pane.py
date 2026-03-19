@@ -120,6 +120,7 @@ class RenderWorker(QObject):
 class PreviewPane(QWidget):
     render_requested = Signal(str, str)
     empty_pages_detected = Signal(list) # 空白ページのインデックスリストを通知
+    pdf_export_finished = Signal(bool, str) # (success, message)
 
     # ライブラリのバージョン一括管理（将来のアップデートはこの定数を書き換えるだけでOK）
     MERMAID_VERSION = "11.4.0"
@@ -881,20 +882,45 @@ class PreviewPane(QWidget):
         print_page.settings().setAttribute(QWebEngineSettings.LocalContentCanAccessRemoteUrls, True)
         
         def on_load_finished(success):
-            if success:
-                sz = QPageSize.A4
-                if "B5" in self._page_size: sz = QPageSize.B5
-                elif "A5" in self._page_size: sz = QPageSize.A5
-                elif "Letter" in self._page_size: sz = QPageSize.Letter
+            print(f"PDF Page Load Finished. Success: {success}")
+            # 注意: success=False でも、一部の画像が読み込めなかっただけの場合があるため、
+            # HTML自体がロードされていれば出力自体は試みる。
+            
+            sz = QPageSize.A4
+            if "B5" in self._page_size: sz = QPageSize.B5
+            elif "A5" in self._page_size: sz = QPageSize.A5
+            elif "Letter" in self._page_size: sz = QPageSize.Letter
+            
+            # フル・フィディリティ方式: 描画範囲を最大化（マージン0）にし、
+            # すべての余白制御をHTML/CSS側（紙の端からの距離）で行う
+            margins_f = QMarginsF(0, 0, 0, 0)
+            layout = QPageLayout(QPageSize(sz), QPageLayout.Landscape if "Landscape" in self._orientation else QPageLayout.Portrait, margins_f, QPageLayout.Unit.Millimeter)
+            
+            # 安定性のためのコールバック方式: 
+            # 直接パスを渡すのではなく、PDFデータをメモリに受け取ってから自前で書き込むことで、
+            # 書き込み完了を確実に把握し、ページの破棄タイミングを制御する。
+            def on_pdf_ready(data):
+                if not data:
+                    print("PDF Generation Failed: No data produced.")
+                    self.pdf_export_finished.emit(False, "PDFデータの生成に失敗しました（データが空です）。")
+                    print_page.deleteLater()
+                    return
                 
-                # フル・フィディリティ方式: 描画範囲を最大化（マージン0）にし、
-                # すべての余白制御をHTML/CSS側（紙の端からの距離）で行う
-                margins_f = QMarginsF(0, 0, 0, 0)
-                layout = QPageLayout(QPageSize(sz), QPageLayout.Landscape if "Landscape" in self._orientation else QPageLayout.Portrait, margins_f, QPageLayout.Unit.Millimeter)
+                try:
+                    # QByteArrayを bytes に変換して保存
+                    with open(path, 'wb') as f:
+                        f.write(data.data() if hasattr(data, "data") else data)
+                    print(f"PDF Successfully Saved: {path}")
+                    self.pdf_export_finished.emit(True, f"PDFを保存しました:\n{path}")
+                except Exception as e:
+                    print(f"PDF Save Error: {e}")
+                    self.pdf_export_finished.emit(False, f"PDFの保存中にエラーが発生しました:\n{e}")
                 
-                print_page.printToPdf(path, layout)
-                # 重要: 出力後にページオブジェクトを安全に削除
-                QTimer.singleShot(5000, print_page.deleteLater)
+                # 保存完了後に安全に破棄
+                print_page.deleteLater()
+
+            print("Generating PDF layout...")
+            print_page.printToPdf(on_pdf_ready, layout)
 
         print_page.loadFinished.connect(on_load_finished)
         # file:/// をベースURLとして指定することで、Cドライブ等の絶対パス画像も正しく解決されます
