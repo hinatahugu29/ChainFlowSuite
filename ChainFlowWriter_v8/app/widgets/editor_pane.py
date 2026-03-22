@@ -6,7 +6,7 @@ from PySide6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QPlainTextEdit
 from PySide6.QtCore import Qt, Signal, QDateTime, QTimer, QRegularExpression, QLocale
 from PySide6.QtGui import QAction, QKeySequence, QShortcut, QSyntaxHighlighter, QTextCharFormat, QColor, QFont, QTextCursor
 from app.utils.theme import apply_dark_title_bar, get_common_stylesheet
-import os
+
 
 
 class ImageSizeDialog(QDialog):
@@ -194,6 +194,8 @@ class MarkdownHighlighter(QSyntaxHighlighter):
 
 
 class MarkdownEditor(QPlainTextEdit):
+    focused = Signal()
+
     def __init__(self):
         super().__init__()
         self.setAcceptDrops(True)
@@ -233,6 +235,10 @@ class MarkdownEditor(QPlainTextEdit):
             cursor.insertText(tag)
             cursor.endEditBlock()
             self.setFocus()
+
+    def focusInEvent(self, event):
+        super().focusInEvent(event)
+        self.focused.emit()
 
 
 
@@ -368,6 +374,11 @@ class EditorPane(QWidget):
         row1_layout.insertWidget(0, self.btn_split)
         row1_layout.insertSpacing(1, 4)
 
+        # フォーカス追跡システムの初期化
+        self.last_active_editor = self.editor
+        self.editor.focused.connect(lambda: self._on_editor_focused(self.editor))
+        self.editor_sub.focused.connect(lambda: self._on_editor_focused(self.editor_sub))
+
         layout.addWidget(header_widget)
         layout.addWidget(self.editor_splitter)
         
@@ -383,11 +394,21 @@ class EditorPane(QWidget):
             self.editor_splitter.setSizes([700, 300]) # restore some ratio
         else:
             self.editor_sub.hide()
-            
+            # 非表示にする際は、操作対象をメインエディタに戻す
+            self.last_active_editor = self.editor
+            self.editor.setFocus()
+
+    def _on_editor_focused(self, editor):
+        """エディタがフォーカスを得た際に呼び出される（アクティブな方を記録）"""
+        self.last_active_editor = editor
+
     def _active_editor(self):
-        """Returns the currently focused editor, fallback to main editor"""
-        if self.editor_sub.hasFocus() and self.editor_sub.isVisible():
-            return self.editor_sub
+        """最後にフォーカスされた（アクティブな）エディタを返す"""
+        if hasattr(self, 'last_active_editor'):
+            # 非表示の場合はメインエディタを返す安全策
+            if self.last_active_editor == self.editor_sub and not self.editor_sub.isVisible():
+                return self.editor
+            return self.last_active_editor
         return self.editor
         
     def _setup_file_menu(self):
@@ -798,7 +819,7 @@ class EditorPane(QWidget):
 
     def _show_context_menu(self, position, editor=None):
         if editor is None:
-            editor = self.editor
+            editor = self._active_editor()
 
         menu = editor.createStandardContextMenu()
         
@@ -959,10 +980,6 @@ class EditorPane(QWidget):
         
         self.btn_macro.setMenu(menu)
         
-    def _insert_at_cursor(self, text):
-        cursor = self.editor.textCursor()
-        cursor.insertText(text)
-        self.editor.setFocus()
         
     def _insert_html(self, html_text):
         editor = self._active_editor()

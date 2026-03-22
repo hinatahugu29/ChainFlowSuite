@@ -16,7 +16,9 @@
       "UTF-8でのクリーン保存"
     ],
     "notes": "元のファイルに含まれていた修復不能な文字化け（Replacement Character等）を、周辺の文脈や既存の製品知識から正確な日本語に置換しました。",
-    "artifacts": ["ChainFlowWriter_v7_Ultimate_Guide.md"]
+    "artifacts": [
+      "ChainFlowWriter_v7_Ultimate_Guide.md"
+    ]
   },
   {
     "timestamp": "2026-03-19T10:45:00+09:00",
@@ -35,7 +37,9 @@
       "最終ファイル 'ChainFlowWriter_v7_Ultimate_Guide.md' の生成"
     ],
     "notes": "元のファイルにUTF-8 and CP932の混在や破損があったため、可能な限りテキストを救出しました。結果として重複を最小限にしつつ、情報量を維持した大著となっています。",
-    "artifacts": ["ChainFlowWriter_v7_Ultimate_Guide.md"]
+    "artifacts": [
+      "ChainFlowWriter_v7_Ultimate_Guide.md"
+    ]
   },
   {
     "timestamp": "2026-03-19T11:20:00+09:00",
@@ -68,7 +72,7 @@
     "files_changed": [],
     "executed_actions": [
       "現在のeditor_pane.pyとmain_window.pyの構造を確認",
-      "QPlainTextEditの制約と解決策を検討",
+      "QPlainTextEdit's constraints and potential solutions considered",
       "5つの具体的な整理案（折り畳み、タブ分離、パネル統合、アウトライン、抽象化）を策定"
     ],
     "uploaded_images": [
@@ -77,7 +81,7 @@
         "context": "UI改善の必要性を裏付ける現状確認用資料"
       }
     ],
-    "notes": "コード発行は不要という指示を遵守し、コンセプト提案に終始しました。将来的な機能実装のロードマップとして活用できる内容を目指しました。",
+    "notes": "コード発行は不要という指示を遵守し、コンセプト提案に終執しました。将来的な機能実装のロードマップとして活用できる内容を目指しました。",
     "artifacts": []
   },
   {
@@ -134,5 +138,111 @@
     ],
     "notes": "QSplitterとQTextDocument共有を用いることで保存ロジック等既存システムへの影響を最小限に留めつつ、大きなUX改善を実現できました。ユーザーからも「OK」の評価を獲得しています。",
     "artifacts": []
+  },
+  {
+    "timestamp": "2026-03-20T00:00:00+09:00",
+    "user_request_summary": "元々の「タブ化」案について、内部的な仕組みは『同じ画面を分ける』か『同期の取れた別画面』のどちらを想定していたかの質問。",
+    "task_summary": "採用した「Split View（同一データの投影）」と、不採用となった「タブ化（別データの結合）」のアーキテクチャ上の決定的な違いを解説しました。",
+    "ai_interpretation": "ユーザーは提案された２つの案の技術的な違い（データ構造レベルの差異）に興味を持ち、なぜ私が「タブ化よりもSplit Viewの方が安全で効率的」と判断したかの本質的な理由を理解しようとしている。",
+    "status": "completed",
+    "duration_minutes": 5,
+    "files_changed": [],
+    "executed_actions": [
+      "現在のSplit View案のアーキテクチャ（単一QTextDocumentの共有）の解説",
+      "元々のタブ化案のアーキテクチャ（２つのQTextDocumentを分離・結合する方式）の解説"
+    ],
+    "notes": "このQ&Aを通じて、「なぜ今回の実装がファイル破壊のリスクがなく安全なのか」という設計思想をご理解いただけるよう努めました。",
+    "artifacts": []
+  },
+  {
+    "timestamp": "2026-03-21T17:45:00+09:00",
+    "user_request_summary": "WriterV8のスプリットエディタ使用時に、下側エディタからショートカットを使うと上側にフォーカスが移ってしまう問題の修正依頼。",
+    "task_summary": "エディタのフォーカス管理システムを刷新。MarkdownEditorにフォーカス信号を追加して最後にアクティブだったエディタを記録するようにし、メニュー操作等で一時的にフォーカスが外れても正しいエディタにショートカットが反映されるよう修正しました。また、不正に上側エディタを優先していた重複メソッド定義を削除しました。",
+    "ai_interpretation": "ユーザーはスプリットエディタ利用時の直感的な操作感を取り戻したいと考えていると理解。判定ロジックを「現在のフォーカス」から「直近のフォーカス履歴」に基づく方式にアップグレードすることで、ツールバー操作時などのフォーカス喪失に起因する誤動作を根本解決した。",
+    "status": "completed",
+    "duration_minutes": 20,
+    "files_changed": [
+      "app/widgets/editor_pane.py"
+    ],
+    "executed_actions": [
+      "MarkdownEditor クラスに focused 信号と focusInEvent のオーバーライドを追加",
+      "EditorPane クラスに last_active_editor メンバ変数を追加し、フォーカス追跡を開始",
+      "EditorPane._active_editor メソッドを履歴ベースの判定に変更",
+      "EditorPane._toggle_split_view 時のフォーカス復元ロジックの改善",
+      "重複して定義されていた不正な _insert_at_cursor メソッドの削除",
+      "コンテキストメニュー表示時のエディタ特定ロジックの修正"
+    ],
+    "notes": "重複メソッドの削除により、日付入力(Ctrl+D)やリンク挿入(Ctrl+K)等のショートカットが確実にアクティブな側のエディタに適用されるようになりました。",
+    "artifacts": []
+  },
+  {
+    "timestamp": "2026-03-21T23:58:46.341242+09:00",
+    "user_request_summary": "ChainFlow Writer v8 ガイドブックの再編。高機能さが前面に出すぎないよう、Markdownベースから段階的に高度な機能へ移行する3段階（Step 1〜3）の構成に変更。",
+    "task_summary": "ドキュメントの構成変更と各部アップデート",
+    "ai_interpretation": "ユーザーは「機能が多すぎて難しそう」という印象を与えないよう、最初はシンプルなMarkdownエディタとして提示し、必要に応じて高度な機能を使えるという柔軟性を強調したいと考えていると理解。",
+    "status": "completed",
+    "duration_minutes": 15,
+    "files_changed": [
+      "ChainFlowWriter_v8_Ultimate_Guide.md"
+    ],
+    "executed_actions": [
+      "概要とコアコンセプトの再構成",
+      "執筆の3Stepレベル（Markdown/拡張表現/究極レイアウト）の導入",
+      "v7からv8へのバージョン表記の一括更新",
+      "インテリジェント・パス解決などの便利機能をStep 1に配置"
+    ],
+    "notes": "Split View機能についても、執筆をサポートする便利なツールとして位置づけを整理した。"
+  },
+  {
+    "timestamp": "2026-03-22T00:08:00.317475+09:00",
+    "user_request_summary": "ガイドブックの全体的な整合性や文脈を見直し、分量を担保しつつ構造を整理してほしい。必要であれば全とっかえも可。",
+    "task_summary": "ガイドブックの章立てとサンプルの全面的な再構築",
+    "ai_interpretation": "ユーザーは、前半の「3 Step レベルのコンセプト」と後半の「機能実践サンプル」の並び順がリンクしておらず、またテスト項目が中間に挟まっているなど、全体としてちぐはぐな印象を受ける部分を整理・洗練させたいのだと理解。",
+    "status": "completed",
+    "duration_minutes": 15,
+    "files_changed": [
+      "ChainFlowWriter_v8_Ultimate_Guide.md"
+    ],
+    "executed_actions": [
+      "ガイドブックの章立てを抜本的に再構成",
+      "「機能実践ガイド」セクションを新設し、Step 1〜3の順序に合わせて機能サンプル群を再配置",
+      "テクニカル検証（テスト用項目）を付録としてファイルの末尾に移動",
+      "不要な重複説明を削りつつ、コードブロックや図解などの重要部分は残して全体の文量を担保"
+    ],
+    "notes": "ユーザー許諾のもと、一部の部分的な置換ではなく、ファイル全体の構造をまるごと書き換える(Overwrite)アプローチを採用し、完全に一貫したトーン＆マナーを実現した。"
+  },
+  {
+    "timestamp": "2026-03-22T12:04:49.202041+09:00",
+    "user_request_summary": "Mermaid図が少ない、無い版のガイドブックもほしい",
+    "task_summary": "Mermaid図を排除したBasic Guideの作成",
+    "ai_interpretation": "Ultimate Guideは機能豊富でMermaid等も多数含まれているが、シンプルにMarkdownエディタとしての機能だけを参照したいユーザーや、Mermaid図が不要なユースケース向けに、図解部分を取り除いたスリム版（Basic）を用意したいと解釈。",
+    "status": "completed",
+    "duration_minutes": 5,
+    "files_changed": [
+      "ChainFlowWriter_v8_Basic_Guide.md"
+    ],
+    "executed_actions": [
+      "既存のUltimate GuideからMermaidブロックおよびその説明箇所（XY Chart, フローチャート等）をすべて削除",
+      "Step 2の見出しを「図解と数式」から「数式」のみに変更",
+      "新しい別ファイルとしてChainFlowWriter_v8_Basic_Guide.mdを生成"
+    ],
+    "notes": "既存のUltimate Guideはそのまま残し、バリエーションとして別名のファイルを作成した。"
+  },
+  {
+    "timestamp": "2026-03-22T13:18:35.679997+09:00",
+    "user_request_summary": "HTMLで2段組も使いつつの表現にできますか",
+    "task_summary": "HTML Flexboxと<m-d>タグを利用した2段組みカードレイアウトの適用",
+    "ai_interpretation": "ChainFlow Writer v8 の強力な機能である「HTML内でのMarkdown記述タグ（<m-d>）」とFlexboxを組み合わせることで、ドキュメント自体のレイアウトをより美しく、空間効率の良い2段組みで表現したいのだと理解。",
+    "status": "completed",
+    "duration_minutes": 5,
+    "files_changed": [
+      "ChainFlowWriter_v8_Basic_Guide.md"
+    ],
+    "executed_actions": [
+      "ガイドブックの概要や機能紹介部分を、<div style=\"display: flex;\">を用いた2段組に変更",
+      "背景色や角丸ボーダー(border-radius)を設定したカード風デザインを各Step実践ガイドに適用",
+      "<m-d>タグを使って、HTMLレイアウト内部でMarkdown構文がそのまま機能する実例として構成をリライト"
+    ],
+    "notes": "Basic Guideに対して適用し、非常にリッチなレイアウトへ昇華させた。"
   }
 ]
