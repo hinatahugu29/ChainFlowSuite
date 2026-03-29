@@ -1,0 +1,165 @@
+{
+  "geometry": "01d9d0cb00030000fffff880fffffff8ffffffff00000487fffff92f000001bb000000ac000005a100000001020000000780fffff88000000017ffffffff00000487",
+  "splitter_state": "000000ff0000000100000002000000f00000068b00ffffffff010000000100",
+  "tabs": [
+    {
+      "title": "Desktop",
+      "state": {
+        "lanes": [
+          {
+            "panes": [
+              {
+                "paths": [
+                  "C:\\Users\\T03000\\Desktop"
+                ],
+                "display_mode": 0,
+                "show_hidden": false,
+                "sort_col": 0,
+                "sort_order": 1,
+                "is_compact": false
+              },
+              {
+                "paths": [
+                  "C:\\Users\\T03000\\Desktop\\tmp"
+                ],
+                "display_mode": 0,
+                "show_hidden": false,
+                "sort_col": 0,
+                "sort_order": 0,
+                "is_compact": false
+              },
+              {
+                "paths": [
+                  "C:\\Users\\T03000\\Desktop\\tmp\\報告書作成"
+                ],
+                "display_mode": 0,
+                "show_hidden": false,
+                "sort_col": 0,
+                "sort_order": 0,
+                "is_compact": false
+              }
+            ]
+          }
+        ],
+        "active_lane_index": 0
+      }
+    },
+    {
+      "title": "Desktop",
+      "state": {
+        "lanes": [
+          {
+            "panes": [
+              {
+                "paths": [
+                  "C:\\Users\\T03000\\Desktop"
+                ],
+                "display_mode": 0,
+                "show_hidden": false,
+                "sort_col": 0,
+                "sort_order": 0,
+                "is_compact": false
+              },
+              {
+                "paths": [
+                  "C:\\Users\\T03000\\Desktop\\青木_案件_43898_コーキンマスター輸出"
+                ],
+                "display_mode": 0,
+                "show_hidden": false,
+                "sort_col": 0,
+                "sort_order": 0,
+                "is_compact": false
+              },
+              {
+                "paths": [
+                  "C:\\Users\\T03000\\Desktop\\青木_案件_43898_コーキンマスター輸出\\2001"
+                ],
+                "display_mode": 0,
+                "show_hidden": false,
+                "sort_col": 0,
+                "sort_order": 0,
+                "is_compact": false
+              }
+            ]
+          }
+        ],
+        "active_lane_index": 0
+      }
+    },
+    {
+      "title": "Py_FILE",
+      "state": {
+        "lanes": [
+          {
+            "panes": [
+              {
+                "paths": [
+                  "E:\\CODE\\Antigravity\\Py_FILE"
+                ],
+                "display_mode": 0,
+                "show_hidden": false,
+                "sort_col": 0,
+                "sort_order": 0,
+                "is_compact": false
+              },
+              {
+                "paths": [
+                  "E:\\CODE\\Antigravity\\Py_FILE\\ChainFlowFiler_v21"
+                ],
+                "display_mode": 0,
+                "show_hidden": false,
+                "sort_col": 0,
+                "sort_order": 0,
+                "is_compact": false
+              }
+            ]
+          }
+        ],
+        "active_lane_index": 0
+      }
+    },
+    {
+      "title": "青木_案件_43898_コーキンマスター輸出",
+      "state": {
+        "lanes": [
+          {
+            "panes": [
+              {
+                "paths": [
+                  "C:\\Users\\T03000\\Desktop"
+                ],
+                "display_mode": 0,
+                "show_hidden": false,
+                "sort_col": 0,
+                "sort_order": 0,
+                "is_compact": false
+              },
+              {
+                "paths": [
+                  "C:\\Users\\T03000\\Desktop\\青木_案件_43898_コーキンマスター輸出"
+                ],
+                "display_mode": 0,
+                "show_hidden": false,
+                "sort_col": 0,
+                "sort_order": 0,
+                "is_compact": false
+              },
+              {
+                "paths": [
+                  "C:\\Users\\T03000\\Desktop\\青木_案件_43898_コーキンマスター輸出\\2001"
+                ],
+                "display_mode": 0,
+                "show_hidden": false,
+                "sort_col": 0,
+                "sort_order": 0,
+                "is_compact": false
+              }
+            ]
+          }
+        ],
+        "active_lane_index": 0
+      }
+    }
+  ],
+  "active_tab_index": 3
+}

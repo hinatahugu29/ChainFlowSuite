@@ -1,0 +1,6 @@
+2026/03/29-15:30:20.289 15a8 Creating DB G:\CODE\Antigravity\Py_FILE\ChainFlowSniper_V2\.web_data\IndexedDB\https_www.canva.com_0.indexeddb.leveldb since it was missing.
+2026/03/29-15:30:20.369 15a8 Reusing MANIFEST G:\CODE\Antigravity\Py_FILE\ChainFlowSniper_V2\.web_data\IndexedDB\https_www.canva.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/03/29-15:30:20.778 2b10 Level-0 table #5: started
+2026/03/29-15:30:20.807 2b10 Level-0 table #5: 8403 bytes OK
+2026/03/29-15:30:20.812 2b10 Delete type=0 #3
+2026/03/29-15:30:20.823 15a8 Manual compaction at level-0 from '\x00\x04\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x05\x00\x00\x00' @ 0 : 0; will stop at (end)

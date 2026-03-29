@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ja" data-loaded="false" data-scrolled="false" data-spmenu="closed">
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, viewport-fit=cover">
+<meta name='robots' content='max-image-preview:large' />
+
+<!-- Google Tag Manager for WordPress by gtm4wp.com -->
+<script data-cfasync="false" data-pagespeed-no-defer>
+	var gtm4wp_datalayer_name = "dataLayer";
+	var dataLayer = dataLayer || [];
+</script>
+<!-- End Google Tag Manager for WordPress by gtm4wp.com --><link rel="alternate" type="application/rss+xml" title="デジラボ &raquo; フィード" href="https://www.buffalo.jp/media/feed/" />
+<link rel="alternate" type="application/rss+xml" title="デジラボ &raquo; コメントフィード" href="https://www.buffalo.jp/media/comments/feed/" />
+
+<!-- SEO SIMPLE PACK 2.5.1 -->
+<title>ProductsDNA-ものづくりの系譜- ポータブルSSD「SSD-PSTU3Aシリーズ」</title>
+<meta name="description" content="開発スタッフへのインタビューを通して、商品開発にまつわるエピソードやアイディアの秘密をご紹介する「ProductsDNA」。今回はバッファロー史上最小・最軽量のポータブルSSD「SSD-PSTU3Aシリーズ」を取り上げます。">
+<meta name="keywords" content="SSD,ポータブルSSD,SSD-PSTU3A,開発者インタビュー,CopyBooster">
+<link rel="canonical" href="https://www.buffalo.jp/media/products-dna-w002-ssd-pstu3a/">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://www.buffalo.jp/media/wp-content/uploads/2023/11/products_dna_ssd-pstu3a_ogp.jpg">
+<meta property="og:title" content="ProductsDNA-ものづくりの系譜- ポータブルSSD「SSD-PSTU3Aシリーズ」">
+<meta property="og:description" content="開発スタッフへのインタビューを通して、商品開発にまつわるエピソードやアイディアの秘密をご紹介する「ProductsDNA」。今回はバッファロー史上最小・最軽量のポータブルSSD「SSD-PSTU3Aシリーズ」を取り上げます。">
+<meta property="og:url" content="https://www.buffalo.jp/media/products-dna-w002-ssd-pstu3a/">
+<meta property="og:site_name" content="デジラボ">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<!-- / SEO SIMPLE PACK -->
+
+<link rel='stylesheet' id='wp-block-library-css'  href='https://www.buffalo.jp/media/wp-includes/css/dist/block-library/style.min.css?ver=6.0.1' type='text/css' media='all' />
+<link rel='stylesheet' id='swell-icons-css'  href='https://www.buffalo.jp/media/wp-content/themes/swell/build/css/swell-icons.css?ver=2.6.8.3' type='text/css' media='all' />
+<link rel='stylesheet' id='main_style-css'  href='https://www.buffalo.jp/media/wp-content/themes/swell/build/css/main.css?ver=2.6.8.3' type='text/css' media='all' />
+<link rel='stylesheet' id='swell_blocks-css'  href='https://www.buffalo.jp/media/wp-content/themes/swell/build/css/blocks.css?ver=2.6.8.3' type='text/css' media='all' />
+<style id='swell_custom-inline-css' type='text/css'>
+:root{--swl-fz--content:4vw;--swl-font_family:"Noto Sans JP", sans-serif;--swl-font_weight:400;--color_main:#252525;--color_text:#707070;--color_link:#d7000f;--color_htag:#252525;--color_bg:#fdfdfd;--color_gradient1:#d8ffff;--color_gradient2:#87e7ff;--color_main_thin:rgba(46, 46, 46, 0.05 );--color_main_dark:rgba(28, 28, 28, 1 );--color_list_check:#252525;--color_list_num:#252525;--color_list_good:#86dd7b;--color_list_triangle:#f4e03a;--color_list_bad:#f36060;--color_faq_q:#d55656;--color_faq_a:#6599b7;--color_icon_good:#3cd250;--color_icon_good_bg:#ecffe9;--color_icon_bad:#4b73eb;--color_icon_bad_bg:#eafaff;--color_icon_info:#f578b4;--color_icon_info_bg:#fff0fa;--color_icon_announce:#ffa537;--color_icon_announce_bg:#fff5f0;--color_icon_pen:#7a7a7a;--color_icon_pen_bg:#f7f7f7;--color_icon_book:#787364;--color_icon_book_bg:#f8f6ef;--color_icon_point:#ffa639;--color_icon_check:#86d67c;--color_icon_batsu:#f36060;--color_icon_hatena:#5295cc;--color_icon_caution:#f7da38;--color_icon_memo:#84878a;--color_deep01:#e44141;--color_deep02:#3d79d5;--color_deep03:#63a84d;--color_deep04:#f09f4d;--color_pale01:#fff2f0;--color_pale02:#f3f8fd;--color_pale03:#f1f9ee;--color_pale04:#fdf9ee;--color_mark_blue:#b7e3ff;--color_mark_green:#bdf9c3;--color_mark_yellow:#fcf69f;--color_mark_orange:#ffddbc;--border01:solid 1px var(--color_main);--border02:double 4px var(--color_main);--border03:dashed 2px var(--color_border);--border04:solid 4px var(--color_gray);--card_posts_thumb_ratio:61.8%;--list_posts_thumb_ratio:100%;--big_posts_thumb_ratio:100%;--thumb_posts_thumb_ratio:100%;--color_header_bg:#fdfdfd;--color_header_text:#333;--color_footer_bg:#fdfdfd;--color_footer_text:#333;--container_size:1200px;--article_size:900px;--logo_size_sp:48px;--logo_size_pc:40px;--logo_size_pcfix:32px;}.swl-cell-bg[data-icon="doubleCircle"]{--cell-icon-color:#ffc977}.swl-cell-bg[data-icon="circle"]{--cell-icon-color:#94e29c}.swl-cell-bg[data-icon="triangle"]{--cell-icon-color:#eeda2f}.swl-cell-bg[data-icon="close"]{--cell-icon-color:#ec9191}.swl-cell-bg[data-icon="hatena"]{--cell-icon-color:#93c9da}.swl-cell-bg[data-icon="check"]{--cell-icon-color:#94e29c}.swl-cell-bg[data-icon="line"]{--cell-icon-color:#9b9b9b}.cap_box[data-colset="col1"]{--capbox-color:#dd3333;--capbox-color--bg:#ffffff}.cap_box[data-colset="col2"]{--capbox-color:#5fb9f5;--capbox-color--bg:#ffffff}.cap_box[data-colset="col3"]{--capbox-color:#2fcd90;--capbox-color--bg:#f9f9f9}.red_{--the-btn-color:#f74a4a;--the-btn-color2:#ffbc49;--the-solid-shadow: rgba(185, 56, 56, 1 )}.blue_{--the-btn-color:#338df4;--the-btn-color2:#35eaff;--the-solid-shadow: rgba(38, 106, 183, 1 )}.green_{--the-btn-color:#62d847;--the-btn-color2:#7bf7bd;--the-solid-shadow: rgba(74, 162, 53, 1 )}.is-style-btn_normal{--the-btn-radius:80px}.is-style-btn_solid{--the-btn-radius:80px}.is-style-btn_shiny{--the-btn-radius:80px}.is-style-btn_line{--the-btn-radius:80px}.post_content blockquote{padding:1.5em 2em 1.5em 3em}.post_content blockquote::before{content:"";display:block;width:5px;height:calc(100% - 3em);top:1.5em;left:1.5em;border-left:solid 1px rgba(180,180,180,.75);border-right:solid 1px rgba(180,180,180,.75);}.mark_blue{background:-webkit-linear-gradient(transparent 64%,var(--color_mark_blue) 0%);background:linear-gradient(transparent 64%,var(--color_mark_blue) 0%)}.mark_green{background:-webkit-linear-gradient(transparent 64%,var(--color_mark_green) 0%);background:linear-gradient(transparent 64%,var(--color_mark_green) 0%)}.mark_yellow{background:-webkit-linear-gradient(transparent 64%,var(--color_mark_yellow) 0%);background:linear-gradient(transparent 64%,var(--color_mark_yellow) 0%)}.mark_orange{background:-webkit-linear-gradient(transparent 64%,var(--color_mark_orange) 0%);background:linear-gradient(transparent 64%,var(--color_mark_orange) 0%)}[class*="is-style-icon_"]{color:#333;border-width:0}[class*="is-style-big_icon_"]{border-width:2px;border-style:solid}[data-col="gray"] .c-balloon__text{background:#f7f7f7;border-color:#ccc}[data-col="gray"] .c-balloon__before{border-right-color:#f7f7f7}[data-col="green"] .c-balloon__text{background:#d1f8c2;border-color:#9ddd93}[data-col="green"] .c-balloon__before{border-right-color:#d1f8c2}[data-col="blue"] .c-balloon__text{background:#e2f6ff;border-color:#93d2f0}[data-col="blue"] .c-balloon__before{border-right-color:#e2f6ff}[data-col="red"] .c-balloon__text{background:#ffebeb;border-color:#f48789}[data-col="red"] .c-balloon__before{border-right-color:#ffebeb}[data-col="yellow"] .c-balloon__text{background:#f9f7d2;border-color:#fbe593}[data-col="yellow"] .c-balloon__before{border-right-color:#f9f7d2}.-type-list2 .p-postList__body::after,.-type-big .p-postList__body::after{content: "READ MORE »";}.c-postThumb__cat{background-color:#252525;color:#fff;background-image: repeating-linear-gradient(-45deg,rgba(255,255,255,.1),rgba(255,255,255,.1) 6px,transparent 6px,transparent 12px)}.post_content h2{background:var(--color_htag);padding:.75em 1em;color:#fff}.post_content h2::before{position:absolute;display:block;pointer-events:none;content:"";top:-4px;left:0;width:100%;height:calc(100% + 4px);box-sizing:content-box;border-top:solid 2px var(--color_htag);border-bottom:solid 2px var(--color_htag)}.post_content h3{padding:0 .5em .5em}.post_content h3::before{content:"";width:100%;height:2px;background: repeating-linear-gradient(90deg, var(--color_htag) 0%, var(--color_htag) 29.3%, rgba(150,150,150,.2) 29.3%, rgba(150,150,150,.2) 100%)}.post_content h4{padding:0 0 0 16px;border-left:solid 2px var(--color_htag)}.l-header{box-shadow: 0 1px 4px rgba(0,0,0,.12)}.l-header__bar{color:#fff;background:var(--color_main)}.l-header__menuBtn{order:1}.l-header__customBtn{order:3}.c-gnav a::after{background:var(--color_main);width:100%;height:2px;transform:scaleX(0)}.p-spHeadMenu .menu-item.-current{border-bottom-color:var(--color_main)}.c-gnav > li:hover > a::after,.c-gnav > .-current > a::after{transform: scaleX(1)}.c-gnav .sub-menu{color:#333;background:#fff}.l-fixHeader::before{opacity:1}#pagetop{border-radius:50%}.c-widget__title.-spmenu{padding:.5em .75em;border-radius:var(--swl-radius--2, 0px);background:var(--color_main);color:#fff;}.c-widget__title.-footer{padding:.5em}.c-widget__title.-footer::before{content:"";bottom:0;left:0;width:40%;z-index:1;background:var(--color_main)}.c-widget__title.-footer::after{content:"";bottom:0;left:0;width:100%;background:var(--color_border)}.c-secTitle{border-left:solid 2px var(--color_main);padding:0em .75em}.p-spMenu{color:#333}.p-spMenu__inner::before{background:#fdfdfd;opacity:1}.p-spMenu__overlay{background:#000;opacity:0.6}[class*="page-numbers"]{color:#fff;background-color:#dedede}a{text-decoration: none}.l-topTitleArea.c-filterLayer::before{background-color:#000;opacity:0.2;content:""}@media screen and (min-width: 960px){:root{}}@media screen and (max-width: 959px){:root{}.l-header__logo{order:2;text-align:center}}@media screen and (min-width: 600px){:root{--swl-fz--content:16px;}}@media screen and (max-width: 599px){:root{}}@media (min-width: 1108px) {.alignwide{left:-100px;width:calc(100% + 200px);}}@media (max-width: 1108px) {.-sidebar-off .swell-block-fullWide__inner.l-container .alignwide{left:0px;width:100%;}}.l-fixHeader .l-fixHeader__gnav{order:0}[data-scrolled=true] .l-fixHeader[data-ready]{opacity:1;-webkit-transform:translateY(0)!important;transform:translateY(0)!important;visibility:visible}.-body-solid .l-fixHeader{box-shadow:0 2px 4px var(--swl-color_shadow)}.l-fixHeader__inner{align-items:stretch;color:var(--color_header_text);display:flex;padding-bottom:0;padding-top:0;position:relative;z-index:1}.l-fixHeader__logo{align-items:center;display:flex;line-height:1;margin-right:24px;order:0;padding:16px 0}.is-style-btn_normal a,.is-style-btn_shiny a{box-shadow:var(--swl-btn_shadow)}.c-shareBtns__btn,.is-style-balloon>.c-tabList .c-tabList__button,.p-snsCta,[class*=page-numbers]{box-shadow:var(--swl-box_shadow)}.p-articleThumb__img,.p-articleThumb__youtube{box-shadow:var(--swl-img_shadow)}.p-pickupBanners__item .c-bannerLink,.p-postList__thumb{box-shadow:0 2px 8px rgba(0,0,0,.1),0 4px 4px -4px rgba(0,0,0,.1)}.p-postList.-w-ranking li:before{background-image:repeating-linear-gradient(-45deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,.1) 6px,transparent 0,transparent 12px);box-shadow:1px 1px 4px rgba(0,0,0,.2)}.l-header__bar{position:relative;width:100%}.l-header__bar .c-catchphrase{color:inherit;font-size:12px;letter-spacing:var(--swl-letter_spacing,.2px);line-height:14px;margin-right:auto;overflow:hidden;padding:4px 0;white-space:nowrap;width:50%}.l-header__bar .c-iconList .c-iconList__link{margin:0;padding:4px 6px}.l-header__barInner{align-items:center;display:flex;justify-content:flex-end}@media (min-width:960px){.-series .l-header__inner{align-items:stretch;display:flex}.-series .l-header__logo{align-items:center;display:flex;flex-wrap:wrap;margin-right:24px;padding:16px 0}.-series .l-header__logo .c-catchphrase{font-size:13px;padding:4px 0}.-series .c-headLogo{margin-right:16px}.-series-right .l-header__inner{justify-content:space-between}.-series-right .c-gnavWrap{margin-left:auto}.-series-right .w-header{margin-left:12px}.-series-left .w-header{margin-left:auto}}@media (min-width:960px) and (min-width:600px){.-series .c-headLogo{max-width:400px}}.c-gnav .sub-menu a:before,.c-listMenu a:before{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-family:icomoon!important;font-style:normal;font-variant:normal;font-weight:400;line-height:1;text-transform:none}.c-submenuToggleBtn{display:none}.c-listMenu a{padding:.75em 1em .75em 1.5em;transition:padding .25s}.c-listMenu a:hover{padding-left:1.75em;padding-right:.75em}.c-gnav .sub-menu a:before,.c-listMenu a:before{color:inherit;content:"\e921";display:inline-block;left:2px;position:absolute;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);vertical-align:middle}.c-listMenu .children,.c-listMenu .sub-menu{margin:0}.c-listMenu .children a,.c-listMenu .sub-menu a{font-size:.9em;padding-left:2.5em}.c-listMenu .children a:before,.c-listMenu .sub-menu a:before{left:1em}.c-listMenu .children a:hover,.c-listMenu .sub-menu a:hover{padding-left:2.75em}.c-listMenu .children ul a,.c-listMenu .sub-menu ul a{padding-left:3.25em}.c-listMenu .children ul a:before,.c-listMenu .sub-menu ul a:before{left:1.75em}.c-listMenu .children ul a:hover,.c-listMenu .sub-menu ul a:hover{padding-left:3.5em}.c-gnav li:hover>.sub-menu{opacity:1;visibility:visible}.c-gnav .sub-menu:before{background:inherit;content:"";height:100%;left:0;position:absolute;top:0;width:100%;z-index:0}.c-gnav .sub-menu .sub-menu{left:100%;top:0;z-index:-1}.c-gnav .sub-menu a{padding-left:2em}.c-gnav .sub-menu a:before{left:.5em}.c-gnav .sub-menu a:hover .ttl{left:4px}:root{}.c-shareBtns__item:not(:last-child){margin-right:4px}.c-shareBtns__btn{padding:8px 0}@media screen and (min-width: 960px){:root{}}@media screen and (max-width: 959px){:root{}}@media screen and (min-width: 600px){:root{}}@media screen and (max-width: 599px){:root{}}.p-relatedPosts .p-postList__item{margin-bottom:1.5em}.p-relatedPosts .p-postList__times,.p-relatedPosts .p-postList__times>:last-child{margin-right:0}@media (min-width:600px){.p-relatedPosts .p-postList__item{width:33.33333%}}@media screen and (min-width:600px) and (max-width:1239px){.p-relatedPosts .p-postList__item:nth-child(7),.p-relatedPosts .p-postList__item:nth-child(8){display:none}}@media screen and (min-width:1240px){.p-relatedPosts .p-postList__item{width:25%}}.-index-off .p-toc,.swell-toc-placeholder:empty{display:none}.p-toc.-modal{height:100%;margin:0;overflow-y:auto;padding:0}#main_content .p-toc{border-radius:var(--swl-radius--2,0);margin:4em auto;max-width:800px}#sidebar .p-toc{margin-top:-.5em}.p-toc__ttl{display:block;font-size:1.2em;line-height:1;position:relative;text-align:center}.p-toc__ttl:before{content:"\e918";display:inline-block;font-family:icomoon;margin-right:.5em;padding-bottom:2px;vertical-align:middle}#index_modal .p-toc__ttl{margin-bottom:.5em}.p-toc__list li{line-height:1.6}.p-toc__list>li+li{margin-top:.5em}.p-toc__list li li{font-size:.9em}.p-toc__list ol,.p-toc__list ul{padding-left:.5em}.p-toc__list .mininote{display:none}.post_content .p-toc__list{padding-left:0}#sidebar .p-toc__list{margin-bottom:0}#sidebar .p-toc__list ol,#sidebar .p-toc__list ul{padding-left:0}.p-toc__link{color:inherit;font-size:inherit;text-decoration:none}.p-toc__link:hover{opacity:.8}.p-toc.-double{background:var(--color_gray);background:linear-gradient(-45deg,transparent 25%,var(--color_gray) 25%,var(--color_gray) 50%,transparent 50%,transparent 75%,var(--color_gray) 75%,var(--color_gray));background-clip:padding-box;background-size:4px 4px;border-bottom:4px double var(--color_border);border-top:4px double var(--color_border);padding:1.5em 1em 1em}.p-toc.-double .p-toc__ttl{margin-bottom:.75em}@media (min-width:960px){#main_content .p-toc{width:92%}}@media (min-width:600px){.p-toc.-double{padding:2em}}.p-pnLinks{align-items:stretch;display:flex;justify-content:space-between;margin:2em 0}.p-pnLinks__item{font-size:3vw;position:relative;width:49%}.p-pnLinks__item:before{content:"";display:block;height:.5em;pointer-events:none;position:absolute;top:50%;width:.5em;z-index:1}.p-pnLinks__item.-prev:before{border-bottom:1px solid;border-left:1px solid;left:.35em;-webkit-transform:rotate(45deg) translateY(-50%);transform:rotate(45deg) translateY(-50%)}.p-pnLinks__item.-prev .p-pnLinks__thumb{margin-right:8px}.p-pnLinks__item.-next .p-pnLinks__link{justify-content:flex-end}.p-pnLinks__item.-next:before{border-bottom:1px solid;border-right:1px solid;right:.35em;-webkit-transform:rotate(-45deg) translateY(-50%);transform:rotate(-45deg) translateY(-50%)}.p-pnLinks__item.-next .p-pnLinks__thumb{margin-left:8px;order:2}.p-pnLinks__item.-next:first-child{margin-left:auto}.p-pnLinks__link{align-items:center;border-radius:var(--swl-radius--2,0);color:inherit;display:flex;height:100%;line-height:1.4;min-height:4em;padding:.6em 1em .5em;position:relative;text-decoration:none;transition:box-shadow .25s;width:100%}.p-pnLinks__thumb{border-radius:var(--swl-radius--4,0);height:32px;-o-object-fit:cover;object-fit:cover;width:48px}.p-pnLinks .-prev .p-pnLinks__link{border-left:1.25em solid var(--color_main)}.p-pnLinks .-prev:before{color:#fff}.p-pnLinks .-next .p-pnLinks__link{border-right:1.25em solid var(--color_main)}.p-pnLinks .-next:before{color:#fff}@media (max-width:959px){.p-pnLinks.-thumb-on{display:block}.p-pnLinks.-thumb-on .p-pnLinks__item{width:100%}}@media (min-width:600px){.p-pnLinks__item{font-size:13px}.p-pnLinks__thumb{height:48px;width:72px}.p-pnLinks__title{transition:-webkit-transform .25s;transition:transform .25s;transition:transform .25s,-webkit-transform .25s}.-prev>.p-pnLinks__link:hover .p-pnLinks__title{-webkit-transform:translateX(4px);transform:translateX(4px)}.-next>.p-pnLinks__link:hover .p-pnLinks__title{-webkit-transform:translateX(-4px);transform:translateX(-4px)}.p-pnLinks .-prev .p-pnLinks__link:hover{box-shadow:1px 1px 2px var(--swl-color_shadow)}.p-pnLinks .-next .p-pnLinks__link:hover{box-shadow:-1px 1px 2px var(--swl-color_shadow)}}
+</style>
+<link rel='stylesheet' id='swell-parts/footer-css'  href='https://www.buffalo.jp/media/wp-content/themes/swell/build/css/modules/parts/footer.css?ver=2.6.8.3' type='text/css' media='all' />
+<link rel='stylesheet' id='swell-page/single-css'  href='https://www.buffalo.jp/media/wp-content/themes/swell/build/css/modules/page/single.css?ver=2.6.8.3' type='text/css' media='all' />
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #fff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--swl-main: var(--color_main);--wp--preset--color--swl-main-thin: var(--color_main_thin);--wp--preset--color--swl-gray: var(--color_gray);--wp--preset--color--swl-deep-01: var(--color_deep01);--wp--preset--color--swl-deep-02: var(--color_deep02);--wp--preset--color--swl-deep-03: var(--color_deep03);--wp--preset--color--swl-deep-04: var(--color_deep04);--wp--preset--color--swl-pale-01: var(--color_pale01);--wp--preset--color--swl-pale-02: var(--color_pale02);--wp--preset--color--swl-pale-03: var(--color_pale03);--wp--preset--color--swl-pale-04: var(--color_pale04);--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 0.9em;--wp--preset--font-size--medium: 1.1em;--wp--preset--font-size--large: 1.25em;--wp--preset--font-size--x-large: 42px;--wp--preset--font-size--xs: 0.75em;--wp--preset--font-size--huge: 1.6em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<link rel='stylesheet' id='wordpress-popular-posts-css-css'  href='https://www.buffalo.jp/media/wp-content/plugins/wordpress-popular-posts/assets/css/wpp.css?ver=6.0.4' type='text/css' media='all' />
+<script type='application/json' id='wpp-json'>
+{"sampling_active":0,"sampling_rate":100,"ajax_url":"https:\/\/www.buffalo.jp\/media\/wp-json\/wordpress-popular-posts\/v1\/popular-posts","api_url":"https:\/\/www.buffalo.jp\/media\/wp-json\/wordpress-popular-posts","ID":6323,"token":"f21b812f76","lang":0,"debug":0}
+</script>
+<script type='text/javascript' src='https://www.buffalo.jp/media/wp-content/plugins/wordpress-popular-posts/assets/js/wpp.min.js?ver=6.0.4' id='wpp-js-js'></script>
+
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&#038;display=swap" rel="stylesheet">
+<noscript><link href="https://www.buffalo.jp/media/wp-content/themes/swell/build/css/noscript.css" rel="stylesheet"></noscript>
+<link rel="https://api.w.org/" href="https://www.buffalo.jp/media/wp-json/" /><link rel="alternate" type="application/json" href="https://www.buffalo.jp/media/wp-json/wp/v2/posts/6323" /><link rel='shortlink' href='https://www.buffalo.jp/media/?p=6323' />
+<meta name="generator" content="Site Kit by Google 1.81.0" />
+<!-- Google Tag Manager for WordPress by gtm4wp.com -->
+<!-- GTM Container placement set to automatic -->
+<script data-cfasync="false" data-pagespeed-no-defer type="text/javascript">
+	var dataLayer_content = {"pagePostType":"post","pagePostType2":"single-post","pageCategory":["products-dna","external-ssd"],"pagePostAuthor":"萩原 和之"};
+	dataLayer.push( dataLayer_content );
+</script>
+<script data-cfasync="false">
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.'+'js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MWSPQH3');
+</script>
+<!-- End Google Tag Manager -->
+<!-- End Google Tag Manager for WordPress by gtm4wp.com -->            <style id="wpp-loading-animation-styles">@-webkit-keyframes bgslide{from{background-position-x:0}to{background-position-x:-200%}}@keyframes bgslide{from{background-position-x:0}to{background-position-x:-200%}}.wpp-widget-placeholder,.wpp-widget-block-placeholder{margin:0 auto;width:60px;height:3px;background:#dd3737;background:linear-gradient(90deg,#dd3737 0%,#571313 10%,#dd3737 100%);background-size:200% auto;border-radius:3px;-webkit-animation:bgslide 1s infinite linear;animation:bgslide 1s infinite linear}</style>
+            <meta name="google-site-verification" content="Uii4UqE89GNKi_DWoJPFNHLmgqqfXmkb9vy8R1fw9nA"><meta name="google-site-verification" content="aSIm0_d8ullI1QcLjzPu9M7ofVJbIWGZjEf_BsDYLi8"><link rel="icon" href="https://www.buffalo.jp/media/wp-content/uploads/2022/07/cropped-dejirabo_fabicon2_20220630-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://www.buffalo.jp/media/wp-content/uploads/2022/07/cropped-dejirabo_fabicon2_20220630-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://www.buffalo.jp/media/wp-content/uploads/2022/07/cropped-dejirabo_fabicon2_20220630-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.buffalo.jp/media/wp-content/uploads/2022/07/cropped-dejirabo_fabicon2_20220630-270x270.png" />
+		<style type="text/css" id="wp-custom-css">
+			/* 画像拡大無効 */
+.lum-lightbox.lum-open {
+    display: none;
+}
+/* ホバー時のカーソルをデフォルトへ */
+.luminous {
+    cursor: default!important;
+}
+
+.sidebanner{
+	border:3px;
+	border-style:solid;
+	border-color:gray;
+}
+
+/* Twitter→Xアイコン変更 背景色変更 */
+.c-shareBtns__item.-twitter {
+	color:#000000;
+}
+
+/* Twitter→Xアイコン変更 （公式提供SVGをCSSに変換） */
+.icon-twitter:before {
+	content:"";
+	display:inline-block;
+	width:1em;
+	height:1em;
+	background-position:center;
+	background-repeat:no-repeat;
+	background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 1200 1227' %3E%3Cstyle type='text/css'%3E .st0%7Bfill:%23FFFFFF;%7D %3C/style%3E%3Cpath class='st0' d='M714.2,519.3L1160.9,0H1055L667.1,450.9L357.3,0H0l468.5,681.8L0,1226.4h105.9l409.6-476.2l327.2,476.2H1200 L714.2,519.3L714.2,519.3z M569.2,687.8l-47.5-67.9L144,79.7h162.6l304.8,436l47.5,67.9l396.2,566.7H892.5L569.2,687.8L569.2,687.8z '/%3E%3C/svg%3E");
+}
+		</style>
+		
+<link rel="stylesheet" href="https://www.buffalo.jp/media/wp-content/themes/swell/build/css/print.css" media="print" >
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-dark-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 0.49803921568627" /><feFuncG type="table" tableValues="0 0.49803921568627" /><feFuncB type="table" tableValues="0 0.49803921568627" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 1" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0 1" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-purple-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.54901960784314 0.98823529411765" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0.71764705882353 0.25490196078431" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-blue-red"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 1" /><feFuncG type="table" tableValues="0 0.27843137254902" /><feFuncB type="table" tableValues="0.5921568627451 0.27843137254902" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-midnight"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 0" /><feFuncG type="table" tableValues="0 0.64705882352941" /><feFuncB type="table" tableValues="0 1" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-magenta-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.78039215686275 1" /><feFuncG type="table" tableValues="0 0.94901960784314" /><feFuncB type="table" tableValues="0.35294117647059 0.47058823529412" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-purple-green"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.65098039215686 0.40392156862745" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0.44705882352941 0.4" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-blue-orange"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.098039215686275 1" /><feFuncG type="table" tableValues="0 0.66274509803922" /><feFuncB type="table" tableValues="0.84705882352941 0.41960784313725" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg>
+<!-- GTM Container placement set to automatic -->
+<!-- Google Tag Manager (noscript) -->
+				<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MWSPQH3" height="0" width="0" style="display:none;visibility:hidden" aria-hidden="true"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) --><div id="body_wrap" class="post-template-default single single-post postid-6323 single-format-standard -body-solid -index-off -sidebar-on -frame-off id_6323" >
+<div id="sp_menu" class="p-spMenu -left">
+	<div class="p-spMenu__inner">
+		<div class="p-spMenu__closeBtn">
+			<button class="c-iconBtn -menuBtn c-plainBtn" data-onclick="toggleMenu" aria-label="メニューを閉じる">
+				<i class="c-iconBtn__icon icon-close-thin"></i>
+			</button>
+		</div>
+		<div class="p-spMenu__body">
+			<div class="c-widget__title -spmenu">
+				MENU			</div>
+			<div class="p-spMenu__nav">
+				<ul class="c-spnav c-listMenu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-163"><a href="https://www.buffalo.jp/">TOP</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-164"><a href="https://www.buffalo.jp/topics/">教えてバッファロー</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-165"><a href="https://www.buffalo.jp/support/">サポート</a></li>
+</ul>			</div>
+					</div>
+	</div>
+	<div class="p-spMenu__overlay c-overlay" data-onclick="toggleMenu"></div>
+</div>
+<header id="header" class="l-header -series -series-right" data-spfix="1">
+	<div class="l-header__bar pc_">
+	<div class="l-header__barInner l-container">
+		<ul class="c-iconList">
+						<li class="c-iconList__item -facebook">
+						<a href="https://www.facebook.com/BuffaloJapan/" target="_blank" rel="noopener" class="c-iconList__link u-fz-14 hov-flash" aria-label="facebook">
+							<i class="c-iconList__icon icon-facebook" role="presentation"></i>
+						</a>
+					</li>
+									<li class="c-iconList__item -twitter">
+						<a href="https://x.com/BUFFALO_jp_info" target="_blank" rel="noopener" class="c-iconList__link u-fz-14 hov-flash" aria-label="twitter">
+							<i class="c-iconList__icon icon-twitter" role="presentation"></i>
+						</a>
+					</li>
+									<li class="c-iconList__item -rss">
+						<a href="https://www.buffalo.jp/media/feed/" target="_blank" rel="noopener" class="c-iconList__link u-fz-14 hov-flash" aria-label="rss">
+							<i class="c-iconList__icon icon-rss" role="presentation"></i>
+						</a>
+					</li>
+									<li class="c-iconList__item -search">
+						<button class="c-iconList__link c-plainBtn u-fz-14 hov-flash" data-onclick="toggleSearch" aria-label="検索">
+							<i class="c-iconList__icon icon-search" role="presentation"></i>
+						</button>
+					</li>
+				</ul>
+	</div>
+</div>
+	<div class="l-header__inner l-container">
+		<div class="l-header__logo">
+			<div class="c-headLogo -img"><a href="https://www.buffalo.jp/media/" title="デジラボ" class="c-headLogo__link" rel="home"><img width="589" height="180"  src="https://www.buffalo.jp/media/wp-content/uploads/2022/07/dejirabo_header589x180_20220630.png" alt="デジラボ" class="c-headLogo__img" srcset="https://www.buffalo.jp/media/wp-content/uploads/2022/07/dejirabo_header589x180_20220630.png 589w, https://www.buffalo.jp/media/wp-content/uploads/2022/07/dejirabo_header589x180_20220630-300x92.png 300w" sizes="(max-width: 959px) 50vw, 800px" decoding="async" loading="eager" ></a></div>							<div class="c-catchphrase u-thin">日々の生活をもっとスマートに。デジタルを使いこなすためのコンテンツを配信。</div>
+					</div>
+		<nav id="gnav" class="l-header__gnav c-gnavWrap">
+					<ul class="c-gnav">
+			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-163"><a href="https://www.buffalo.jp/"><span class="ttl">TOP</span></a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-164"><a href="https://www.buffalo.jp/topics/"><span class="ttl">教えてバッファロー</span></a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-165"><a href="https://www.buffalo.jp/support/"><span class="ttl">サポート</span></a></li>
+					</ul>
+			</nav>
+		<div class="l-header__customBtn sp_">
+			<button class="c-iconBtn c-plainBtn" data-onclick="toggleSearch" aria-label="検索ボタン">
+			<i class="c-iconBtn__icon icon-search"></i>
+					</button>
+	</div>
+<div class="l-header__menuBtn sp_">
+	<button class="c-iconBtn -menuBtn c-plainBtn" data-onclick="toggleMenu" aria-label="メニューボタン">
+		<i class="c-iconBtn__icon icon-menu-thin"></i>
+			</button>
+</div>
+	</div>
+	</header>
+<div id="fix_header" class="l-fixHeader -series -series-right">
+	<div class="l-fixHeader__inner l-container">
+		<div class="l-fixHeader__logo">
+			<div class="c-headLogo -img"><a href="https://www.buffalo.jp/media/" title="デジラボ" class="c-headLogo__link" rel="home"><img width="589" height="180"  src="https://www.buffalo.jp/media/wp-content/uploads/2022/07/dejirabo_header589x180_20220630.png" alt="デジラボ" class="c-headLogo__img" srcset="https://www.buffalo.jp/media/wp-content/uploads/2022/07/dejirabo_header589x180_20220630.png 589w, https://www.buffalo.jp/media/wp-content/uploads/2022/07/dejirabo_header589x180_20220630-300x92.png 300w" sizes="(max-width: 959px) 50vw, 800px" decoding="async" loading="eager" ></a></div>		</div>
+		<div class="l-fixHeader__gnav c-gnavWrap">
+					<ul class="c-gnav">
+			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-163"><a href="https://www.buffalo.jp/"><span class="ttl">TOP</span></a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-164"><a href="https://www.buffalo.jp/topics/"><span class="ttl">教えてバッファロー</span></a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-165"><a href="https://www.buffalo.jp/support/"><span class="ttl">サポート</span></a></li>
+					</ul>
+			</div>
+	</div>
+</div>
+<div id="breadcrumb" class="p-breadcrumb -bg-on"><ol class="p-breadcrumb__list l-container"><li class="p-breadcrumb__item"><a href="https://www.buffalo.jp/media/" class="p-breadcrumb__text"><span class="icon-home"> ホーム</span></a></li><li class="p-breadcrumb__item"><a href="https://www.buffalo.jp/media/category/products-dna/" class="p-breadcrumb__text"><span>Products DNA</span></a></li><li class="p-breadcrumb__item"><span class="p-breadcrumb__text">ProductsDNA-ものづくりの系譜-  ポータブルSSD「SSD-PSTU3Aシリーズ」</span></li></ol></div><div id="content" class="l-content l-container" data-postid="6323" data-pvct="true">
+<main id="main_content" class="l-mainContent l-article">
+	<article class="l-mainContent__inner">
+		<div class="p-articleHead c-postTitle">
+	<h1 class="c-postTitle__ttl">ProductsDNA-ものづくりの系譜-  ポータブルSSD「SSD-PSTU3Aシリーズ」</h1>
+	<time class="c-postTitle__date u-thin" datetime="2023-11-15">
+		<span class="__y">2023</span>
+		<span class="__md">11/15</span>
+	</time>
+</div>
+<div class="p-articleMetas -top">
+		<div class="p-articleMetas__termList c-categoryList">
+					<a class="c-categoryList__link hov-flash-up" href="https://www.buffalo.jp/media/category/products-dna/" data-cat-id="26">
+				Products DNA			</a>
+					<a class="c-categoryList__link hov-flash-up" href="https://www.buffalo.jp/media/category/external-ssd/" data-cat-id="9">
+				外付けSSD			</a>
+			</div>
+<div class="p-articleMetas__times c-postTimes u-thin">
+			<span class="c-postTimes__posted icon-posted" aria-label="公開日">
+			2023年11月15日		</span>
+				<time class="c-postTimes__modified icon-modified" datetime="2023-11-15" aria-label="更新日">
+			2023年11月15日		</time>
+	</div>
+</div>
+<figure class="p-articleThumb"><img width="2400" height="1480"  src="https://www.buffalo.jp/media/wp-content/uploads/2023/11/products_dna_ssd-pstu3a_eyecath.jpg" alt="" class="p-articleThumb__img" srcset="https://www.buffalo.jp/media/wp-content/uploads/2023/11/products_dna_ssd-pstu3a_eyecath.jpg 2400w, https://www.buffalo.jp/media/wp-content/uploads/2023/11/products_dna_ssd-pstu3a_eyecath-300x185.jpg 300w, https://www.buffalo.jp/media/wp-content/uploads/2023/11/products_dna_ssd-pstu3a_eyecath-1024x631.jpg 1024w, https://www.buffalo.jp/media/wp-content/uploads/2023/11/products_dna_ssd-pstu3a_eyecath-768x474.jpg 768w, https://www.buffalo.jp/media/wp-content/uploads/2023/11/products_dna_ssd-pstu3a_eyecath-1536x947.jpg 1536w, https://www.buffalo.jp/media/wp-content/uploads/2023/11/products_dna_ssd-pstu3a_eyecath-2048x1263.jpg 2048w" sizes="(max-width: 2400px) 100vw, 2400px" ></figure>		<div class="post_content">
+			
+<h2>パソコン、ゲーム、テレビへスマート接続<br>バッファロー史上最小サイズのポータブルSSD</h2>
+
+
+
+<p>開発スタッフへのインタビューを通して、商品開発にまつわるエピソードやアイデアの秘密をご紹介する『Products DNA』。<br>今回は、バッファロー史上最小・最軽量<sup>※</sup>のポータブルSSD「SSD-PSTU3Aシリーズ」の開発担当、斉藤、馬場に話を聞いた。<br>※バッファロー製外付けSSDの外形寸法と質量を比較(2023年7月時点)</p>
+
+
+
+<h2>発熱、転送速度、耐衝撃性…。<br>あらゆる課題をクリアしてたどり着いた、最小・最軽量SSD</h2>
+
+
+
+<p>――今回新たにポータブルSSD「SSD-PSTU3Aシリーズ」が発表となりました。まずはその特長について教えてください。</p>
+
+
+
+<div class="wp-block-columns">
+<div class="wp-block-column" style="flex-basis:66.66%">
+<p><strong>斉藤：</strong>最大の特長はやはり「SSD-PSTU3Aシリーズ」がポータブルSSDとしてバッファロー史上最小・最軽量の商品であるということですね。たとえばPCに接続して使っていただく場合、飛び出し部分はわずか約17mmという、極めてコンパクトなSSDとなっています。加えて、SSD自体の重さも約4.5gと軽量です。サイズ、重さともにノートパソコンに挿入したまま持ち運んでも気になりません。使っていただければ「最新の外部ストレージって、こんなに小さくなっているのか」と驚いてもらえるものと自負しています。</p>
+</div>
+
+
+
+<div class="wp-block-column" style="flex-basis:33.33%">
+<figure class="wp-container-2 wp-block-gallery-1 wp-block-gallery has-nested-images columns-default is-cropped">
+<figure class="wp-block-image size-full"><img width="800" height="600" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="https://www.buffalo.jp/media/wp-content/uploads/2023/10/size_ssd-pst.png" alt="" class="wp-image-6626 lazyload" data-srcset="https://www.buffalo.jp/media/wp-content/uploads/2023/10/size_ssd-pst.png 800w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/size_ssd-pst-300x225.png 300w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/size_ssd-pst-768x576.png 768w" sizes="(max-width: 800px) 100vw, 800px"  data-aspectratio="800/600"><noscript><img width="800" height="600" src="https://www.buffalo.jp/media/wp-content/uploads/2023/10/size_ssd-pst.png" alt="" class="wp-image-6626" srcset="https://www.buffalo.jp/media/wp-content/uploads/2023/10/size_ssd-pst.png 800w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/size_ssd-pst-300x225.png 300w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/size_ssd-pst-768x576.png 768w" sizes="(max-width: 800px) 100vw, 800px" ></noscript></figure>
+</figure>
+</div>
+</div>
+
+
+
+<p>さらに、最小・最軽量なだけでなく「SSD-PSTU3Aシリーズ」はアメリカの軍事規格である「MIL-STD-810H 516.8 procedure IV」に準拠した耐衝撃性を誇ります。これだけ小さく軽いSSDですから、落としてしまうことも可能性としては十分考えられます。そうした場合にもデータが失われないよう、堅牢性にも配慮をしています。</p>
+
+
+
+<p><strong>馬場：</strong>「SSD-PSTU3Aシリーズ」はもともと転送速度が高速なSSDであることに加えて、USB 3.2（Gen 2）にも対応にしているので、読み込みであればおよそ600MB/s、書き込みにおいても約500MB/sと高速なデータ転送を実現しています。容量の大きな動画や画像ファイルを多くやり取りする際に快適であることに加えて、「SSD-PSTU3Aシリーズ」はSSDストレージのコピーを高速化するバッファロー独自のアプリケーション「CopyBooster」にも対応しています。</p>
+
+
+
+<div class="wp-block-columns">
+<div class="wp-block-column" style="flex-basis:66.66%">
+<p>Window<ins>s</ins>パソコンに「CopyBooster」をインストールしていれば、エクスプローラー上で普段どおり「SSD-PSTU3Aシリーズ」にデータをドラッグ＆ドロップするだけで、たとえば5GB（1MB×5,000個）のデータであれば通常約42秒かかっていたファイルコピーを約15秒まで短縮※することができるようになります。</p>
+
+
+
+<p>※測定環境は<a href="https://www.buffalo.jp/product/detail/ssd-pst1.0u3-ba.html" data-type="URL" data-id="https://www.buffalo.jp/product/detail/ssd-pst1.0u3-ba.html">商品ページ</a>をご確認ください。</p>
+</div>
+
+
+
+<div class="wp-block-column" style="flex-basis:33.33%">
+<figure class="wp-block-image size-full is-resized"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="https://www.buffalo.jp/media/wp-content/uploads/2023/10/speed_copybooster.png" alt="" class="wp-image-6627 lazyload" width="292" height="219" data-srcset="https://www.buffalo.jp/media/wp-content/uploads/2023/10/speed_copybooster.png 800w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/speed_copybooster-300x225.png 300w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/speed_copybooster-768x576.png 768w" sizes="(max-width: 292px) 100vw, 292px"  data-aspectratio="292/219"><noscript><img src="https://www.buffalo.jp/media/wp-content/uploads/2023/10/speed_copybooster.png" alt="" class="wp-image-6627" width="292" height="219" srcset="https://www.buffalo.jp/media/wp-content/uploads/2023/10/speed_copybooster.png 800w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/speed_copybooster-300x225.png 300w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/speed_copybooster-768x576.png 768w" sizes="(max-width: 292px) 100vw, 292px" ></noscript></figure>
+</div>
+</div>
+
+
+
+<p>――約27秒も短縮できるというのはすごいですね。どのように時間短縮を実現しているのでしょうか。</p>
+
+
+
+<p><strong>馬場：</strong>OSでのコピー中の処理を効率化することで高速化を実現しています。これはヘビーユーザーだけを対象にしたものではなく、日常的にSSDを使用されている方であれば、どなたでも恩恵が受けられるものです。 開発にあたっては、コピーするデータのファイルサイズ、組み合わせる機器のバリエーションなど、考えられるあらゆるシーンで検証を行いました。限られたデータと機器の組み合わせでだけ機能するのでは意味がありませんからね。チェックしてはチューニングし直しての繰り返しを約2か月間行い、結果として「あらゆるお客さま」に喜んでいただけるアプリケーションに仕上がったと考えています。</p>
+
+
+
+<p>――今回の「SSD-PSTU3Aシリーズ」、開発にあたって苦労した点はどのようなところでしょうか。</p>
+
+
+
+<p><strong>斉藤：</strong>「SSD-PSTU3Aシリーズ」の開発における最大のテーマは、バッファロー史上最小・最軽量のポータブルSSDであることに加えて、データの高速転送機能を共存させることでした。真っ先に課題となったのが発熱の問題です。小さな筐体では排熱に限界がありますが、発熱を抑えるために転送速度を下げすぎたのでは、お客さまの期待に応えることはできません。逆に転送速度を重視しすぎて手で持てないほど熱くなってしまっては日常的な使用に耐えません。熱シミュレーションを何回も重ね、最終的に導き出した答えが「熱をホスト機器側に逃がす」という発想の転換でした。というものの、「CopyBooster」と同様、限られた機器との組み合わせでだけ機能するのでは意味がありませんから、排熱がきちんとされて商品の温度が上がり過ぎていないか、いくつものペア検証を行っています。結果的にはどのペアでも過度な温度上昇を抑えつつ高速転送が実現できることが確認できています。</p>
+
+
+
+<p> ――最小・最軽量と高速転送、それに使いやすさを併存させたということですね。</p>
+
+
+
+<p><strong>斉藤：</strong>スペック上の性能を追い求めるだけでなく、スペックに現れない使いやすさを追求するのはバッファローのDNAそのもの。「SSD-PSTU3Aシリーズ」にもしっかりとそのDNAは受け継がれています。</p>
+
+
+
+
+
+
+
+<h3>【商品紹介】<strong>ポータブルSSD「SSD-PSTU3Aシリーズ」</strong></h3>
+
+
+
+<div class="wp-block-columns u-mb-ctrl u-mb-50">
+<div class="wp-block-column" style="flex-basis:66.66%">
+<p><strong>小型＆軽量と高速転送を両立</strong><br><strong>ファイルコピー高速化アプリ「CopyBooster」対応</strong></p>
+
+
+
+<p>SSDならではの高速データ転送を実現しながらも、接続時の飛び出し部分を約17mm、重さも4.5gにまで抑えた、バッファロー史上最小最軽量のSSD。ファイルコピー高速化アプリ「CopyBooster（コピーブースター）」にも対応し、大量のファイルも高速で転送することができます。</p>
+
+
+
+<div class="swell-block-button is-style-btn_normal"><a href="https://www.buffalo.jp/product/detail/ssd-pst1.0u3-ba.html" class="swell-block-button__link"><span>商品詳細をみる</span></a></div>
+</div>
+
+
+
+<div class="wp-block-column" style="flex-basis:33.33%">
+<figure class="wp-block-image size-large"><img width="1024" height="1024" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="https://www.buffalo.jp/media/wp-content/uploads/2023/10/ssd-pstu3a-1024x1024.png" alt="" class="wp-image-6630 lazyload" data-srcset="https://www.buffalo.jp/media/wp-content/uploads/2023/10/ssd-pstu3a-1024x1024.png 1024w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/ssd-pstu3a-300x300.png 300w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/ssd-pstu3a-150x150.png 150w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/ssd-pstu3a-768x768.png 768w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/ssd-pstu3a.png 1280w" sizes="(max-width: 1024px) 100vw, 1024px"  data-aspectratio="1024/1024"><noscript><img width="1024" height="1024" src="https://www.buffalo.jp/media/wp-content/uploads/2023/10/ssd-pstu3a-1024x1024.png" alt="" class="wp-image-6630" srcset="https://www.buffalo.jp/media/wp-content/uploads/2023/10/ssd-pstu3a-1024x1024.png 1024w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/ssd-pstu3a-300x300.png 300w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/ssd-pstu3a-150x150.png 150w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/ssd-pstu3a-768x768.png 768w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/ssd-pstu3a.png 1280w" sizes="(max-width: 1024px) 100vw, 1024px" ></noscript></figure>
+</div>
+</div>
+
+
+
+<div class="swell-block-capbox cap_box is-style-onborder_ttl2"><div class="cap_box_ttl"><span>開発者紹介</span></div><div class="cap_box_content">
+<div class="wp-block-columns">
+<div class="wp-block-column" style="flex-basis:66.66%">
+<p>データストレージ開発部　<br><strong>馬場 大輔(写真:左)</strong></p>
+
+
+
+<p>仕事はもちろんプライベートでもアプリケーション制作を趣味とする根っからのソフトウェア・エンジニア。プログラミングの醍醐味は、試行錯誤を重ねてプログラムを完成に導くPDCAにあるという。</p>
+
+
+
+<p>データストレージ開発部　<br><strong>斉藤 勝男(写真:右)</strong></p>
+
+
+
+<p>休日の外出でも量販店でバッファロー商品をチェックし、手がけた商品が並んでいれば家族に胸を張る。親族の中でもITリテラシーが高く、PC関連の困りごとを一手に引き受ける「相談役」だ。</p>
+
+
+
+
+</div>
+
+
+
+<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:33.33%">
+<figure class="wp-block-image size-large"><img width="1024" height="681" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="https://www.buffalo.jp/media/wp-content/uploads/2023/10/profile-1024x681.jpg" alt="" class="wp-image-6631 lazyload" data-srcset="https://www.buffalo.jp/media/wp-content/uploads/2023/10/profile-1024x681.jpg 1024w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/profile-300x200.jpg 300w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/profile-768x511.jpg 768w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/profile-1536x1022.jpg 1536w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/profile-2048x1363.jpg 2048w" sizes="(max-width: 1024px) 100vw, 1024px"  data-aspectratio="1024/681"><noscript><img width="1024" height="681" src="https://www.buffalo.jp/media/wp-content/uploads/2023/10/profile-1024x681.jpg" alt="" class="wp-image-6631" srcset="https://www.buffalo.jp/media/wp-content/uploads/2023/10/profile-1024x681.jpg 1024w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/profile-300x200.jpg 300w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/profile-768x511.jpg 768w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/profile-1536x1022.jpg 1536w, https://www.buffalo.jp/media/wp-content/uploads/2023/10/profile-2048x1363.jpg 2048w" sizes="(max-width: 1024px) 100vw, 1024px" ></noscript></figure>
+</div>
+</div>
+</div></div>
+
+
+
+<div class="swell-block-button is-style-btn_normal"><a href="https://www.buffalo.jp/product/child_category/external-ssd.html" class="swell-block-button__link"><span>外付けSSD 一覧をみる</span></a></div>
+
+
+
+
+		</div>
+		<div class="p-articleFoot">
+	<div class="p-articleMetas -bottom">
+			<div class="p-articleMetas__termList c-categoryList">
+					<a class="c-categoryList__link hov-flash-up" href="https://www.buffalo.jp/media/category/products-dna/" data-cat-id="26">
+				Products DNA			</a>
+					<a class="c-categoryList__link hov-flash-up" href="https://www.buffalo.jp/media/category/external-ssd/" data-cat-id="9">
+				外付けSSD			</a>
+			</div>
+	</div>
+</div>
+<div class="c-shareBtns -bottom -style-block">
+			<div class="c-shareBtns__message">
+			<span class="__text">
+				なるほど！と思ったら記事のシェアをお願いします			</span>
+		</div>
+		<ul class="c-shareBtns__list">
+							<li class="c-shareBtns__item -facebook">
+				<a class="c-shareBtns__btn hov-flash-up" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.buffalo.jp%2Fmedia%2Fproducts-dna-w002-ssd-pstu3a%2F" title="Facebookでシェア" onclick="javascript:window.open(this.href, '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=800,width=600');return false;" target="_blank" role="button" tabindex="0">
+					<i class="snsicon c-shareBtns__icon icon-facebook" role="presentation"></i>
+				</a>
+			</li>
+							<li class="c-shareBtns__item -twitter">
+				<a class="c-shareBtns__btn hov-flash-up" href="https://x.com/share?url=https%3A%2F%2Fwww.buffalo.jp%2Fmedia%2Fproducts-dna-w002-ssd-pstu3a%2F&#038;text=ProductsDNA-%E3%82%82%E3%81%AE%E3%81%A5%E3%81%8F%E3%82%8A%E3%81%AE%E7%B3%BB%E8%AD%9C-++%E3%83%9D%E3%83%BC%E3%82%BF%E3%83%96%E3%83%ABSSD%E3%80%8CSSD-PSTU3A%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%E3%80%8D" title="X（旧Twitter）でシェア" onclick="javascript:window.open(this.href, '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=600');return false;" target="_blank" role="button" tabindex="0">
+					<i class="snsicon c-shareBtns__icon icon-twitter" role="presentation"></i>
+				</a>
+			</li>
+							<li class="c-shareBtns__item -hatebu">
+				<a class="c-shareBtns__btn hov-flash-up" href="//b.hatena.ne.jp/add?mode=confirm&#038;url=https%3A%2F%2Fwww.buffalo.jp%2Fmedia%2Fproducts-dna-w002-ssd-pstu3a%2F" title="はてなブックマークに登録" onclick="javascript:window.open(this.href, '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=1000');return false;" target="_blank" role="button" tabindex="0">
+					<i class="snsicon c-shareBtns__icon icon-hatebu" role="presentation"></i>
+				</a>
+			</li>
+											<li class="c-shareBtns__item -line">
+				<a class="c-shareBtns__btn hov-flash-up" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fwww.buffalo.jp%2Fmedia%2Fproducts-dna-w002-ssd-pstu3a%2F&#038;text=ProductsDNA-%E3%82%82%E3%81%AE%E3%81%A5%E3%81%8F%E3%82%8A%E3%81%AE%E7%B3%BB%E8%AD%9C-++%E3%83%9D%E3%83%BC%E3%82%BF%E3%83%96%E3%83%ABSSD%E3%80%8CSSD-PSTU3A%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%E3%80%8D" title="LINEに送る" target="_blank" role="button" tabindex="0">
+					<i class="snsicon c-shareBtns__icon icon-line" role="presentation"></i>
+				</a>
+			</li>
+												<li class="c-shareBtns__item -copy">
+				<button class="c-urlcopy c-plainBtn c-shareBtns__btn hov-flash-up" data-clipboard-text="https://www.buffalo.jp/media/products-dna-w002-ssd-pstu3a/" title="URLをコピーする">
+					<span class="c-urlcopy__content">
+						<i class="c-shareBtns__icon icon-clipboard-copy -to-copy"></i>
+						<i class="c-shareBtns__icon icon-clipboard-copied -copied"></i>
+					</span>
+				</button>
+				<div class="c-copyedPoppup">URLをコピーしました！</div>
+			</li>
+			</ul>
+
+	</div>
+<div class="c-shareBtns -fix -style-block">
+		<ul class="c-shareBtns__list">
+							<li class="c-shareBtns__item -facebook">
+				<a class="c-shareBtns__btn hov-flash-up" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.buffalo.jp%2Fmedia%2Fproducts-dna-w002-ssd-pstu3a%2F" title="Facebookでシェア" onclick="javascript:window.open(this.href, '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=800,width=600');return false;" target="_blank" role="button" tabindex="0">
+					<i class="snsicon c-shareBtns__icon icon-facebook" role="presentation"></i>
+				</a>
+			</li>
+							<li class="c-shareBtns__item -twitter">
+				<a class="c-shareBtns__btn hov-flash-up" href="https://x.com/share?url=https%3A%2F%2Fwww.buffalo.jp%2Fmedia%2Fproducts-dna-w002-ssd-pstu3a%2F&#038;text=ProductsDNA-%E3%82%82%E3%81%AE%E3%81%A5%E3%81%8F%E3%82%8A%E3%81%AE%E7%B3%BB%E8%AD%9C-++%E3%83%9D%E3%83%BC%E3%82%BF%E3%83%96%E3%83%ABSSD%E3%80%8CSSD-PSTU3A%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%E3%80%8D" title="X（旧Twitter）でシェア" onclick="javascript:window.open(this.href, '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=600');return false;" target="_blank" role="button" tabindex="0">
+					<i class="snsicon c-shareBtns__icon icon-twitter" role="presentation"></i>
+				</a>
+			</li>
+							<li class="c-shareBtns__item -hatebu">
+				<a class="c-shareBtns__btn hov-flash-up" href="//b.hatena.ne.jp/add?mode=confirm&#038;url=https%3A%2F%2Fwww.buffalo.jp%2Fmedia%2Fproducts-dna-w002-ssd-pstu3a%2F" title="はてなブックマークに登録" onclick="javascript:window.open(this.href, '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=1000');return false;" target="_blank" role="button" tabindex="0">
+					<i class="snsicon c-shareBtns__icon icon-hatebu" role="presentation"></i>
+				</a>
+			</li>
+											<li class="c-shareBtns__item -line">
+				<a class="c-shareBtns__btn hov-flash-up" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fwww.buffalo.jp%2Fmedia%2Fproducts-dna-w002-ssd-pstu3a%2F&#038;text=ProductsDNA-%E3%82%82%E3%81%AE%E3%81%A5%E3%81%8F%E3%82%8A%E3%81%AE%E7%B3%BB%E8%AD%9C-++%E3%83%9D%E3%83%BC%E3%82%BF%E3%83%96%E3%83%ABSSD%E3%80%8CSSD-PSTU3A%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%E3%80%8D" title="LINEに送る" target="_blank" role="button" tabindex="0">
+					<i class="snsicon c-shareBtns__icon icon-line" role="presentation"></i>
+				</a>
+			</li>
+												<li class="c-shareBtns__item -copy">
+				<button class="c-urlcopy c-plainBtn c-shareBtns__btn hov-flash-up" data-clipboard-text="https://www.buffalo.jp/media/products-dna-w002-ssd-pstu3a/" title="URLをコピーする">
+					<span class="c-urlcopy__content">
+						<i class="c-shareBtns__icon icon-clipboard-copy -to-copy"></i>
+						<i class="c-shareBtns__icon icon-clipboard-copied -copied"></i>
+					</span>
+				</button>
+				<div class="c-copyedPoppup">URLをコピーしました！</div>
+			</li>
+			</ul>
+
+	</div>
+		<div id="after_article" class="l-articleBottom">
+			<ul class="p-pnLinks -style-normal -thumb-on">
+			<li class="p-pnLinks__item -prev">
+				<a href="https://www.buffalo.jp/media/nasne-pop-up-shop-maruifamily-mizonokuchi/" rel="prev" class="p-pnLinks__link">
+		<img width="160" height="90"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" class="p-pnLinks__thumb lazyload" data-src="https://www.buffalo.jp/media/wp-content/uploads/2023/11/bnr_2400-1480-300x185.png" data-aspectratio="160/90" ><noscript><img src="https://www.buffalo.jp/media/wp-content/uploads/2023/11/bnr_2400-1480-300x185.png" class="p-pnLinks__thumb" alt=""></noscript>		<span class="p-pnLinks__title">【開催終了】「nasne®」がその場で体験できる！ポップアップショップを「マルイファミリー溝口」にて期間限定開催！</span>
+	</a>
+			</li>
+				<li class="p-pnLinks__item -next">
+				<a href="https://www.buffalo.jp/media/digital-life-w002-rr-pw2/" rel="next" class="p-pnLinks__link">
+		<img width="160" height="90"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" class="p-pnLinks__thumb lazyload" data-src="https://www.buffalo.jp/media/wp-content/uploads/2025/03/vol236_vol236_manga_TOP-300x185.png" data-aspectratio="160/90" ><noscript><img src="https://www.buffalo.jp/media/wp-content/uploads/2025/03/vol236_vol236_manga_TOP-300x185.png" class="p-pnLinks__thumb" alt=""></noscript>		<span class="p-pnLinks__title">【おしえて！デジタルライフ】ラクレコでDVD視聴！移動時間もLet's Enjoy！の巻</span>
+	</a>
+			</li>
+	</ul>
+<section class="l-articleBottom__section -related">
+	<h2 class="l-articleBottom__title c-secTitle">関連記事</h2><ul class="p-postList p-relatedPosts -type-card"><li class="p-postList__item">
+	<a href="https://www.buffalo.jp/media/products-dna-w005-photo-usb-backup-2/" class="p-postList__link">
+		<div class="p-postList__thumb c-postThumb">
+			<figure class="c-postThumb__figure">
+			<img width="300" height="185"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" class="c-postThumb__img u-obf-cover lazyload" sizes="(min-width: 600px) 320px, 50vw" data-src="https://www.buffalo.jp/media/wp-content/uploads/2025/10/202510_Products_DNA_v239_web_banner2400_1480-300x185.jpg" data-srcset="https://www.buffalo.jp/media/wp-content/uploads/2025/10/202510_Products_DNA_v239_web_banner2400_1480-300x185.jpg 300w, https://www.buffalo.jp/media/wp-content/uploads/2025/10/202510_Products_DNA_v239_web_banner2400_1480-1024x631.jpg 1024w, https://www.buffalo.jp/media/wp-content/uploads/2025/10/202510_Products_DNA_v239_web_banner2400_1480-768x474.jpg 768w, https://www.buffalo.jp/media/wp-content/uploads/2025/10/202510_Products_DNA_v239_web_banner2400_1480-1536x947.jpg 1536w, https://www.buffalo.jp/media/wp-content/uploads/2025/10/202510_Products_DNA_v239_web_banner2400_1480-2048x1263.jpg 2048w" data-aspectratio="300/185" ><noscript><img src="https://www.buffalo.jp/media/wp-content/uploads/2025/10/202510_Products_DNA_v239_web_banner2400_1480-300x185.jpg" class="c-postThumb__img u-obf-cover" alt=""></noscript>			</figure>
+		</div>
+		<div class="p-postList__body">
+			<div class="p-postList__title">ProductsDNA-ものづくりの系譜- 安心と手軽さを両立！スマホ時代の新定番「写真バックアップ」アプリ誕生。開発の舞台裏から紐解く、写真の最適な保管方法</div>
+				<div class="p-postList__meta"><div class="p-postList__times c-postTimes u-thin">
+			<time class="c-postTimes__posted icon-posted" datetime="2025-10-30">2025年10月30日</time>
+		</div>
+</div>		</div>
+	</a>
+</li>
+<li class="p-postList__item">
+	<a href="https://www.buffalo.jp/media/review-ssd-sdhu3/" class="p-postList__link">
+		<div class="p-postList__thumb c-postThumb">
+			<figure class="c-postThumb__figure">
+			<img width="300" height="200"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" class="c-postThumb__img u-obf-cover lazyload" sizes="(min-width: 600px) 320px, 50vw" data-src="https://www.buffalo.jp/media/wp-content/uploads/2025/10/BUFFALO_003-300x200.jpg" data-srcset="https://www.buffalo.jp/media/wp-content/uploads/2025/10/BUFFALO_003-300x200.jpg 300w, https://www.buffalo.jp/media/wp-content/uploads/2025/10/BUFFALO_003-1024x683.jpg 1024w, https://www.buffalo.jp/media/wp-content/uploads/2025/10/BUFFALO_003-768x512.jpg 768w, https://www.buffalo.jp/media/wp-content/uploads/2025/10/BUFFALO_003.jpg 1300w" data-aspectratio="300/200" ><noscript><img src="https://www.buffalo.jp/media/wp-content/uploads/2025/10/BUFFALO_003-300x200.jpg" class="c-postThumb__img u-obf-cover" alt=""></noscript>			</figure>
+		</div>
+		<div class="p-postList__body">
+			<div class="p-postList__title">容量の心配、たった13gで減らせる。スマホ直挿しのミニSSDが頼もしい</div>
+				<div class="p-postList__meta"><div class="p-postList__times c-postTimes u-thin">
+			<time class="c-postTimes__posted icon-posted" datetime="2025-10-24">2025年10月24日</time>
+		</div>
+</div>		</div>
+	</a>
+</li>
+<li class="p-postList__item">
+	<a href="https://www.buffalo.jp/media/photo_backup_review/" class="p-postList__link">
+		<div class="p-postList__thumb c-postThumb">
+			<figure class="c-postThumb__figure">
+			<img width="300" height="185"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" class="c-postThumb__img u-obf-cover lazyload" sizes="(min-width: 600px) 320px, 50vw" data-src="https://www.buffalo.jp/media/wp-content/uploads/2024/12/ic1200bnr-300x185.jpg" data-srcset="https://www.buffalo.jp/media/wp-content/uploads/2024/12/ic1200bnr-300x185.jpg 300w, https://www.buffalo.jp/media/wp-content/uploads/2024/12/ic1200bnr-1024x631.jpg 1024w, https://www.buffalo.jp/media/wp-content/uploads/2024/12/ic1200bnr-768x474.jpg 768w, https://www.buffalo.jp/media/wp-content/uploads/2024/12/ic1200bnr.jpg 1200w" data-aspectratio="300/185" ><noscript><img src="https://www.buffalo.jp/media/wp-content/uploads/2024/12/ic1200bnr-300x185.jpg" class="c-postThumb__img u-obf-cover" alt=""></noscript>			</figure>
+		</div>
+		<div class="p-postList__body">
+			<div class="p-postList__title">iPhoneの容量節約！ 外付けSSDに写真・動画をバックアップする便利テクニック</div>
+				<div class="p-postList__meta"><div class="p-postList__times c-postTimes u-thin">
+			<time class="c-postTimes__posted icon-posted" datetime="2024-12-20">2024年12月20日</time>
+		</div>
+</div>		</div>
+	</a>
+</li>
+<li class="p-postList__item">
+	<a href="https://www.buffalo.jp/media/products-dna-w004-wifi-roaming/" class="p-postList__link">
+		<div class="p-postList__thumb c-postThumb">
+			<figure class="c-postThumb__figure">
+			<img width="300" height="185"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" class="c-postThumb__img u-obf-cover lazyload" sizes="(min-width: 600px) 320px, 50vw" data-src="https://www.buffalo.jp/media/wp-content/uploads/2024/10/20240909_Products_DNA_v238_web_eyecatch-300x185.jpg" data-srcset="https://www.buffalo.jp/media/wp-content/uploads/2024/10/20240909_Products_DNA_v238_web_eyecatch-300x185.jpg 300w, https://www.buffalo.jp/media/wp-content/uploads/2024/10/20240909_Products_DNA_v238_web_eyecatch-1024x631.jpg 1024w, https://www.buffalo.jp/media/wp-content/uploads/2024/10/20240909_Products_DNA_v238_web_eyecatch-768x474.jpg 768w, https://www.buffalo.jp/media/wp-content/uploads/2024/10/20240909_Products_DNA_v238_web_eyecatch-1536x947.jpg 1536w, https://www.buffalo.jp/media/wp-content/uploads/2024/10/20240909_Products_DNA_v238_web_eyecatch-2048x1263.jpg 2048w" data-aspectratio="300/185" ><noscript><img src="https://www.buffalo.jp/media/wp-content/uploads/2024/10/20240909_Products_DNA_v238_web_eyecatch-300x185.jpg" class="c-postThumb__img u-obf-cover" alt=""></noscript>			</figure>
+		</div>
+		<div class="p-postList__body">
+			<div class="p-postList__title">ProductsDNA-ものづくりの系譜-  「ローミング支援機能」と「キキNaviでの一括管理」に対応 AirStation Pro</div>
+				<div class="p-postList__meta"><div class="p-postList__times c-postTimes u-thin">
+			<time class="c-postTimes__posted icon-posted" datetime="2024-10-15">2024年10月15日</time>
+		</div>
+</div>		</div>
+	</a>
+</li>
+<li class="p-postList__item">
+	<a href="https://www.buffalo.jp/media/pro-users-229-ssd-phpu3a/" class="p-postList__link">
+		<div class="p-postList__thumb c-postThumb">
+			<figure class="c-postThumb__figure">
+			<img width="300" height="185"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" class="c-postThumb__img u-obf-cover lazyload" sizes="(min-width: 600px) 320px, 50vw" data-src="https://www.buffalo.jp/media/wp-content/uploads/2024/05/224_title-300x185.png" data-srcset="https://www.buffalo.jp/media/wp-content/uploads/2024/05/224_title-300x185.png 300w, https://www.buffalo.jp/media/wp-content/uploads/2024/05/224_title-1024x631.png 1024w, https://www.buffalo.jp/media/wp-content/uploads/2024/05/224_title-768x474.png 768w, https://www.buffalo.jp/media/wp-content/uploads/2024/05/224_title-1536x947.png 1536w, https://www.buffalo.jp/media/wp-content/uploads/2024/05/224_title-2048x1263.png 2048w" data-aspectratio="300/185" ><noscript><img src="https://www.buffalo.jp/media/wp-content/uploads/2024/05/224_title-300x185.png" class="c-postThumb__img u-obf-cover" alt=""></noscript>			</figure>
+		</div>
+		<div class="p-postList__body">
+			<div class="p-postList__title">@Professional Users【第229回】ダンサー / 振付師 迷彩トモヤ</div>
+				<div class="p-postList__meta"><div class="p-postList__times c-postTimes u-thin">
+			<time class="c-postTimes__posted icon-posted" datetime="2024-06-26">2024年6月26日</time>
+		</div>
+</div>		</div>
+	</a>
+</li>
+<li class="p-postList__item">
+	<a href="https://www.buffalo.jp/media/products-dna-w003-vr-utm/" class="p-postList__link">
+		<div class="p-postList__thumb c-postThumb">
+			<figure class="c-postThumb__figure">
+			<img width="300" height="185"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" class="c-postThumb__img u-obf-cover lazyload" sizes="(min-width: 600px) 320px, 50vw" data-src="https://www.buffalo.jp/media/wp-content/uploads/2024/03/web_eyecath_vr-utm-300x185.jpg" data-srcset="https://www.buffalo.jp/media/wp-content/uploads/2024/03/web_eyecath_vr-utm-300x185.jpg 300w, https://www.buffalo.jp/media/wp-content/uploads/2024/03/web_eyecath_vr-utm-1024x631.jpg 1024w, https://www.buffalo.jp/media/wp-content/uploads/2024/03/web_eyecath_vr-utm-768x474.jpg 768w, https://www.buffalo.jp/media/wp-content/uploads/2024/03/web_eyecath_vr-utm-1536x947.jpg 1536w, https://www.buffalo.jp/media/wp-content/uploads/2024/03/web_eyecath_vr-utm-2048x1263.jpg 2048w" data-aspectratio="300/185" ><noscript><img src="https://www.buffalo.jp/media/wp-content/uploads/2024/03/web_eyecath_vr-utm-300x185.jpg" class="c-postThumb__img u-obf-cover" alt=""></noscript>			</figure>
+		</div>
+		<div class="p-postList__body">
+			<div class="p-postList__title">ProductsDNA-ものづくりの系譜-  統合脅威管理ツール「VR-UTMシリーズ」</div>
+				<div class="p-postList__meta"><div class="p-postList__times c-postTimes u-thin">
+			<time class="c-postTimes__posted icon-posted" datetime="2024-04-01">2024年4月1日</time>
+		</div>
+</div>		</div>
+	</a>
+</li>
+<li class="p-postList__item">
+	<a href="https://www.buffalo.jp/media/pro-users-223-ssd-phpu3a/" class="p-postList__link">
+		<div class="p-postList__thumb c-postThumb">
+			<figure class="c-postThumb__figure">
+			<img width="300" height="185"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" class="c-postThumb__img u-obf-cover lazyload" sizes="(min-width: 600px) 320px, 50vw" data-src="https://www.buffalo.jp/media/wp-content/uploads/2023/11/223_title-300x185.png" data-srcset="https://www.buffalo.jp/media/wp-content/uploads/2023/11/223_title-300x185.png 300w, https://www.buffalo.jp/media/wp-content/uploads/2023/11/223_title-1024x631.png 1024w, https://www.buffalo.jp/media/wp-content/uploads/2023/11/223_title-768x474.png 768w, https://www.buffalo.jp/media/wp-content/uploads/2023/11/223_title-1536x947.png 1536w, https://www.buffalo.jp/media/wp-content/uploads/2023/11/223_title-2048x1263.png 2048w" data-aspectratio="300/185" ><noscript><img src="https://www.buffalo.jp/media/wp-content/uploads/2023/11/223_title-300x185.png" class="c-postThumb__img u-obf-cover" alt=""></noscript>			</figure>
+		</div>
+		<div class="p-postList__body">
+			<div class="p-postList__title">@Professional Users【第223回】オイルペインター / グラフィックデザイナー Jenna（ジェナ）</div>
+				<div class="p-postList__meta"><div class="p-postList__times c-postTimes u-thin">
+			<time class="c-postTimes__posted icon-posted" datetime="2023-12-20">2023年12月20日</time>
+		</div>
+</div>		</div>
+	</a>
+</li>
+<li class="p-postList__item">
+	<a href="https://www.buffalo.jp/media/pro-users-221-ssd-phpu3a/" class="p-postList__link">
+		<div class="p-postList__thumb c-postThumb">
+			<figure class="c-postThumb__figure">
+			<img width="300" height="185"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" class="c-postThumb__img u-obf-cover lazyload" sizes="(min-width: 600px) 320px, 50vw" data-src="https://www.buffalo.jp/media/wp-content/uploads/2023/09/221_title-300x185.png" data-srcset="https://www.buffalo.jp/media/wp-content/uploads/2023/09/221_title-300x185.png 300w, https://www.buffalo.jp/media/wp-content/uploads/2023/09/221_title-1024x631.png 1024w, https://www.buffalo.jp/media/wp-content/uploads/2023/09/221_title-768x474.png 768w, https://www.buffalo.jp/media/wp-content/uploads/2023/09/221_title-1536x947.png 1536w, https://www.buffalo.jp/media/wp-content/uploads/2023/09/221_title-2048x1263.png 2048w" data-aspectratio="300/185" ><noscript><img src="https://www.buffalo.jp/media/wp-content/uploads/2023/09/221_title-300x185.png" class="c-postThumb__img u-obf-cover" alt=""></noscript>			</figure>
+		</div>
+		<div class="p-postList__body">
+			<div class="p-postList__title">@Professional Users【第221回】DJ/イベントプロデューサー DJ PAIPAI</div>
+				<div class="p-postList__meta"><div class="p-postList__times c-postTimes u-thin">
+			<time class="c-postTimes__posted icon-posted" datetime="2023-10-25">2023年10月25日</time>
+		</div>
+</div>		</div>
+	</a>
+</li>
+</ul></section>
+		</div>
+			</article>
+</main>
+<aside id="sidebar" class="l-sidebar">
+	<div id="block-2" class="c-widget widget_block widget_search"><form role="search" method="get" action="https://www.buffalo.jp/media/" class="wp-block-search__button-outside wp-block-search__text-button wp-block-search"><label for="wp-block-search__input-1" class="wp-block-search__label">検索</label><div class="wp-block-search__inside-wrapper " ><input type="search" id="wp-block-search__input-1" class="wp-block-search__input " name="s" value="" placeholder=""  required /><button type="submit" class="wp-block-search__button  "  >検索</button></div></form></div><div id="block-3" class="c-widget widget_block"><div class="wp-block-group"><div class="wp-block-group__inner-container"><div class="c-widget__title -side">最近の投稿</div><ul class="wp-block-latest-posts__list wp-block-latest-posts"><li><a class="wp-block-latest-posts__post-title" href="https://www.buffalo.jp/media/semi-solid-battery/">新しい技術だからこそ、外部機関と徹底的に検証する。 バッファローが「半固体モバイルバッテリー」に込めた品質の根拠。</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://www.buffalo.jp/media/management-cost-saving/">無料でここまでできるの？現地出張ゼロ、管理コストゼロへ　バッファローが描く機器管理省力化の現実解</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://www.buffalo.jp/media/products-dna-w005-photo-usb-backup-2/">ProductsDNA-ものづくりの系譜- 安心と手軽さを両立！スマホ時代の新定番「写真バックアップ」アプリ誕生。開発の舞台裏から紐解く、写真の最適な保管方法</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://www.buffalo.jp/media/wi-fi_6e_7/">Wi-Fi 6E/Wi-Fi 7端末続々登場　デバイスのWi-Fi規格に合わせてWi-Fiルーターも買い替えよう！</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://www.buffalo.jp/media/digital-life-w005-jc-star/">【おしえて！デジタルライフ】「JC-STAR」で家庭のセキュリティ対策の巻</a></li>
+</ul></div></div></div><div id="block-5" class="c-widget widget_block"><div class="wp-block-group"><div class="wp-block-group__inner-container"><div class="c-widget__title -side">アーカイブ</div><ul class=" wp-block-archives-list c-listMenu wp-block-archives"><li><a href="https://www.buffalo.jp/media/2026/03/">2026年3月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2026/01/">2026年1月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2025/10/">2025年10月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2025/07/">2025年7月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2025/06/">2025年6月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2024/12/">2024年12月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2024/11/">2024年11月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2024/10/">2024年10月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2024/08/">2024年8月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2024/07/">2024年7月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2024/06/">2024年6月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2024/05/">2024年5月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2024/04/">2024年4月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2024/03/">2024年3月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2024/02/">2024年2月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2024/01/">2024年1月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2023/12/">2023年12月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2023/11/">2023年11月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2023/10/">2023年10月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2023/09/">2023年9月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2023/08/">2023年8月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2023/07/">2023年7月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2023/06/">2023年6月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2023/05/">2023年5月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2023/03/">2023年3月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2022/12/">2022年12月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2022/11/">2022年11月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2022/10/">2022年10月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2022/09/">2022年9月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2022/06/">2022年6月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2022/05/">2022年5月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2022/03/">2022年3月<span class="post_count"></span></a></li><li><a href="https://www.buffalo.jp/media/2022/02/">2022年2月<span class="post_count"></span></a></li></ul></div></div></div><div id="block-6" class="c-widget widget_block"><div class="wp-block-group"><div class="wp-block-group__inner-container"><div class="c-widget__title -side">カテゴリー</div><ul class="wp-block-categories-list c-listMenu wp-block-categories">	<li class="cat-item cat-item-25"><a href="https://www.buffalo.jp/media/category/lava/">@Professional Users</a>
+</li>
+	<li class="cat-item cat-item-47"><a href="https://www.buffalo.jp/media/category/iphone%e3%83%90%e3%83%83%e3%82%af%e3%82%a2%e3%83%83%e3%83%97/">iPhoneバックアップ</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="https://www.buffalo.jp/media/category/nas/">NAS</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="https://www.buffalo.jp/media/category/nasne/">nasne</a>
+</li>
+	<li class="cat-item cat-item-26"><a href="https://www.buffalo.jp/media/category/products-dna/">Products DNA</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="https://www.buffalo.jp/media/category/wi-fi%e3%82%a2%e3%82%af%e3%82%bb%e3%82%b9%e3%83%9d%e3%82%a4%e3%83%b3%e3%83%88/">Wi-Fiアクセスポイント</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="https://www.buffalo.jp/media/category/wifi-router/">Wi-Fiルーター</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="https://www.buffalo.jp/media/category/wifi-range-extender/">Wi-Fi中継機</a>
+</li>
+	<li class="cat-item cat-item-27"><a href="https://www.buffalo.jp/media/category/%e3%81%8a%e3%81%97%e3%81%88%e3%81%a6%ef%bc%81%e3%83%87%e3%82%b8%e3%82%bf%e3%83%ab%e3%83%a9%e3%82%a4%e3%83%95/">おしえて！デジタルライフ</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="https://www.buffalo.jp/media/category/omoidebako/">おもいでばこ</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://www.buffalo.jp/media/category/%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b/">お知らせ</a>
+</li>
+	<li class="cat-item cat-item-20"><a href="https://www.buffalo.jp/media/category/%e3%82%ad%e3%82%adnavi/">キキNavi</a>
+</li>
+	<li class="cat-item cat-item-36"><a href="https://www.buffalo.jp/media/category/%e3%82%b9%e3%83%9e%e3%83%bc%e3%83%88%e3%83%88%e3%83%a9%e3%83%83%e3%82%ab%e3%83%bc/">スマートトラッカー</a>
+</li>
+	<li class="cat-item cat-item-22"><a href="https://www.buffalo.jp/media/category/nasne/%e3%83%8a%e3%82%b9%e3%83%8d%e5%85%88%e8%bc%a9/">ナスネ先輩</a>
+</li>
+	<li class="cat-item cat-item-53"><a href="https://www.buffalo.jp/media/category/%e3%83%a2%e3%83%90%e3%82%a4%e3%83%ab%e3%83%90%e3%83%83%e3%83%86%e3%83%aa%e3%83%bc/">モバイルバッテリー</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="https://www.buffalo.jp/media/category/%e3%83%a9%e3%82%af%e3%83%ac%e3%82%b3%ef%bc%8b/">ラクレコ＋</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="https://www.buffalo.jp/media/category/external-hdd/">外付けHDD</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://www.buffalo.jp/media/category/external-ssd/">外付けSSD</a>
+</li>
+	<li class="cat-item cat-item-19"><a href="https://www.buffalo.jp/media/category/%e6%b3%95%e4%ba%ba/">法人</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="https://www.buffalo.jp/media/category/%e9%80%a3%e8%bc%89%e4%bc%81%e7%94%bb/">連載企画</a>
+</li>
+</ul></div></div></div></aside>
+</div>
+<div id="before_footer_widget" class="w-beforeFooter"><div class="l-container"><div id="text-5" class="c-widget widget_text">			<div class="textwidget"><p class="txt-small">※記載されている速度表記は規格値で、実環境での速度ではありません。</p>
+<p class="txt-small">※記載されている各会社名・商品名などは、一般に各社の商標または登録商標です。</p>
+<p class="txt-small">※記載されている価格は、希望小売価格です。</p>
+<p class="txt-small">※記載されている仕様、価格、デザインなどは予告なく変更する場合があります。</p>
+</div>
+		</div></div></div><footer id="footer" class="l-footer">
+	<div class="l-footer__inner">
+	<div class="l-footer__widgetArea">
+	<div class="l-container w-footer -col1">
+		<div class="w-footer__box"><div id="text-3" class="c-widget widget_text"><div class="c-widget__title -footer">Powered by</div>			<div class="textwidget"><p><img class="alignnone wp-image-12408 size-full lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="https://www.buffalo.jp/media/wp-content/uploads/2026/03/buffalo-logo_138x55_common-footer.png" alt="" width="138" height="55"  data-aspectratio="138/55"><noscript><img class="alignnone wp-image-12408 size-full lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="https://www.buffalo.jp/media/wp-content/uploads/2026/03/buffalo-logo_138x55_common-footer.png" alt="" width="138" height="55"  data-aspectratio="138/55"><noscript><img class="alignnone wp-image-12408 size-full" src="https://www.buffalo.jp/media/wp-content/uploads/2026/03/buffalo-logo_138x55_common-footer.png" alt="" width="138" height="55" ></noscript></noscript></p>
+<p>株式会社バッファロー（BUFFALO INC.）</p>
+<p>〒460-8315　愛知県名古屋市中区大須三丁目30番20号 赤門通ビル</p>
+<p>会社概要や、お問い合わせは<a href="https://www.buffalo.jp/company/outline/profile.html">こちら</a></p>
+</div>
+		</div></div>	</div>
+</div>
+		<div class="l-footer__foot">
+			<div class="l-container">
+						<p class="copyright">
+				<span lang="en">&copy;</span>
+				1995-2026 BUFFALO INC.			</p>
+					</div>
+	</div>
+</div>
+</footer>
+<div class="p-fixBtnWrap">
+	
+			<button id="pagetop" class="c-fixBtn c-plainBtn hov-bg-main" data-onclick="pageTop" aria-label="ページトップボタン" data-has-text="">
+			<i class="c-fixBtn__icon icon-chevron-small-up" role="presentation"></i>
+					</button>
+	</div>
+
+<div id="search_modal" class="c-modal p-searchModal">
+	<div class="c-overlay" data-onclick="toggleSearch"></div>
+	<div class="p-searchModal__inner">
+		<form role="search" method="get" class="c-searchForm" action="https://www.buffalo.jp/media/" role="search">
+	<input type="text" value="" name="s" class="c-searchForm__s s" placeholder="検索" aria-label="検索ワード">
+	<button type="submit" class="c-searchForm__submit icon-search hov-opacity u-bg-main" value="search" aria-label="検索を実行する"></button>
+</form>
+		<button class="c-modal__close c-plainBtn" data-onclick="toggleSearch">
+			<i class="icon-batsu"></i> 閉じる		</button>
+	</div>
+</div>
+</div><!--/ #all_wrapp-->
+<div class="l-scrollObserver" aria-hidden="true"></div><style>.wp-container-2 {display: flex;gap: 0.5em;flex-wrap: wrap;align-items: center;}.wp-container-2 > * { margin: 0; }</style>
+<style> .wp-block-gallery-1{ --wp--style--unstable-gallery-gap: var( --wp--style--gallery-gap-default, var( --gallery-block--gutter-size, var( --wp--style--block-gap, 0.5em ) ) ); gap: var( --wp--style--gallery-gap-default, var( --gallery-block--gutter-size, var( --wp--style--block-gap, 0.5em ) ) )}</style><link rel='stylesheet' id='swell_luminous-css'  href='https://www.buffalo.jp/media/wp-content/themes/swell/build/css/plugins/luminous.css?ver=2.6.8.3' type='text/css' media='all' />
+<script type='text/javascript' id='swell_script-js-extra'>
+/* <![CDATA[ */
+var swellVars = {"siteUrl":"https:\/\/www.buffalo.jp\/media\/","restUrl":"https:\/\/www.buffalo.jp\/media\/wp-json\/wp\/v2\/","ajaxUrl":"https:\/\/www.buffalo.jp\/media\/wp-admin\/admin-ajax.php","ajaxNonce":"f444fdbf64","isLoggedIn":"","useAjaxAfterPost":"","useAjaxFooter":"","usePvCount":"1","isFixHeadSP":"1","tocListTag":"ol","tocTarget":"h3","tocMinnum":"2","psNum":"5","psNumSp":"2","psSpeed":"1500","psDelay":"5000"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.buffalo.jp/media/wp-content/themes/swell/build/js/main.min.js?ver=2.6.8.3' id='swell_script-js'></script>
+<script type='text/javascript' src='https://www.buffalo.jp/media/wp-content/themes/swell/assets/js/plugins/lazysizes.min.js?ver=2.6.8.3' id='swell_lazysizes-js'></script>
+<script type='text/javascript' src='https://www.buffalo.jp/media/wp-content/themes/swell/build/js/front/set_fix_header.min.js?ver=2.6.8.3' id='swell_set_fix_header-js'></script>
+<script type='text/javascript' src='https://www.buffalo.jp/media/wp-content/themes/swell/assets/js/plugins/luminous.min.js?ver=2.6.8.3' id='swell_luminous-js'></script>
+<script type='text/javascript' id='swell_set_luminous-js-extra'>
+/* <![CDATA[ */
+var swlLuminousVars = {"postImg":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.buffalo.jp/media/wp-content/themes/swell/build/js/front/set_luminous.min.js?ver=2.6.8.3' id='swell_set_luminous-js'></script>
+<script type='text/javascript' src='https://www.buffalo.jp/media/wp-includes/js/clipboard.min.js?ver=2.0.10' id='clipboard-js'></script>
+<script type='text/javascript' src='https://www.buffalo.jp/media/wp-content/themes/swell/build/js/front/set_urlcopy.min.js?ver=2.6.8.3' id='swell_set_urlcopy-js'></script>
+
+<!-- JSON-LD @SWELL -->
+<script type="application/ld+json">{"@context": "https://schema.org","@graph": [{"@type":"Organization","@id":"https:\/\/www.buffalo.jp\/media\/#organization","name":"デジラボ","url":"https:\/\/www.buffalo.jp\/media\/","logo":{"@type":"ImageObject","url":"https:\/\/www.buffalo.jp\/media\/wp-content\/uploads\/2022\/07\/dejirabo_header589x180_20220630.png","width":589,"height":180}},{"@type":"WebSite","@id":"https:\/\/www.buffalo.jp\/media\/#website","url":"https:\/\/www.buffalo.jp\/media\/","name":"デジラボ | 日々の生活をもっとスマートに。デジタルを使いこなすためのコンテンツを配信。","potentialAction":{"@type":"SearchAction","target":"https:\/\/www.buffalo.jp\/media\/?s={s}","query-input":"name=s required"}},{"@type":"WebPage","@id":"https:\/\/www.buffalo.jp\/media\/products-dna-w002-ssd-pstu3a\/","url":"https:\/\/www.buffalo.jp\/media\/products-dna-w002-ssd-pstu3a\/","name":"ProductsDNA-ものづくりの系譜- ポータブルSSD「SSD-PSTU3Aシリーズ」","description":"開発スタッフへのインタビューを通して、商品開発にまつわるエピソードやアイディアの秘密をご紹介する「ProductsDNA」。今回はバッファロー史上最小・最軽量のポータブルSSD「SSD-PSTU3Aシリーズ」を取り上げます。","isPartOf":{"@id":"https:\/\/www.buffalo.jp\/media\/#website"}},{"@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/www.buffalo.jp\/media\/products-dna-w002-ssd-pstu3a\/"},"headline":"ProductsDNA-ものづくりの系譜-  ポータブルSSD「SSD-PSTU3Aシリーズ」","image":{"@type":"ImageObject","url":"https:\/\/www.buffalo.jp\/media\/wp-content\/uploads\/2023\/11\/products_dna_ssd-pstu3a_ogp.jpg"},"datePublished":"2023-11-15T09:00:00+0900","dateModified":"2023-11-15T10:03:24+0900","author":{"@type":"Person","@id":"https:\/\/www.buffalo.jp\/media\/products-dna-w002-ssd-pstu3a\/#author","name":"萩原 和之","url":"https:\/\/www.buffalo.jp\/media\/"},"publisher":{"@id":"https:\/\/www.buffalo.jp\/media\/#organization"}},{"@type":"BreadcrumbList","@id":"https:\/\/www.buffalo.jp\/media\/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https:\/\/www.buffalo.jp\/media\/category\/products-dna\/","name":"Products DNA"}}]}]}</script>
+<!-- / JSON-LD @SWELL -->
+</body></html>

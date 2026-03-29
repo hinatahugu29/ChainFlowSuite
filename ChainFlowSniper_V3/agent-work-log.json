@@ -1,0 +1,31 @@
+[
+  {
+    "timestamp": "2026-03-26T16:35:00+09:00",
+    "user_request_summary": "選択時にもテキストが二重になる問題の修正。",
+    "status": "completed",
+    "duration_minutes": 5,
+    "files_changed": ["core/main_window.py", "core/widgets.py", "resources/theme.qss"],
+    "executed_actions": ["#extractionList への CSS 特定化"],
+    "uploaded_images": [],
+    "notes": "",
+    "artifacts": []
+  },
+  {
+    "timestamp": "2026-03-26T16:50:00+09:00",
+    "user_request_summary": "機能・特徴ドキュメント (FEATURES.md) の作成。",
+    "ai_interpretation": "つまり、これまでの膨大な開発・修正を経て極まった『Sniper Research Shell v2』の全貌を、体系的にまとめた公式マニュアルとして整備し、ユーザーが『この一冊を見れば全機能がわかる』状態にしたいということですね。",
+    "status": "completed",
+    "duration_minutes": 10,
+    "files_changed": ["FEATURES.md"],
+    "executed_actions": [
+      "Sniper Mode (A/Z/C/X/V) の詳細解説を記載",
+      "ブラウザ機能（マルチタブ、セッション共有、UA擬装）を記載",
+      "UI特徴（デタッチ、ダークテーマ、スマートリスト）を記載",
+      "高度なロジック（自己クリーンアップ、XSS保護、アトミック保存）を記載",
+      "全ショートカットキーの一覧表を作成"
+    ],
+    "uploaded_images": [],
+    "notes": "このドキュメントにより、導入後の学習コストが大幅に低減されます。",
+    "artifacts": []
+  }
+]

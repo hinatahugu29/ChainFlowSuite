@@ -7,17 +7,25 @@
 
 ## 🚀 収録アプリケーション / Included Applications
 
-### 📁 ChainFlow Filer (v21)
-**超高速・キーボード主体の次世代ファイラー**
-- **Slash Menu (`Ctrl+P`)**: 全てのSuiteツールやカスタムプラグインを瞬時に呼び出し。
-- **Asynchronous Engine**: 数十万ファイルもフリーズさせない完全非同期スキャン。
-- **Smart Logic**: フォルダとファイルを混在させてソートする独自のインテリジェンス。
+### 📁 ChainFlow Filer (v22)
+**超高速・I/O負荷ゼロの次世代ファイラー**
+- **Slash Menu (`Ctrl+P`)**: 全てのSuiteツールや最新の Sniper V3 / Writer v9 などを瞬時に呼び出し。
+- **I/O-Zero Engine**: インメモリ・アイコン生成技術により、ディスク負荷を最小化した極限の高速表示。
+- **Global Model**: スイート全域で共有される高速ファイルシステム・アーキテクチャ。
 
-### ✍️ ChainFlow Writer (v6)
-**DTPレベルのレイアウト精度を持つ究極のMarkdownエディタ**
+### ✍️ ChainFlow Writer (v9)
+**IDE級の視認性とDTPの精度を兼ね備えたドキュメントエンジン**
+- **IDE-Style Highlight**: 複雑なHTML/CSSノイズを背景に沈めつつ、意味的に色分けする高度なシンタックスハイライト。
 - **Beyond Typora**: リアルタイム改ページレンダリングにより、編集画面がそのままPDFの完成図に。
-- **Stamp Syntax**: `<stamp>` 構文による絶対座標指定で、自由自在なレイアウト。
+- **Stamp Syntax**: `<stamp>` 構文による絶対座標指定で、公的な書類レイアウトを自由自在に。
 - **High Fidelity**: 1:1の再現性を誇るPDF出力エンジンを搭載。
+
+### 🔍 ChainFlow Sniper (V3)
+**情報の「構造」と「見た目」を射抜くリサーチ・ステーション**
+- **4-Quadrant Extraction**: A(Text), Z(Markdown), S(Style), D(DOM) の4つのモードで、あらゆるWeb情報を資産化。
+- **Pure DOM Snipe (D-Mode)**: 装飾を排除し、AI連携やWriterテーマに最適化された純粋構造のみを抽出。
+- **Rich Style Restorer**: CSS GridやFilterまでをもポータブルに再構築し、A4紙面にWebの表現力を持ち込む。
+- **Deep Penetration**: iFrameやShadow DOMの内部さえも透過してスナイプ可能。
 
 ### 🎨 ChainFlow Designer
 **直感的な操作とインテリジェンスが融合したDTPエディタ**
