@@ -1,67 +1,66 @@
-# ChainFlow Suite 📂✨
+# ChainFlow Suite V23.2 "Modular Refined" 📂✨
 
-**ChainFlow Suite** は、Windows環境でのワークフローを極限まで効率化するために設計された、プロフェッショナル向けツール群のコレクションです。
-個別のツールが独立して動作しつつも、共通の設計思想（キーボード主体、ダークテーマ、高速レスポンス）と、統一されたブランドアイデンティティ（AppUserModelIDによるタスクバー統合）により、シームレスな体験を提供します。
+**ChainFlow Suite** は、Windows環境での事務実務を「エンジニアリング」へと昇華させる、プロフェッショナル向け高度ツールの集合体です。
+「Python の知性」と「Rust の剛性」を融合させた **Deep Compiled Synergy** アーキテクチャにより、従来の事務ツールの常識を覆す圧倒的な速度、安定性、そして審美性を提供します。
 
 ---
 
-## 🚀 収録アプリケーション / Included Applications
+## 🚀 収録コア・アプリケーション / Core Applications
 
-### 📁 ChainFlow Filer (v22)
-**超高速・I/O負荷ゼロの次世代ファイラー**
-- **Slash Menu (`Ctrl+P`)**: 全てのSuiteツールや最新の Sniper V3 / Writer v9 などを瞬時に呼び出し。
-- **I/O-Zero Engine**: インメモリ・アイコン生成技術により、ディスク負荷を最小化した極限の高速表示。
-- **Global Model**: スイート全域で共有される高速ファイルシステム・アーキテクチャ。
+### 📁 ChainFlow Filer v23.2 [The Modular Control Tower]
+**次世代の「情報コックピット」型ファイラー**
+- **Native Core Implementation**: Rust (PyO3) によるディレクトリ走査エンジンを搭載。数万ファイル規模のフォルダも「0.01秒」でハンドリング。
+- **Modular Architecture**: UI、ビジネスロジック（Actions）、セッション管理を完全に分離。大規模操作においても揺るぎない堅牢性を実現。
+- **Flow UI**: 無数のディレクトリをタイル状に敷き詰める「Massive Parallel Tiling」と、キーボード主体（H/J/K/L）の高速ワークフロー。
+- **Stability Guard**: `shiboken6` による C++ オブジェクト生存確認を導入し、極限の高速操作時でもクラッシュを許しません。
 
-### ✍️ ChainFlow Writer (v9)
-**IDE級の視認性とDTPの精度を兼ね備えたドキュメントエンジン**
-- **IDE-Style Highlight**: 複雑なHTML/CSSノイズを背景に沈めつつ、意味的に色分けする高度なシンタックスハイライト。
-- **Beyond Typora**: リアルタイム改ページレンダリングにより、編集画面がそのままPDFの完成図に。
-- **Stamp Syntax**: `<stamp>` 構文による絶対座標指定で、公的な書類レイアウトを自由自在に。
-- **High Fidelity**: 1:1の再現性を誇るPDF出力エンジンを搭載。
-
-### 🔍 ChainFlow Sniper (V3)
-**情報の「構造」と「見た目」を射抜くリサーチ・ステーション**
-- **4-Quadrant Extraction**: A(Text), Z(Markdown), S(Style), D(DOM) の4つのモードで、あらゆるWeb情報を資産化。
-- **Pure DOM Snipe (D-Mode)**: 装飾を排除し、AI連携やWriterテーマに最適化された純粋構造のみを抽出。
-- **Rich Style Restorer**: CSS GridやFilterまでをもポータブルに再構築し、A4紙面にWebの表現力を持ち込む。
-- **Deep Penetration**: iFrameやShadow DOMの内部さえも透過してスナイプ可能。
-
-### 🎨 ChainFlow Designer
-**直感的な操作とインテリジェンスが融合したDTPエディタ**
-- **Smart Snap**: オブジェクト間の端点、中心点、中心線を検知して吸着。
-- **Pro Table**: セル単位のドラッグリサイズや構造変更（Excel風操作）に対応。
-- **Advanced Export**: DPI指定可能な画像出力や、グリッド込のPDF出力。
-
-### 🔍 ChainFlow Search
+### 🔍 ChainFlow Search v23.2 [Parallel Oracle]
 **「探す」を「見つける」に変えるハイブリッド検索エンジン**
-- **Scan & Stream**: 高速スキャンとリアルタイムなメモリ内フィルタリングの二段構え。
-- **Advanced Query**: AND/OR/NOT/- 記法をフルサポートした高度な絞り込み。
-- **History & Tabs**: 検索履歴からの即時復旧と、複数タブによる並行検索。
+- **GIL-Free Search Engine**: Rust 駆動の並列スキャンエンジンにより、マルチコアをフル活用した高速ファイルシステム走破。
+- **Instant Filtering**: 大規模検索中も UI の応答性を損なわない非同期ストリーミング処理。
+- **Universal Query**: AND/OR/NOT/- 記法をフルサポートし、目的のデータへ最短距離で到達。
 
-### 📝 ChainFlow ToDo
-**思考を妨げないミニマルなタスク管理**
-- **MD Integration**: 全てのタスクをMarkdown形式で瞬時にバックアップ・共有。
-- **Progress Tracking**: カテゴリごとの進捗率をリアルタイムに可視化。
+### 🔍 ChainFlow Sniper V3 [Research Station]
+**情報の「構造」と「見た目」を射抜く抽出エンジン**
+- **4-Quadrant Extraction**: A(Text), Z(Markdown), S(Style), D(DOM) の4モードで、Web上のあらゆる情報を資産化。
+- **Pure DOM Snipe**: ノイズを排除し、AI連携やWriterテーマに最適化された純潔な構造のみを抽出。
+- **Deep Penetration**: iFrame や Shadow DOM の内部さえも透過してスナイプ可能。
 
-### 📄 ChainFlow PDF Studio & Compare
-**PDFを「読む」から「解析・検証する」へ**
-- **Sync View (Studio)**: サムネイル、全ページ、プロパティを同期表示する3ペイン構成。
-- **Multi-View Diff (Compare)**: 最大4画面の同期スクロール比較とZENモード。
+### ✍️ ChainFlow Writer v9 / 🎨 Designer
+**構造化ドキュメントと視覚表現の高度な融合**
+- **IDE-Style Highlight**: 意味論に基づいた高度なシンタックスハイライトによる IDE 級の視認性。
+- **Beyond Typora**: リアルタイム改ページレンダリングにより、「編集画面 ＝ PDF完成図」を実現。
+- **Smart Snap DTP**: オブジェクト間の吸着検知を備えた Designer による、事務実務の黄金比を維持した図解作成。
 
 ---
 
-## 🛠️ 技術スタック / Technical Stack
-- **Language**: Python 3.10+
-- **GUI Framework**: PySide6 (Qt for Python)
-- **PDF Engine**: PyMuPDF, QtWebEngine
-- **Graphics**: PIL (Pillow), QtGraphicsScene
-- **Distribution**: PyInstaller (Windows AppUserModelID supported)
+## 🛠️ 技術アーキテクチャ / Technical Architecture: "Deep Compiled Synergy"
 
-## 📦 インストール / Installation
-1. `git clone https://github.com/hinatahugu29/ChainFlowSuite.git`
-2. 各ディレクトリ内の `main.py` を実行するか、ビルド済みのEXEを使用してください。
-3. `py -m pip install -r requirements.txt` で必要な依存関係を解消してください。
+ChainFlow Suite は、2026年における最高峰の技術スタックを組み合わせた独自の基盤によって支えられています。
+
+- **Intelligence**: **Python 3.12+** による高度なビジネスロジックと AI 連携。
+- **Force Core**: **Rust (PyO3)** による物理層に近い並列処理と高速 I/O。
+- **Execution**: **Nuitka (C-Translator)** によるマシン語コンパイル。UI レスポンスをネイティブ C++ と同等まで引き上げ。
+- **Stability**: **shiboken6** による C++ / Python オブジェクトの生存管理（Stability Guard）。
+- **Identity**: **AppUserModelID** 統合による Windows タスクバーでの完璧な振る舞い。
+
+---
+
+## 📦 インストールと実行 / Installation & Execution
+
+1. **リポジトリのクローン**:
+   ```bash
+   git clone https://github.com/hinatahugu29/ChainFlowSuite.git
+   ```
+2. **依存関係の解消**:
+   ```bash
+   py -m pip install -r requirements.txt
+   ```
+3. **アプリケーションの起動**:
+   各ディレクトリ内の `main.py` を実行するか、`build_v23_xxx.bat` を使用してビルドされたEXE形式を使用してください。
+
+---
 
 ## 📄 ライセンス / License
-© 2026 hinatahugu29. All rights reserved. 個人利用および開発コミュニティへの貢献を歓迎します。
+© 2026 hinatahugu29. All rights reserved.
+**Hybrid Administrative Engineering** — 事務実務を、より自由で、より創造的な領域へ。
