@@ -1,0 +1,51 @@
+{
+  "geometry": "01d9d0cb0003000000000000fffffff80000077f00000407fffff87afffffe5ffffffff7000002450000000002000000078000000000000000170000077f00000407",
+  "splitter_state": "000000ff0000000100000002000000f00000068b00ffffffff010000000100",
+  "tabs": [
+    {
+      "title": "Desktop",
+      "state": {
+        "lanes": [
+          {
+            "panes": [
+              {
+                "paths": [
+                  "C:\\Users\\hinat\\Desktop"
+                ],
+                "display_mode": 0,
+                "show_hidden": false,
+                "sort_col": 1,
+                "sort_order": 1,
+                "is_compact": false
+              }
+            ]
+          }
+        ],
+        "active_lane_index": 0
+      }
+    },
+    {
+      "title": "ChainFlowFiler_v23_2",
+      "state": {
+        "lanes": [
+          {
+            "panes": [
+              {
+                "paths": [
+                  "g:\\CODE\\Antigravity\\Py_FILE\\ChainFlowFiler_v23_2"
+                ],
+                "display_mode": 2,
+                "show_hidden": true,
+                "sort_col": 1,
+                "sort_order": 1,
+                "is_compact": false
+              }
+            ]
+          }
+        ],
+        "active_lane_index": 0
+      }
+    }
+  ],
+  "active_tab_index": 0
+}

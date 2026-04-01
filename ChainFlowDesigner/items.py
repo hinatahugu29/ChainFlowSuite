@@ -57,6 +57,7 @@ class ConstrainedMoveMixin:
 
     def mousePressEvent(self, event):
         self.drag_start_pos = self.pos()
+        self._raw_un_snapped_pos = self.pos()
         super().mousePressEvent(event)
 
     def mouseReleaseEvent(self, event):
@@ -76,18 +77,30 @@ class ConstrainedMoveMixin:
         if change == QGraphicsItem.ItemPositionChange and self.scene():
             if getattr(self, '_is_resizing', False):
                 return super().itemChange(change, value)
-            new_pos = value
-            # Check for Shift key
+            
+            # Qt内部の移動ロジックによるオフセット破壊（ガタつき）を防ぐため、
+            # 純粋な移動デルタを計算し、仮想の生座標（_raw_un_snapped_pos）に加算する。
+            delta = value - self.pos()
+            if hasattr(self, '_raw_un_snapped_pos'):
+                self._raw_un_snapped_pos += delta
+                raw_target = QPointF(self._raw_un_snapped_pos) # コピーして利用
+            else:
+                raw_target = QPointF(value)
+                
+            new_pos = raw_target
+            
+            # Check for Shift key (軸固定)
             modifiers = QApplication.keyboardModifiers()
             if modifiers & Qt.ShiftModifier and self.drag_start_pos:
                 dx = abs(new_pos.x() - self.drag_start_pos.x())
                 dy = abs(new_pos.y() - self.drag_start_pos.y())
                 
-                # Constrain to axis with larger movement
                 if dx > dy:
                     new_pos = QPointF(new_pos.x(), self.drag_start_pos.y())
+                    if hasattr(self, '_raw_un_snapped_pos'): self._raw_un_snapped_pos.setY(self.drag_start_pos.y())
                 else:
                     new_pos = QPointF(self.drag_start_pos.x(), new_pos.y())
+                    if hasattr(self, '_raw_un_snapped_pos'): self._raw_un_snapped_pos.setX(self.drag_start_pos.x())
             
             # Apply snap logic
             scene = self.scene()

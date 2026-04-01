@@ -37,3 +37,12 @@
 *.zip
 *.7z
 *.rar
+
+# Temporary development scripts
+update_log_*.py
+update_log.py
+nuitka-crash-report.xml
+*.spec
+
+# Rust build artifacts
+**/target/

@@ -1,0 +1,123 @@
+{
+    "version": "1.0",
+    "tools": [
+        {
+            "name": "ChainFlow Tool",
+            "id": "chainflow_tool",
+            "description": "Rich content viewer and editor for HTML, PDF, and Markdown.",
+            "extensions": [
+                ".html",
+                ".htm",
+                ".pdf",
+                ".md"
+            ],
+            "executable_path": "../ChainFlowTool/ChainFlowTool.exe",
+            "script_path": "../ChainFlowTool/editor.py",
+            "arguments": [
+                "--file",
+                "{FILE_PATH}"
+            ]
+        },
+        {
+            "name": "Quick Image Tool",
+            "id": "image_tool",
+            "description": "Image converter and resizer.",
+            "extensions": [
+                ".png",
+                ".jpg",
+                ".jpeg",
+                ".webp",
+                ".bmp",
+                ".gif",
+                ".tiff"
+            ],
+            "executable_path": "../ChainFlowImage/image_tool.exe",
+            "script_path": "../ChainFlowImage/image_tool.py",
+            "arguments": [
+                "{FILE_PATH}"
+            ]
+        },
+        {
+            "name": "ChainFlow Search",
+            "id": "search_tool",
+            "description": "Fast file search utility.",
+            "extensions": [],
+            "executable_path": "../ChainFlowSearch/ChainFlowSearch.exe",
+            "script_path": "../ChainFlowSearch/main.py",
+            "arguments": [
+                "{FILE_PATH}"
+            ]
+        },
+        {
+            "name": "ChainFlow Designer",
+            "id": "designer_tool",
+            "description": "DTP Editor for layout and design.",
+            "extensions": [
+                ".cfd",
+                ".pydtp"
+            ],
+            "executable_path": "../ChainFlowDesigner/ChainFlowDesigner.exe",
+            "script_path": "../ChainFlowDesigner/main.py",
+            "arguments": [
+                "{FILE_PATH}"
+            ]
+        },
+        {
+            "name": "ChainFlow ToDo",
+            "id": "todo_tool",
+            "description": "Simple ToDo list manager.",
+            "extensions": [],
+            "executable_path": "../ChainFlowToDo/ChainFlowToDo.exe",
+            "script_path": "../ChainFlowToDo/main.py",
+            "arguments": []
+        },
+        {
+            "name": "ChainFlow PDF Studio",
+            "id": "pdf_studio",
+            "description": "Advanced PDF manipulation tool.",
+            "extensions": [
+                ".pdf"
+            ],
+            "executable_path": "../ChainFlowPDFStudio/ChainFlowPDFStudio.exe",
+            "script_path": "../ChainFlowPDFStudio/app/main.py",
+            "arguments": []
+        },
+        {
+            "name": "ChainFlow PDF Compare",
+            "id": "pdf_compare",
+            "description": "Multi-view PDF comparison tool with fractal workspaces.",
+            "extensions": [
+                ".pdf"
+            ],
+            "executable_path": "../ChainFlowPDFCompare/ChainFlowPDFCompare.exe",
+            "script_path": "../ChainFlowPDFCompare/main.py",
+            "arguments": [
+                "{FILE_PATH}"
+            ]
+        },
+        {
+            "name": "ChainFlow Writer",
+            "id": "writer_tool",
+            "description": "Professional Markdown writer with LaTeX and Mermaid support.",
+            "extensions": [
+                ".md"
+            ],
+            "executable_path": "../ChainFlowWriter_v9/ChainFlowWriter.exe",
+            "script_path": "../ChainFlowWriter_v9/main.py",
+            "arguments": [
+                "{FILE_PATH}"
+            ]
+        },
+        {
+            "name": "Sniper Research Shell",
+            "id": "sniper_shell",
+            "description": "Information extraction browser station for research efficiency.",
+            "extensions": [],
+            "executable_path": "../ChainFlowSniper_V3/ChainFlowSniper.exe",
+            "script_path": "../ChainFlowSniper_V3/main.py",
+            "arguments": [
+                "{FILE_PATH}"
+            ]
+        }
+    ]
+}

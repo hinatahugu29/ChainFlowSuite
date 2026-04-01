@@ -441,6 +441,14 @@ class MainWindow(QMainWindow):
 
         
     def _load_file(self, path):
+        # Strict Extension Check for safety
+        ext = os.path.splitext(path)[1].lower()
+        if ext not in ['.md', '.txt', '.markdown']:
+             QMessageBox.warning(self, "警告", f"Markdownまたはテキスト以外のファイルです:\n{os.path.basename(path)}\n\n読み込みを中止し、ファイル名継承を解除します。")
+             self.current_file = None
+             self.setWindowTitle(f"ChainFlow Writer v9 - Untitled")
+             return
+
         try:
             with open(path, 'r', encoding='utf-8') as f:
                 text = f.read()
@@ -464,7 +472,9 @@ class MainWindow(QMainWindow):
             self._set_modified(False)
             
         except Exception as e:
-            QMessageBox.critical(self, "Error", f"Failed to open file:\n{e}")
+            QMessageBox.critical(self, "エラー", f"ファイルの読み込みに失敗しました:\n{e}\n\nファイル名継承を解除します。")
+            self.current_file = None
+            self.setWindowTitle(f"ChainFlow Writer v9 - Untitled")
 
     def _on_save_requested(self):
         if not self.current_file:
@@ -480,6 +490,10 @@ class MainWindow(QMainWindow):
         )
         if not path:
             return False
+            
+        # Ensure .md extension if no extension is specified by the user
+        if not os.path.splitext(path)[1]:
+            path += ".md"
             
         self.current_file = path
         return self._save_to_path(self.current_file)

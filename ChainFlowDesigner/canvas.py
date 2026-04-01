@@ -558,8 +558,9 @@ class DTPView(QGraphicsView):
 
     def __init__(self, scene, parent=None):
         super().__init__(scene, parent)
-        # 背景色をスタイルシートで強制指定（ダークテーマ対策）
-        self.setStyleSheet("background: #505050; border: none;")
+        # 背景色をBrushで強制指定（ダークテーマ対策）
+        from PySide6.QtGui import QColor
+        self.setBackgroundBrush(QColor('#505050'))
         self.setRenderHint(QPainter.Antialiasing)
         self.setRenderHint(QPainter.SmoothPixmapTransform)
         self.setDragMode(QGraphicsView.RubberBandDrag)

@@ -1,0 +1,133 @@
+{
+  "geometry": "01d9d0cb00030000fffff880fffffff8ffffffff0000048700000001000000a00000077e0000048600000001020000000780fffff88000000017ffffffff00000487",
+  "splitter_state": "000000ff0000000100000002000000f00000068b00ffffffff010000000100",
+  "tabs": [
+    {
+      "title": "Desktop",
+      "state": {
+        "lanes": [
+          {
+            "panes": [
+              {
+                "paths": [
+                  "C:\\Users\\T03000\\Desktop"
+                ],
+                "display_mode": 0,
+                "show_hidden": false,
+                "sort_col": 0,
+                "sort_order": 0,
+                "is_compact": false
+              },
+              {
+                "paths": [
+                  "C:\\Users\\T03000\\Desktop\\eValue関連"
+                ],
+                "display_mode": 0,
+                "show_hidden": false,
+                "sort_col": 0,
+                "sort_order": 0,
+                "is_compact": false
+              },
+              {
+                "paths": [
+                  "C:\\Users\\T03000\\Desktop\\eValue関連\\CHEMICAL"
+                ],
+                "display_mode": 0,
+                "show_hidden": false,
+                "sort_col": 0,
+                "sort_order": 0,
+                "is_compact": false
+              },
+              {
+                "paths": [
+                  "T:\\品質管理\\100_化学物質調査\\chemSHERPA\\報告書\\CI"
+                ],
+                "display_mode": 0,
+                "show_hidden": false,
+                "sort_col": 0,
+                "sort_order": 0,
+                "is_compact": false
+              }
+            ]
+          }
+        ],
+        "active_lane_index": 0
+      }
+    },
+    {
+      "title": "Desktop",
+      "state": {
+        "lanes": [
+          {
+            "panes": [
+              {
+                "paths": [
+                  "C:\\Users\\T03000\\Desktop"
+                ],
+                "display_mode": 0,
+                "show_hidden": false,
+                "sort_col": 0,
+                "sort_order": 0,
+                "is_compact": false
+              }
+            ]
+          }
+        ],
+        "active_lane_index": 0
+      }
+    },
+    {
+      "title": "不適合関連",
+      "state": {
+        "lanes": [
+          {
+            "panes": [
+              {
+                "paths": [
+                  "T:\\品質管理\\不適合関連"
+                ],
+                "display_mode": 0,
+                "show_hidden": false,
+                "sort_col": 0,
+                "sort_order": 0,
+                "is_compact": false
+              },
+              {
+                "paths": [
+                  "T:\\品質管理\\不適合関連\\2026年3月期"
+                ],
+                "display_mode": 0,
+                "show_hidden": false,
+                "sort_col": 0,
+                "sort_order": 1,
+                "is_compact": false
+              },
+              {
+                "paths": [
+                  "T:\\品質管理\\不適合関連\\2026年3月期\\M37-033 ODIS製グリーススプレー 缶打痕発見"
+                ],
+                "display_mode": 0,
+                "show_hidden": false,
+                "sort_col": 0,
+                "sort_order": 0,
+                "is_compact": false
+              },
+              {
+                "paths": [
+                  "T:\\品質管理\\不適合関連\\2026年3月期\\M37-060 リーフクリン業務用480_噴射口マーク無し\\tmp"
+                ],
+                "display_mode": 0,
+                "show_hidden": false,
+                "sort_col": 0,
+                "sort_order": 0,
+                "is_compact": false
+              }
+            ]
+          }
+        ],
+        "active_lane_index": 0
+      }
+    }
+  ],
+  "active_tab_index": 2
+}

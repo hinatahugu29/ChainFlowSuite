@@ -1,0 +1,16 @@
+[package]
+name = "chainflow_search_core"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "chainflow_search_core"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.22.2", features = ["extension-module"] }
+ignore = "0.4.22"
+regex = "1.10.4"
+rayon = "1.10.0"
+num_cpus = "1.16.0"
+unicode-normalization = "0.1.23"
