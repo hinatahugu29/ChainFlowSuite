@@ -1,23 +1,40 @@
-# ChainFlow PDF Studio 📄🔬
+# ChainFlow PDF Studio 📄🔬✨
 
-**ChainFlow PDF Studio** は、PDFを単に閲覧するだけでなく、内部構造やレイアウトを深く解剖するための専門的な解析ツールです。
+**ChainFlow PDF Studio** は、PDF を単に「読む」ためのツールから、内部構造を「解析・解剖」するための専門的エンジニアリング・ステーションへと昇華させたアプリケーションです。
 
-### ✨ 主な機能 / Key Features
-- **Synchronized 3-Pane Layout**:
-    - **Left**: サムネイル・アウトライン・検証用レイヤー。
-    - **Center**: 高解像度レンダリングエンジンによるメインプレビュー。
-    - **Right**: メタデータ詳細、ページ属性、および注釈管理プロパティ。
-- **Used Pages Analysis**: 文書内で実際に使用されているリソースやフォントの使用状況を、サムネイル上にオーバーレイ表示。
-- **Metadata Inspector**: タイトル、作成者、暗号化設定、そしてPDF/Aなどの規格適合性を瞬時に確認。
-- **Native Rendering**: 高速かつ忠実なベクトルレンダリングにより、複雑な図面や文字組も正確に再現。
+---
 
-### 🛠️ 技術情報 / Technical Info
-- **Core Engine**: PyMuPDF + Qt (via PySide6)
-- **UI Logic**: 各ペインが状態を相互に同期する、リアクティブなUI設計。
-- **Theme**: 長時間の解析作業でも目が疲れにくい、プロ仕様のダーク配色。
+## 🚀 PDF アナリティクス / Core Features
 
-### ⌨️ 操作方法 / Shortcuts
-- `Ctrl + O`: PDFを開く
-- `Ctrl + L`: サイドバーの表示切り替え
-- `Home / End`: 文頭 / 文末へ
-- `Ctrl + F`: 文書内検索
+### 🔬 Synchronized 3-Pane Layout
+サムネイル、アウトライン、メインプレビュー、およびメタデータの三者が完全に同期した分析環境を提供。
+- **Left**: アウトライン・サムネイル・検証情報のレイヤー。
+- **Center**: 高解像度 Native レンダリングによるメインプレビュー。
+- **Right**: メタデータ詳細、ページ属性、注釈管理パネル。
+
+### 📊 Used Pages & Resource Analysis
+文書内で実際に使用されているリソースやフォントの使用状況を、サムネイル上にオーバーレイ表示。プロフェッショナルな文書検証を可能にします。
+
+### 📄 Universal Metadata Inspector
+タイトル、作成者、暗号化設定に加え、PDF/A 等の規格適合性を瞬時に確認。機密情報や提出用資料の最終チェックに威力を発揮します。
+
+---
+
+## ⌨️ 主要ショートカット / Shortcuts
+- **`Ctrl + O`**: PDF を開く。
+- **`Ctrl + L`**: サイドバーの表示切り替え。
+- **`Home` / `End`**: 文頭 / 文末へ。
+- **`Ctrl + F`**: 文書内検索。
+
+---
+
+## 🛠️ 技術スタック / Tech Stack
+- **Framework**: PySide6 (Qt for Python 6)
+- **Core Engine**: PyMuPDF (Fitz) による極めて高速な PDF 解析。
+- **Theme**: 長時間の解析作業でも目が疲れにくい、プロフェッショナル仕様のダークテーマ。
+
+---
+
+## 📄 ライセンス / License
+© 2026 hinatahugu29. All rights reserved.
+**Inspect the Structure, Understand the Truth.** — PDF を解剖し、構造を理解する。

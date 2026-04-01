@@ -1,22 +1,52 @@
-# ChainFlow Filer (v21) 📁
+# ChainFlow Filer v23.2 [Modular Refined] 📁✨
 
-**ChainFlow Filer** は、キーボード駆動のワークフローと、大規模ファイルシステムにも耐えうる強力な非同期エンジンを融合させた、プロフェッショナル仕様のファイラーです。
+**ChainFlow Filer** は、Python の柔軟な知性と Rust の圧倒的な剛性を融合させた、プロフェッショナル向け次世代ファイルマネージャーです。
+単なるファイル閲覧ソフトの枠を超え、大量の素材を複数のツール群へ高速かつ正確に流し込む（Flow）ための**「ワークフローのハブ（作業用コックピット）」**として再定義されました。
 
-### ✨ 主な機能 / Key Features
-- **Slash Menu (`Ctrl+P`)**: 全てのSuiteアプリケーション、内部コマンド、カスタムスクリプトを瞬時に呼び出すコマンドランチャー。
-- **Asynchronous File Engine**: ネットワークドライブや大規模ディレクトリでもUIをフリーズさせない、完全非同期のファイル列挙。
-- **Smart Sorting**: ファイルとフォルダを区別せず混在させた独自のソートや、自然順序によるインテリジェンスな並び替え。
-- **Mark & Process**: キーボードによる直感的なファイル「マーク」機能と、マーク済みファイルに対する一括操作。
-- **Path History**: 最近使用したフォルダや頻繁に訪れる場所への、シームレスなアクセス。
+---
 
-### 🛠️ 技術情報 / Technical Info
-- **Framework**: PySide6 (Qt for Python)
-- **Model**: 高度に最適化された `QFileSystemModel` カスタムプロキシ。
-- **IPC**: 他の ChainFlow ツールへの引数受け渡しとプロセス管理。
+## 🚀 次世代のコア・テクノロジー / Core Technologies
 
-### ⌨️ 操作方法 / Shortcuts
-- `Ctrl + P`: スラッシュメニュー（コマンド実行）
-- `Enter`: 実行 / フォルダ移動
-- `Backspace`: 上の階層へ
-- `F5`: 強制リフレッシュ（キャッシュ破棄）
-- `Esc`: 選択解除
+### 🦀 Rust Native Engine (`chainflow_core`)
+ディレクトリ走査、ソート、フィルタリングといった I/O 集約型処理を **Rust (PyO3)** で実装されたネイティブコアへ移譲。数万ファイル規模のフォルダも「0.01秒」でハンドリングする、マシンレベルのパフォーマンスを実現しました。
+
+### 🧩 Modular Refined Architecture
+UI レイヤーからビジネスロジック（ファイル操作、セッション管理）を完全に分離。
+- **`core/actions.py`**: ファイル移動、コピー、外部ツール起動などのアクションを統括。
+- **`core/session.py`**: タブ構成やソート順、レーンレイアウトの永続化を担当。
+
+### 🛡️ Stability Guard (`shiboken6`)
+`shiboken6` を利用した C++ オブジェクトの生存確認を実装。高速なタブ切り替えやフォルダ遷移の瞬間に発生しがちな `RuntimeError` を構造的に排除し、極限の操作速度においても「絶対的安定」を保証します。
+
+---
+
+## 🎨 独創的なユーザー体験 / User Experience
+
+### Massive Parallel Tiling (超多ペイン並置)
+単一ウィンドウ内に無数のディレクトリをタイル状に敷き詰め、関連するプロジェクトフォルダを一元的に監視・操作可能。幅の狭いレーンを多数並べ、それらを**「縦スタック（Vertical Stack）」**させることで、情報の密度を極限まで高めます。
+
+### Keyboard-Driven Workflow
+マウス操作による「思考の断絶」を排除。ホームポジションから離れることなく、エディタのような感覚でファイル操作を完結できます。
+
+### 📋 主要ショートカット / Interaction
+- **`H` / `J` / `K` / `L`**: Vim スタイルによるペイン移動・ファイル選択。
+- **`Ctrl + P`**: スラッシュメニュー（コマンドパレット）。Suite アプリやカスタムツールを瞬時に呼び出し。
+- **`V`**: 垂直分割（新規ペインの作成）。
+- **`S`**: 高速検索 / フィルタリング。
+- **`X`**: 実行 / アクション選択。
+- **`Q`**: ペインを閉じる / アプリケーション終了。
+
+---
+
+## 🛠️ 技術スタック / Tech Stack
+- **Languages**: Python 3.12+ / Rust (PyO3)
+- **GUI Framework**: PySide6 (Qt for Python 6)
+- **Native Engine**: `chainflow_core` (Maturin-built)
+- **Compilation**: Nuitka (C-Translator) によるマシン語化
+- **Stability**: `shiboken6` (Stability Guard)
+
+---
+
+## 📄 ライセンス / License
+© 2026 hinatahugu29. All rights reserved.
+**Zero-Proxy, Native Core Architecture.** — 思考の速度を、ファイルシステムの速度へ。

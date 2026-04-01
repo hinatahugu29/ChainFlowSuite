@@ -1,23 +1,39 @@
-# ChainFlow Tool (Editor/Viewer) 🛠️📖
+# ChainFlow Tool (Editor/Viewer Hub) 🛠️📖✨
 
-**ChainFlow Tool** は、Suite全体の基盤となる共通機能を備え、特に Markdown と HTML の「閲覧」と「簡易編集」に特化したインテリジェンスな汎用 hub です。
+**ChainFlow Tool** は、Suite 全体の基盤となる共通機能を備え、特に Markdown と HTML の「閲覧」と「高度な連携」に特化したインテリジェンスな汎用ハブです。
 
-### ✨ 主な機能 / Key Features
-- **Dual-Role Engine**:
-    - **Editor Mode**: Markdown2 ベースの高速な Markdown 編集とリアルタイムプレビュー。
-    - **Viewer Mode**: `QWebEngineView` (Chromiumベース) による、HTML、PDF、および高度なWebコンテンツの忠実な再現。
-- **Integrated Logic**: `Ctrl+P` (Slash Menu) を通じて Suite の他ツールと密接に連携。
-- **Snippet & Help**: よく使う Markdown 構文やショートカットをサイドパネルに常備。ダブルクリックで即座にエディタへ挿入可能。
-- **Professional PDF Export**: 印刷用 CSS を動的に適用し、Web ページや Markdown を美しい等幅 PDF として出力。
-- **Geometry Memory**: Filer から呼び出された際のウィンドウ位置やサイズをスマートに管理。
+---
 
-### 🛠️ 技術情報 / Technical Info
-- **Framework**: PySide6 + QtWebEngine (+ QtPrintSupport)
-- **Rendering**: Chromium エンジンによる最高峰の Web 互換性。
-- **Stability**: Windows AppUserModelID 搭載により、Filer と同じブランドアイコンをタスクバーに正しく表示。
+## 🚀 インテグレーション・ハブ / Core Features
 
-### ⌨️ 操作方法 / Shortcuts
-- `Ctrl + S`: 保存
-- `Ctrl + P`: スラッシュメニュー（ツール連携 / スニペット）
-- `Ctrl + E`: PDF エクスポート
-- `F1`: ヘルプパネルの表示 / 非表示
+### 🔄 Dual-Role Engine
+- **Editor Mode**: Markdown2 ベースの高速な Markdown 編集とリアルタイムプレビューを提供。
+- **Viewer Mode**: `QWebEngineView` (Chromium ベース) による、HTML、PDF、および高度な Web コンテンツの忠実な再現。
+
+### 🔌 Project Flow Integration
+スラッシュメニュー (`Ctrl + P`) を通じて Suite の他ツール（Filer, Search, Sniper 等）と密接に連携。情報の「流れ」を中継し、必要なデータへ即座にアクセスするためのステーションとして機能します。
+
+### 📋 Snippet & Help Utility
+よく使う Markdown 構文やショートカットをサイドパネルに常備。ダブルクリックで即座にエディタへ挿入でき、作業のスピードを加速させます。
+
+---
+
+## 🛠️ プロフェッショナル仕様 / Special Specs
+
+- **Professional PDF Export**: 印刷用 CSS を動的に適用し、Web ページや文書を美しい PDF として出力。
+- **Geometry Memory**: Filer 等から呼び出された際のウィンドウ位置やサイズをスマートに管理し、常に最適なワークスペースを復元。
+- **Modern Identity**: AppUserModelID 搭載により、Windows タスクバーで Suite 統一のブランドアイコンを正しく表示。
+
+---
+
+## ⌨️ 主要ショートカット / Shortcuts
+- **`Ctrl + S`**: 保存。
+- **`Ctrl + P`**: スラッシュメニュー / スニペットパネルの切り替え。
+- **`Ctrl + E`**: PDF エクスポート。
+- **`F1`**: ヘルプパネルの表示 / 非表示。
+
+---
+
+## 📄 ライセンス / License
+© 2026 hinatahugu29. All rights reserved.
+**Connect the Assets, Empower the Flow.** — 資産を繋ぎ、フローを加速させる。
