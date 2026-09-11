@@ -13,7 +13,7 @@ import tempfile
 from PySide6.QtGui import QAction, QDesktopServices, QKeySequence, QShortcut, QDrag, QIcon, QPixmap, QColor, QPainter, QImage
 
 from models.proxy_model import SmartSortFilterProxyModel
-from core import same_path, FileOperationWorker, logger, exists_nonblocking
+from core import same_path, FileOperationWorker, logger, exists_nonblocking, move_to_trash
 from core.global_model import get_global_file_system_model
 
 # v14.2 Refactoring: Classes extracted to subpackage for maintainability
@@ -1079,13 +1079,41 @@ class FilePane(QFrame):
             QMessageBox.critical(self, "Image Paste Error", f"Failed to save image:\n{e}")
 
     def action_delete(self):
+        """選択項目をゴミ箱へ送る。
+
+        v23.8: 以前は base_model.remove() による完全削除だったため、
+        誤操作したら復元手段が無かった。ゴミ箱経由に変更し、失敗時は
+        黙って握りつぶさずユーザーに通知する。
+        """
         info = self.get_selection_info()
         paths = info["paths"]
-        if paths:
-            ret = QMessageBox.question(self, "Delete", f"Are you sure you want to delete {len(paths)} items?", QMessageBox.Yes | QMessageBox.No)
-            if ret == QMessageBox.Yes:
-                for item in info["full_infos"]:
-                    self.base_model.remove(item["index"])
+        if not paths:
+            return
+
+        if len(paths) == 1:
+            detail = os.path.basename(paths[0]) or paths[0]
+        else:
+            detail = f"{len(paths)} 件"
+
+        ret = QMessageBox.question(
+            self, "Delete",
+            f"{detail} をゴミ箱へ移動しますか?",
+            QMessageBox.Yes | QMessageBox.No
+        )
+        if ret != QMessageBox.Yes:
+            return
+
+        ok, err = move_to_trash(paths)
+        if ok:
+            logger.log_info(f"Moved to trash: {len(paths)} item(s)")
+        elif err == "cancelled":
+            # OS 側の警告でユーザーが中止した。追加の通知は不要。
+            logger.log_info("Delete cancelled by user")
+        else:
+            logger.log_error(f"Delete failed: {err}")
+            QMessageBox.critical(self, "削除エラー", f"削除できませんでした:\n{err}")
+
+        self.refresh_contents()
 
     def action_rename(self):
         info = self.get_selection_info()
@@ -1222,9 +1250,13 @@ class FilePane(QFrame):
         if hasattr(self, '_zip_worker') and self._zip_worker:
             self._zip_worker.deleteLater()
             self._zip_worker = None
-        # v22.0: 自動リフレッシュ
-        if success:
-            self.refresh_contents()
+        # v23.8: 一部失敗していても一覧は必ず更新する（成功分が反映されないと
+        # 何がどこまで処理されたのか分からなくなるため）
+        self.refresh_contents()
+
+        if not success:
+            logger.log_error(f"Paste operation reported failures: {message}")
+            QMessageBox.warning(self, "ファイル操作", message)
     
     def _on_zip_error(self, error_message):
         """v14.2 ZIP圧縮エラー"""
@@ -1355,9 +1387,13 @@ class FilePane(QFrame):
             self._paste_worker.deleteLater()
             self._paste_worker = None
             
-        # v22.0: 自動リフレッシュ
-        if success:
-            self.refresh_contents()
+        # v23.8: 一部失敗していても一覧は必ず更新する（成功分が反映されないと
+        # 何がどこまで処理されたのか分からなくなるため）
+        self.refresh_contents()
+
+        if not success:
+            logger.log_error(f"Paste operation reported failures: {message}")
+            QMessageBox.warning(self, "ファイル操作", message)
     
     def _on_paste_error(self, error_message):
         """v14.2 ペーストエラー"""

@@ -224,3 +224,94 @@ def exists_nonblocking(path):
         return os.path.exists(path)
     except Exception:
         return False
+
+
+# ==============================================================================
+# ゴミ箱への削除
+#
+# 従来は QFileSystemModel.remove() を直接呼んでおり、確認ダイアログで Yes を
+# 押した瞬間に復元不能な完全削除が走っていた。ファイラーの誤操作で最も痛い
+# 部分なので、Windows のシェル API 経由でゴミ箱へ送る。
+#
+# SHFileOperationW に FOF_ALLOWUNDO を付けると「元に戻す」が効く形で削除される。
+# FOF_WANTNUKEWARNING は、サイズ超過やネットワークドライブ等でゴミ箱に入れられず
+# 完全削除になってしまう場合に、OS 標準の警告を出させるためのフラグ。
+# これを外すと黙って完全削除されるため、必ず付けたままにすること。
+# ==============================================================================
+
+_FO_DELETE = 0x0003
+_FOF_NOCONFIRMATION = 0x0010
+_FOF_ALLOWUNDO = 0x0040
+_FOF_WANTNUKEWARNING = 0x4000
+
+
+def move_to_trash(paths):
+    """指定パスをゴミ箱へ送る。
+
+    Args:
+        paths: 削除対象パスのリスト
+
+    Returns:
+        (ok, detail): ok が False のとき detail にエラー内容を示す文字列が入る。
+                      ユーザーが OS の警告でキャンセルした場合も ok=False,
+                      detail="cancelled" を返す。
+    """
+    targets = [os.path.normpath(os.path.abspath(p)) for p in paths if p]
+    if not targets:
+        return False, "削除対象がありません"
+
+    if os.name != 'nt':
+        # Windows 以外は send2trash があれば使う（無ければ失敗として扱い、
+        # 呼び出し側に完全削除させない）
+        try:
+            from send2trash import send2trash
+        except ImportError:
+            return False, "ゴミ箱への削除に対応していません (send2trash 未インストール)"
+        try:
+            for p in targets:
+                send2trash(p)
+            return True, ""
+        except Exception as e:
+            return False, str(e)
+
+    import ctypes
+    from ctypes import wintypes
+
+    class _SHFILEOPSTRUCTW(ctypes.Structure):
+        _fields_ = [
+            ("hwnd", wintypes.HWND),
+            ("wFunc", wintypes.UINT),
+            ("pFrom", ctypes.c_wchar_p),
+            ("pTo", ctypes.c_wchar_p),
+            ("fFlags", ctypes.c_uint16),
+            ("fAnyOperationsAborted", wintypes.BOOL),
+            ("hNameMappings", ctypes.c_void_p),
+            ("lpszProgressTitle", ctypes.c_wchar_p),
+        ]
+
+    # pFrom は「NUL 区切り + 末尾二重 NUL」の文字列。c_wchar_p に直接代入すると
+    # 最初の NUL で切れてしまうため、バッファを作って cast する。
+    # buf は API 呼び出しが終わるまで参照を保持しておく必要がある。
+    buf = ctypes.create_unicode_buffer("\0".join(targets) + "\0\0")
+
+    op = _SHFILEOPSTRUCTW()
+    op.hwnd = None
+    op.wFunc = _FO_DELETE
+    op.pFrom = ctypes.cast(buf, ctypes.c_wchar_p)
+    op.pTo = None
+    op.fFlags = _FOF_ALLOWUNDO | _FOF_NOCONFIRMATION | _FOF_WANTNUKEWARNING
+    op.fAnyOperationsAborted = False
+    op.hNameMappings = None
+    op.lpszProgressTitle = None
+
+    try:
+        res = ctypes.windll.shell32.SHFileOperationW(ctypes.byref(op))
+    except Exception as e:
+        return False, str(e)
+
+    if op.fAnyOperationsAborted:
+        return False, "cancelled"
+    if res != 0:
+        # SHFileOperation は GetLastError ではなく独自のコードを返す
+        return False, f"削除に失敗しました (code: 0x{res:X})"
+    return True, ""

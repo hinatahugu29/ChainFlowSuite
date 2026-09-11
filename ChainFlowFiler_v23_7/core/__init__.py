@@ -11,7 +11,8 @@ from .file_operations import (
     is_archive_file,
     is_network_path,
     looks_like_dir,
-    exists_nonblocking
+    exists_nonblocking,
+    move_to_trash
 )
 
 from .styles import Colors, Styles, Constants
@@ -41,6 +42,7 @@ __all__ = [
     'is_network_path',
     'looks_like_dir',
     'exists_nonblocking',
+    'move_to_trash',
     # Styles
     'Colors',
     'Styles',

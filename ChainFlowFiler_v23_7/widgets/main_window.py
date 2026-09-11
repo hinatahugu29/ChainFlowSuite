@@ -415,22 +415,56 @@ class ChainFlowFiler(QMainWindow):
         result = self.plugin_manager.launch_tool(tool_def, target_path, self)
         print(f"[DEBUG] launch_tool result: {result}")
 
+    def _running_file_workers(self):
+        """実行中のファイル操作ワーカーを全ペインから集める"""
+        running = []
+        for i in range(self.tab_widget.count()):
+            area = self.tab_widget.widget(i)
+            for lane in getattr(area, "lanes", []):
+                for pane in getattr(lane, "panes", []):
+                    worker = getattr(pane, "_paste_worker", None)
+                    try:
+                        if worker is not None and worker.isRunning():
+                            running.append(worker)
+                    except RuntimeError:
+                        # 既に破棄されたオブジェクト
+                        pass
+        return running
+
     def closeEvent(self, event):
+        # v23.8: コピー/移動の実行中に閉じると、ワーカースレッドが道半ばで
+        # 落とされて中途半端なファイルが残る。ユーザーに判断させる。
+        running = self._running_file_workers()
+        if running:
+            ret = QMessageBox.question(
+                self, "ファイル操作が実行中です",
+                f"コピー/移動が {len(running)} 件実行中です。"
+                "中断して終了しますか?",
+                QMessageBox.Yes | QMessageBox.No
+            )
+            if ret != QMessageBox.Yes:
+                event.ignore()
+                return
+            for worker in running:
+                try:
+                    worker.cancel()
+                    # キャンセルはチェックポイントでしか効かないため、
+                    # 現在処理中の 1 件が終わるまでは待つ
+                    worker.wait(5000)
+                except Exception:
+                    pass
+
         self.save_session()
-        
-        # v19.0: Terminate all tools launched via PluginManager
+
+        # v23.8: 起動した Suite ツール(Writer/ToDo/Search 等)は独立したアプリで、
+        # 未保存の作業を抱えている可能性がある。Filer を閉じただけで道連れに
+        # するのは明確な事故なので、終了させずに参照だけ手放す。
+        # (以前は plugin_manager.terminate_all() と editor_processes の
+        #  terminate() でまとめて kill していた)
         if self.plugin_manager:
-            self.plugin_manager.terminate_all()
-        
-        # v16.2: Terminate any other spawned processes (like ToDo)
-        for proc in self.editor_processes:
-            try:
-                if proc.poll() is None:
-                    proc.terminate()
-            except Exception:
-                pass
+            self.plugin_manager.release_all()
         self.editor_processes.clear()
-        
+
         super().closeEvent(event)
 
     

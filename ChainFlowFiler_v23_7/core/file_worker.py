@@ -64,27 +64,46 @@ class FileOperationWorker(QThread):
     # コピー/移動
     # ----------------------------------------------------------------
     def _run_copy_move(self):
-        """コピーまたは移動を実行"""
+        """コピーまたは移動を実行
+
+        v23.8: 以前は個々の失敗を stderr に print するだけで、最後に必ず
+        finished(True) を emit していた。GUI アプリでは stderr は誰の目にも
+        触れないため、移動に失敗したファイルがあっても「完了」と表示され、
+        移動できたつもりで元を失う事故につながる。失敗を集計して報告する。
+        """
         total = len(self.src_paths)
         completed = 0
-        
+        succeeded = 0
+        failures = []   # (名前, 理由)
+        skipped = []    # 元が存在しない等、実行前に弾いたもの
+
         for src in self.src_paths:
             if self._cancelled:
-                self.finished.emit(False, "キャンセルされました")
+                self.finished.emit(False, self._build_report(succeeded, total, failures, skipped, cancelled=True))
                 return
-            
+
+            name = os.path.basename(src)
+
             if not os.path.exists(src):
+                skipped.append(name)
                 completed += 1
                 continue
-            
-            name = os.path.basename(src)
+
             dest = os.path.join(self.dest_path, name)
-            
+
+            # 自分自身（または自分の内側）への移動/コピーを弾く。
+            # これを許すと shutil が中途半端な再帰コピーを作ってしまう。
+            reason = self._reject_reason(src, dest)
+            if reason:
+                failures.append((name, reason))
+                completed += 1
+                continue
+
             # 同名衝突回避
             dest = self._resolve_conflict(dest)
-            
+
             self.progress.emit(completed, total, name)
-            
+
             try:
                 if self.operation_type == "copy":
                     if os.path.isdir(src):
@@ -93,14 +112,53 @@ class FileOperationWorker(QThread):
                         shutil.copy2(src, dest)
                 else:  # move
                     shutil.move(src, dest)
+                succeeded += 1
             except Exception as e:
+                failures.append((name, str(e)))
                 print(f"Operation Error ({src}): {e}", file=sys.stderr)
-            
+
             completed += 1
             self.progress.emit(completed, total, name)
-        
-        self.finished.emit(True, f"{completed}/{total} 件完了")
-    
+
+        message = self._build_report(succeeded, total, failures, skipped)
+        # 一部でも失敗したら成功扱いにしない。error ではなく finished(False) で
+        # 返すのは、error 側のハンドラがワーカーを片付けてしまい finished 側の
+        # リフレッシュが走らなくなるため（成否にかかわらず一覧は更新したい）。
+        self.finished.emit(not failures, message)
+
+    def _reject_reason(self, src, dest):
+        """実行前に弾くべきケースかを判定し、理由文字列を返す（問題なければ None）"""
+        try:
+            src_abs = os.path.normcase(os.path.abspath(src))
+            dest_dir_abs = os.path.normcase(os.path.abspath(self.dest_path))
+        except Exception:
+            return None
+
+        if src_abs == dest_dir_abs:
+            return "移動先が自分自身です"
+        if os.path.isdir(src) and (dest_dir_abs + os.sep).startswith(src_abs + os.sep):
+            return "自分の内側のフォルダへは移動できません"
+        if (self.operation_type == "move"
+                and os.path.normcase(os.path.abspath(os.path.dirname(src))) == dest_dir_abs):
+            return "移動元と移動先が同じフォルダです"
+        return None
+
+    def _build_report(self, succeeded, total, failures, skipped, cancelled=False):
+        """結果メッセージを組み立てる"""
+        parts = []
+        if cancelled:
+            parts.append("キャンセルされました")
+        parts.append(f"成功 {succeeded}/{total} 件")
+        if skipped:
+            parts.append(f"元が見つからずスキップ: {len(skipped)} 件")
+        if failures:
+            parts.append(f"失敗 {len(failures)} 件:")
+            for name, reason in failures[:10]:
+                parts.append(f"  - {name}: {reason}")
+            if len(failures) > 10:
+                parts.append(f"  ... 他 {len(failures) - 10} 件")
+        return "\n".join(parts)
+
     def _copy_tree_with_progress(self, src, dest, base_completed, total):
         """フォルダを再帰的にコピー（進捗更新付き）"""
         # shutil.copytree はブロッキングなのでそのまま使用

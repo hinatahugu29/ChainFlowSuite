@@ -217,8 +217,21 @@ class PluginManager:
                 QMessageBox.critical(parent_widget, "Launch Error", f"Failed to launch tool:\n{e}")
             return False
 
+    def release_all(self):
+        """起動したツールへの参照だけを手放す（プロセスは終了させない）。
+
+        v23.8: Filer の終了時に terminate_all() を呼んでいたため、Writer や
+        ToDo など別アプリとして起動したツールが未保存のまま道連れで落ちていた。
+        通常終了ではこちらを使い、ツールは独立して生き残らせる。
+        """
+        self.active_processes.clear()
+
     def terminate_all(self):
-        """Terminate all launched tool processes"""
+        """Terminate all launched tool processes
+
+        注意: 通常のアプリ終了では呼ばないこと（release_all を使う）。
+        起動したツールを明示的に一括終了したい場合のみ使用する。
+        """
         for proc in self.active_processes:
             try:
                 if proc.poll() is None: # Running
