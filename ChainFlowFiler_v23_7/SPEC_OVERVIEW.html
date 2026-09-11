@@ -1,0 +1,665 @@
+<title>ChainFlow Filer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ground:#f5f7fa;
+    --surface:#ffffff;
+    --surface-2:#eaeef4;
+    --line:#d6dde6;
+    --line-soft:#e6ebf1;
+    --ink:#0f141a;
+    --ink-2:#454f5c;
+    --ink-3:#6d7887;
+    --accent:#0a6ec4;
+    --accent-soft:#e2eefa;
+    --deep:#094771;
+    --gold:#8f6400;
+    --gold-soft:#faf0d4;
+    --gold-line:#e6c46a;
+    --measure:66ch;
+    --radius:3px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#12161b;
+      --surface:#1a1f26;
+      --surface-2:#212831;
+      --line:#2d3641;
+      --line-soft:#232b34;
+      --ink:#e7ecf3;
+      --ink-2:#a6b1bf;
+      --ink-3:#7a8697;
+      --accent:#54a6e8;
+      --accent-soft:#122b40;
+      --deep:#0d5a8f;
+      --gold:#f0c159;
+      --gold-soft:#26200f;
+      --gold-line:#5c4a1c;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#12161b;
+    --surface:#1a1f26;
+    --surface-2:#212831;
+    --line:#2d3641;
+    --line-soft:#232b34;
+    --ink:#e7ecf3;
+    --ink-2:#a6b1bf;
+    --ink-3:#7a8697;
+    --accent:#54a6e8;
+    --accent-soft:#122b40;
+    --deep:#0d5a8f;
+    --gold:#f0c159;
+    --gold-soft:#26200f;
+    --gold-line:#5c4a1c;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:"IBM Plex Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic UI",Meiryo,system-ui,sans-serif;
+    font-size:15px;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1000px;margin:0 auto;padding:0 28px 96px;}
+  .prose{max-width:var(--measure);}
+
+  /* ---------- masthead ---------- */
+  .mast{
+    border-bottom:1px solid var(--line);
+    padding:56px 0 30px;
+    margin-bottom:8px;
+  }
+  .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);font-weight:600;
+  }
+  h1{
+    font-size:clamp(30px,5vw,44px);
+    line-height:1.18;font-weight:600;letter-spacing:-.02em;
+    margin:14px 0 0;text-wrap:balance;
+  }
+  .lede{
+    margin:18px 0 0;max-width:60ch;
+    font-size:17px;line-height:1.8;color:var(--ink-2);
+  }
+  .mast-meta{
+    display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:26px;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:12px;color:var(--ink-3);
+  }
+  .mast-meta b{color:var(--ink-2);font-weight:500;}
+
+  /* ---------- sections ---------- */
+  section{padding-top:52px;}
+  h2{
+    font-size:12px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--ink-3);margin:0 0 4px;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+  }
+  .h2sub{
+    font-size:23px;font-weight:600;letter-spacing:-.015em;line-height:1.4;
+    margin:0 0 22px;text-wrap:balance;
+  }
+  h3{
+    font-size:16px;font-weight:600;margin:32px 0 8px;letter-spacing:-.005em;
+  }
+  p{margin:0 0 16px;}
+  .prose p:last-child{margin-bottom:0;}
+  strong{font-weight:600;}
+  a{color:var(--accent);}
+
+  /* ---------- fact strip ---------- */
+  .facts{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:1px;background:var(--line);border:1px solid var(--line);
+    margin:30px 0 0;
+  }
+  .fact{background:var(--surface);padding:16px 18px;}
+  .fact dt{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
+  }
+  .fact dd{margin:5px 0 0;font-size:15px;font-weight:500;line-height:1.5;}
+
+  /* ---------- diagram frames ---------- */
+  figure{margin:26px 0 0;}
+  .frame{
+    border:1px solid var(--line);background:var(--surface);
+    padding:26px 22px 20px;overflow-x:auto;
+  }
+  .frame svg{display:block;margin:0 auto;max-width:100%;height:auto;}
+  figcaption{
+    margin-top:12px;font-size:13px;line-height:1.7;color:var(--ink-3);
+    max-width:62ch;
+  }
+  /* svg tokens */
+  .s-pane{fill:var(--surface-2);stroke:var(--line);}
+  .s-pane-live{fill:var(--accent-soft);stroke:var(--accent);}
+  .s-frame{fill:none;stroke:var(--line);}
+  .s-label{fill:var(--ink-2);font-family:"IBM Plex Mono",monospace;font-size:11px;}
+  .s-label-sm{fill:var(--ink-3);font-family:"IBM Plex Mono",monospace;font-size:10px;}
+  .s-title{fill:var(--ink);font-family:"IBM Plex Sans JP",sans-serif;font-size:12px;font-weight:600;}
+  .s-arrow{stroke:var(--accent);fill:none;stroke-width:1.5;}
+  .s-arrow-head{fill:var(--accent);}
+  .s-tick{stroke:var(--line);stroke-width:1;}
+
+  /* ---------- tables ---------- */
+  .tablewrap{overflow-x:auto;margin:24px 0 0;border:1px solid var(--line);}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;background:var(--surface);}
+  th,td{text-align:left;padding:11px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top;}
+  thead th{
+    background:var(--surface-2);
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-3);font-weight:600;border-bottom:1px solid var(--line);
+    white-space:nowrap;
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  td.num{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  td.key{font-weight:500;white-space:nowrap;}
+  .gain{color:var(--accent);font-weight:600;}
+
+  code,kbd{font-family:"IBM Plex Mono",ui-monospace,monospace;}
+  code{
+    font-size:.87em;background:var(--surface-2);
+    padding:1px 5px;border-radius:var(--radius);
+    border:1px solid var(--line-soft);
+  }
+  kbd{
+    display:inline-block;font-size:11.5px;font-weight:500;
+    background:var(--surface);border:1px solid var(--line);
+    border-bottom-width:2px;border-radius:var(--radius);
+    padding:2px 7px;color:var(--ink);white-space:nowrap;
+  }
+
+  /* ---------- keys ---------- */
+  .keys{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:1px;background:var(--line);border:1px solid var(--line);margin-top:24px;
+  }
+  .keyrow{
+    background:var(--surface);padding:11px 16px;
+    display:flex;align-items:baseline;gap:12px;
+  }
+  .keyrow .k{flex:0 0 auto;}
+  .keyrow .d{font-size:13.5px;color:var(--ink-2);line-height:1.55;}
+
+  /* ---------- callout ---------- */
+  .note{
+    border-left:2px solid var(--gold-line);background:var(--gold-soft);
+    padding:16px 20px;margin:26px 0 0;
+  }
+  .note .note-h{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--gold);font-weight:600;margin-bottom:6px;
+  }
+  .note p{font-size:13.5px;line-height:1.75;color:var(--ink-2);margin:0 0 10px;}
+  .note p:last-child{margin:0;}
+
+  /* ---------- suite ---------- */
+  .suite{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
+    gap:1px;background:var(--line);border:1px solid var(--line);margin-top:24px;
+  }
+  .tool{background:var(--surface);padding:13px 16px;}
+  .tool b{display:block;font-size:13.5px;font-weight:600;}
+  .tool span{display:block;font-size:12.5px;color:var(--ink-3);line-height:1.6;margin-top:2px;}
+
+  /* ---------- limits ---------- */
+  .limits{margin-top:24px;border:1px solid var(--line);background:var(--surface);}
+  .limit{padding:16px 20px;border-bottom:1px solid var(--line-soft);}
+  .limit:last-child{border-bottom:none;}
+  .limit b{display:block;font-size:14px;font-weight:600;margin-bottom:4px;}
+  .limit p{font-size:13.5px;color:var(--ink-2);margin:0;line-height:1.75;}
+
+  footer{
+    margin-top:64px;padding-top:22px;border-top:1px solid var(--line);
+    font-size:12.5px;color:var(--ink-3);line-height:1.8;max-width:62ch;
+  }
+  footer b{color:var(--ink-2);font-weight:500;}
+
+  @media (max-width:640px){
+    .wrap{padding:0 18px 64px;}
+    .mast{padding-top:38px;}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="eyebrow">Windows File Manager / Ver. 23.7</div>
+    <h1>ChainFlow Filer</h1>
+    <p class="lede">
+      フォルダを「開いて戻る」のではなく、<strong>横に流して並べる</strong>ファイラー。
+      思考の流れをそのまま画面に残したまま、キーボードだけで作業を進めることを目的に設計されています。
+    </p>
+    <div class="mast-meta">
+      <span><b>Python 3.11</b> + PySide6 (Qt 6)</span>
+      <span><b>Rust</b> ネイティブコア (PyO3)</span>
+      <span><b>Nuitka</b> コンパイル配布</span>
+      <span>約 <b>8,400</b> 行 / 単一実行フォルダ 90 MB</span>
+    </div>
+  </header>
+
+  <section>
+    <h2>Overview</h2>
+    <div class="h2sub">これは何か</div>
+    <div class="prose">
+      <p>
+        Windows 用のファイル管理アプリケーションです。エクスプローラーや一般的な2画面ファイラーの代替として、
+        <strong>大量のフォルダを行き来する作業</strong>を主な対象にしています。
+      </p>
+      <p>
+        中核にあるのは Miller Columns（macOS Finder のカラム表示）の考え方ですが、それを1列に限定せず、
+        複数の列を縦にも積める格子として扱う点が異なります。ここから「Chain Flow」という名前が来ています。
+      </p>
+      <p>
+        単体のアプリであると同時に、ChainFlow スイート（エディタ、検索、PDF、画像処理など11ツール）の
+        <strong>起点となるハブ</strong>としても機能します。ファイルを選んでコマンドを打つと、
+        そのパスを引き継いだまま各ツールが別プロセスで立ち上がります。
+      </p>
+    </div>
+
+    <dl class="facts">
+      <div class="fact"><dt>対象OS</dt><dd>Windows 10 / 11</dd></div>
+      <div class="fact"><dt>配布形態</dt><dd>ポータブル（レジストリ不使用）</dd></div>
+      <div class="fact"><dt>設定の保存先</dt><dd>実行ファイルと同階層の JSON</dd></div>
+      <div class="fact"><dt>ライセンス形態</dt><dd>社内利用ツール</dd></div>
+    </dl>
+  </section>
+
+  <section>
+    <h2>Concept</h2>
+    <div class="h2sub">Chain Flow — 画面が思考の形になる</div>
+    <div class="prose">
+      <p>
+        通常のファイラーでフォルダを掘ると、<strong>今どこにいるか</strong>は分かっても
+        <strong>どう辿ってきたか</strong>は画面から消えます。戻るには履歴を遡るしかありません。
+      </p>
+      <p>
+        ChainFlow Filer は、フォルダを選ぶたびに右へ新しいペインを足していきます。
+        辿った経路がそのまま横一列に残るため、途中の階層に戻るのは「左のペインを見る」だけで済みます。
+      </p>
+    </div>
+
+    <figure>
+      <div class="frame">
+        <svg viewBox="0 0 720 300" role="img" aria-label="タブの中に2本のレーンがあり、各レーンが左から右へペインを連ねている構造図">
+          <!-- tab frame -->
+          <rect class="s-frame" x="8" y="26" width="704" height="258"/>
+          <text class="s-title" x="8" y="18">タブ（ワークスペース）</text>
+
+          <!-- lane 1 -->
+          <text class="s-label-sm" x="22" y="52">LANE 1</text>
+          <rect class="s-pane" x="22" y="60" width="140" height="72"/>
+          <rect class="s-pane" x="184" y="60" width="140" height="72"/>
+          <rect class="s-pane-live" x="346" y="60" width="140" height="72"/>
+          <rect class="s-pane" x="508" y="60" width="184" height="72" opacity="0.45"/>
+          <text class="s-label" x="34" y="84">Projects</text>
+          <text class="s-label" x="196" y="84">2026</text>
+          <text class="s-label" x="358" y="84">04_設計</text>
+          <text class="s-label-sm" x="520" y="84">次の選択で生成</text>
+          <text class="s-label-sm" x="34" y="104">親</text>
+          <text class="s-label-sm" x="196" y="104">子</text>
+          <text class="s-label-sm" x="358" y="104">孫（作業中）</text>
+          <!-- arrows lane 1 -->
+          <path class="s-arrow" d="M164 96 L180 96"/>
+          <path class="s-arrow-head" d="M180 96 l-5 -3.5 v7 z"/>
+          <path class="s-arrow" d="M326 96 L342 96"/>
+          <path class="s-arrow-head" d="M342 96 l-5 -3.5 v7 z"/>
+          <path class="s-arrow" d="M488 96 L504 96"/>
+          <path class="s-arrow-head" d="M504 96 l-5 -3.5 v7 z"/>
+
+          <!-- divider -->
+          <line class="s-tick" x1="22" y1="156" x2="692" y2="156"/>
+
+          <!-- lane 2 -->
+          <text class="s-label-sm" x="22" y="182">LANE 2</text>
+          <rect class="s-pane" x="22" y="190" width="140" height="72"/>
+          <rect class="s-pane" x="184" y="190" width="140" height="72"/>
+          <rect class="s-pane" x="346" y="190" width="346" height="72" opacity="0.45"/>
+          <text class="s-label" x="34" y="214">Archive</text>
+          <text class="s-label" x="196" y="214">2025</text>
+          <text class="s-label-sm" x="358" y="214">別タスクの流れ</text>
+          <path class="s-arrow" d="M164 226 L180 226"/>
+          <path class="s-arrow-head" d="M180 226 l-5 -3.5 v7 z"/>
+
+          <!-- axis annotations -->
+          <text class="s-label-sm" x="22" y="278">横軸 = 1つの思考の流れ（親 → 子 → 孫）</text>
+          <text class="s-label-sm" x="360" y="278">縦軸 = 並行する別タスク（レーン間はD&amp;Dで連携）</text>
+        </svg>
+      </div>
+      <figcaption>
+        レーン内でフォルダを選ぶと右のペインが更新され、経路が横に伸びる。
+        レーンを縦に増やせば、素材探しと成果物の保存のような別タスクを同時に開いたまま作業できる。
+      </figcaption>
+    </figure>
+
+    <h3>キーボード中心</h3>
+    <div class="prose">
+      <p>
+        移動・選択・コピー・リネーム・プレビュー・ペインの追加と削除まで、
+        マウスを使わずに完結できるよう設計されています。ショートカットはアプリ全体で26種類が定義されています。
+      </p>
+    </div>
+
+    <div class="keys">
+      <div class="keyrow"><span class="k"><kbd>Ctrl</kbd> <kbd>P</kbd></span><span class="d">コマンドパレット（内部コマンド＋外部ツール）</span></div>
+      <div class="keyrow"><span class="k"><kbd>Space</kbd></span><span class="d">クイックプレビュー（画像・テキスト・PDF）</span></div>
+      <div class="keyrow"><span class="k"><kbd>Enter</kbd></span><span class="d">実行 / フォルダへ進む</span></div>
+      <div class="keyrow"><span class="k"><kbd>Backspace</kbd></span><span class="d">上の階層へ</span></div>
+      <div class="keyrow"><span class="k"><kbd>Alt</kbd>（長押し）</span><span class="d">選択中ファイルの上流・下流をハイライト</span></div>
+      <div class="keyrow"><span class="k"><kbd>Alt</kbd> + クリック</span><span class="d">マーク（ペインを跨いだ永続選択）</span></div>
+      <div class="keyrow"><span class="k"><kbd>Ctrl</kbd> + ホイール</span><span class="d">ペイン幅の可変リサイズ</span></div>
+      <div class="keyrow"><span class="k"><kbd>Shift</kbd> + ホイール</span><span class="d">レーン高さの可変リサイズ</span></div>
+      <div class="keyrow"><span class="k"><kbd>Shift</kbd> <kbd>W</kbd></span><span class="d">ホバー中ペインの末尾ビューを削除</span></div>
+      <div class="keyrow"><span class="k"><kbd>F5</kbd></span><span class="d">キャッシュ破棄つき強制リフレッシュ</span></div>
+    </div>
+
+    <h3>可搬性</h3>
+    <div class="prose">
+      <p>
+        Windows レジストリを一切使いません。セッション（<code>session.json</code>）、
+        お気に入り（<code>favorites.json</code>）、外部ツール定義（<code>tools.json</code>）は
+        すべて実行ファイルと同じ階層に置かれます。フォルダごとコピーすれば別PCで同じ状態が再現されます。
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Architecture</h2>
+    <div class="h2sub">4層の入れ子構造</div>
+    <div class="prose">
+      <p>
+        画面構造はそのままオブジェクトの所有関係になっています。
+        タブがレーンを持ち、レーンがペインを持ち、ペインが1つ以上のビューを持ちます。
+      </p>
+    </div>
+
+    <figure>
+      <div class="frame">
+        <svg viewBox="0 0 700 330" role="img" aria-label="メインウィンドウから各コンポーネントとデータモデルへの構成図">
+          <rect class="s-frame" x="10" y="10" width="420" height="310"/>
+          <text class="s-title" x="22" y="34">ChainFlowFiler（QMainWindow）</text>
+          <text class="s-label-sm" x="22" y="52">セッション管理・全体ショートカット・プラグイン起動</text>
+
+          <rect class="s-pane" x="22" y="64" width="120" height="46"/>
+          <text class="s-label" x="32" y="84">Navigation</text>
+          <text class="s-label-sm" x="32" y="100">標準/お気に入り/ドライブ</text>
+
+          <rect class="s-pane" x="154" y="64" width="264" height="242"/>
+          <text class="s-title" x="164" y="84">FlowArea（＝タブ1枚）</text>
+
+          <rect class="s-pane" x="166" y="96" width="240" height="94"/>
+          <text class="s-label" x="176" y="114">FlowLane</text>
+          <rect class="s-pane-live" x="176" y="124" width="106" height="54"/>
+          <rect class="s-pane" x="290" y="124" width="106" height="54"/>
+          <text class="s-label-sm" x="186" y="144">FilePane</text>
+          <text class="s-label-sm" x="186" y="162">= QTreeView</text>
+          <text class="s-label-sm" x="300" y="144">FilePane</text>
+          <text class="s-label-sm" x="300" y="162">= QTreeView</text>
+
+          <rect class="s-pane" x="166" y="202" width="240" height="46" opacity="0.5"/>
+          <text class="s-label" x="176" y="222">FlowLane</text>
+          <text class="s-label-sm" x="176" y="238">（縦に追加可能）</text>
+
+          <text class="s-label-sm" x="166" y="272">FilePane はファイル操作の最小単位。</text>
+          <text class="s-label-sm" x="166" y="288">1ペインに複数フォルダを同時表示できる。</text>
+
+          <!-- data side -->
+          <rect class="s-frame" x="452" y="10" width="238" height="310"/>
+          <text class="s-title" x="464" y="34">データ層（全ペインで共有）</text>
+
+          <rect class="s-pane-live" x="464" y="52" width="214" height="76"/>
+          <text class="s-label" x="474" y="72">SmartSortFilterProxy</text>
+          <text class="s-label-sm" x="474" y="90">検索・表示モード・隠しファイル</text>
+          <text class="s-label-sm" x="474" y="106">拡張子アイコン・並び順</text>
+          <text class="s-label-sm" x="474" y="122">※ ペインごとに1つ</text>
+
+          <path class="s-arrow" d="M571 130 L571 150"/>
+          <path class="s-arrow-head" d="M571 150 l-3.5 -5 h7 z"/>
+
+          <rect class="s-pane" x="464" y="152" width="214" height="74"/>
+          <text class="s-label" x="474" y="172">QFileSystemModel</text>
+          <text class="s-label-sm" x="474" y="190">OSの非同期列挙・変更監視</text>
+          <text class="s-label-sm" x="474" y="206">※ アプリ全体で1インスタンス</text>
+
+          <path class="s-arrow" d="M571 228 L571 248"/>
+          <path class="s-arrow-head" d="M571 248 l-3.5 -5 h7 z"/>
+
+          <rect class="s-pane" x="464" y="250" width="214" height="56"/>
+          <text class="s-label" x="474" y="270">chainflow_core (Rust)</text>
+          <text class="s-label-sm" x="474" y="288">一括ソート・比較</text>
+        </svg>
+      </div>
+      <figcaption>
+        <code>QFileSystemModel</code> はアプリ全体で1つだけ生成し、全ペインが共有する。
+        モデルを複数持つと、それぞれがファイル監視スレッドを立てて重くなるため。
+      </figcaption>
+    </figure>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>コンポーネント</th><th>実装</th><th>責務</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="key">ChainFlowFiler</td><td class="num">main_window.py</td><td>アプリのライフサイクル、セッションの保存と復元、全体ショートカット</td></tr>
+          <tr><td class="key">NavigationPane</td><td class="num">navigation_pane.py</td><td>標準フォルダ、お気に入り（D&amp;D登録・ホットキー）、ドライブツリー</td></tr>
+          <tr><td class="key">FlowArea</td><td class="num">flow_area.py</td><td>タブ1枚の中身。レーンを縦に並べる</td></tr>
+          <tr><td class="key">FlowLane</td><td class="num">flow_lane.py</td><td>ペインの横連鎖。親ペインの選択に応じて子ペインを更新</td></tr>
+          <tr><td class="key">FilePane</td><td class="num">file_pane/</td><td>ファイル操作の最小単位。キー・マウス処理、コンテキストメニュー</td></tr>
+          <tr><td class="key">SmartSortFilterProxyModel</td><td class="num">proxy_model.py</td><td>フィルタ、並び替え、拡張子ベースのアイコン、.lnk の透過表示</td></tr>
+          <tr><td class="key">PluginManager</td><td class="num">plugin_manager.py</td><td>tools.json の読み込みと外部ツールのプロセス管理</td></tr>
+          <tr><td class="key">FileOperationWorker</td><td class="num">file_worker.py</td><td>コピー・移動・ZIP などをバックグラウンドスレッドで実行</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>特徴的な実装</h3>
+    <div class="prose">
+      <p>
+        <strong>フォルダショートカットの透過化</strong> — Windows の <code>.lnk</code> がフォルダを指している場合、
+        表示名から拡張子を落とし、種類を「File Folder」として扱います。
+        ネットワーク上の深い階層にあるプロジェクトを、手元の「隣のフォルダ」として並べられます。
+      </p>
+      <p>
+        <strong>文脈ハイライト</strong> — <kbd>Alt</kbd> を押している間だけ、選択中ファイルの祖先フォルダが
+        上流のペインでハイライトされ、そこまでスクロールします。どの経路で今の場所に来たかが一目で分かります。
+      </p>
+      <p>
+        <strong>マーク</strong> — <kbd>Alt</kbd>+クリックで付けるマークはペインを跨いで保持されます。
+        複数のフォルダから集めたファイルをまとめて1回でコピー・移動できます。
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Stack</h2>
+    <div class="h2sub">技術構成</div>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>層</th><th>採用技術</th><th>採用理由</th></tr></thead>
+        <tbody>
+          <tr><td class="key">言語</td><td class="num">Python 3.11</td><td>開発速度とライブラリの厚み</td></tr>
+          <tr><td class="key">GUI</td><td class="num">PySide6 (Qt 6)</td><td>ネイティブ描画、成熟したモデル/ビュー、将来的な他OS対応の余地</td></tr>
+          <tr><td class="key">ファイル列挙</td><td class="num">QFileSystemModel</td><td>OS の変更監視 API を使った非同期列挙。UI をブロックしない</td></tr>
+          <tr><td class="key">ソート</td><td class="num">Rust / PyO3</td><td>数万件のソートを Python のループから外に出すため</td></tr>
+          <tr><td class="key">ビルド</td><td class="num">Nuitka（standalone・LTO）</td><td>Python を C にコンパイル。起動と実行の両方を短縮</td></tr>
+          <tr><td class="key">重い処理</td><td class="num">QThread ワーカー</td><td>コピー・移動・圧縮を UI と分離。進捗表示とキャンセルに対応</td></tr>
+          <tr><td class="key">PDF</td><td class="num">pypdf</td><td>結合ツールを内蔵</td></tr>
+          <tr><td class="key">シェル連携</td><td class="num">win32com / ctypes</td><td>ショートカット作成、プロパティ表示、ダークタイトルバー（DWM API）</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <div class="note-h">配布構成について</div>
+      <p>
+        Nuitka の <code>--standalone</code> でビルドし、<code>Internal/</code> に実行ファイルと依存 DLL を格納、
+        その外にランチャーを置く構成です。<strong>単一 EXE ではありません。</strong>
+        Qt / Python の中核 DLL 約 62 MB を起動時に読み込むため、これを1ファイルに固めても速くはならないためです。
+      </p>
+      <p>
+        なお <code>QtWebEngine</code>（Chromium）は現在は使用していません。以前のバージョンで HTML プレビューに
+        採用していましたが、配布サイズが 640 MB に達したため取り外しました。
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Performance</h2>
+    <div class="h2sub">実測値と、その意味</div>
+    <div class="prose">
+      <p>
+        「速い」を形容詞で語らないために、実測値を残しています。
+        以下は Windows 10 / Core i7 相当 / NVMe SSD、および 1Gbps LAN 上の SMB 共有での計測です。
+      </p>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>項目</th><th>条件</th><th class="num">改善前</th><th class="num">現行</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="key">タブの初回表示</td>
+            <td>ローカル 33,788 件 / 8ビュー</td>
+            <td class="num">19,557 ms</td><td class="num gain">8,545 ms</td>
+          </tr>
+          <tr>
+            <td class="key">タブ切り替え</td>
+            <td>同上・2回目以降</td>
+            <td class="num">109 ms</td><td class="num">97 ms</td>
+          </tr>
+          <tr>
+            <td class="key">ネットワーク表示</td>
+            <td>未訪問の SMB フォルダ・1行あたり</td>
+            <td class="num">24.4 ms</td><td class="num gain">2.1 ms</td>
+          </tr>
+          <tr>
+            <td class="key">起動（ウォーム）</td>
+            <td>2回目以降</td>
+            <td class="num">—</td><td class="num">約 1.0 s</td>
+          </tr>
+          <tr>
+            <td class="key">起動（コールド）</td>
+            <td>OS 再起動後の初回</td>
+            <td class="num">—</td><td class="num">約 3.5 s</td>
+          </tr>
+          <tr>
+            <td class="key">常駐メモリ</td>
+            <td>ワーキングセット</td>
+            <td class="num">—</td><td class="num">約 160 MB</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>速度を支えている3つの設計</h3>
+    <div class="prose">
+      <p>
+        <strong>1. 共有モデル</strong> — <code>QFileSystemModel</code> をアプリ全体で1つに絞り、
+        ペインごとにプロキシだけを持たせています。モデルを複数持つと監視スレッドが増殖します。
+      </p>
+      <p>
+        <strong>2. 一括ソート</strong> — 比較関数を1件ずつ Python で呼ぶのではなく、
+        フォルダの中身を Rust 側で一度だけ並べ、<strong>順位表</strong>を作って以降は整数比較だけで済ませます。
+        辞書のキーにはパス文字列ではなくモデル内部のノードID を使います
+        （文字列にすると比較のたびにフルパスを組み立てることになり、33,788 件で約177万回の生成が発生していました）。
+      </p>
+      <p>
+        <strong>3. シェル API の回避</strong> — Qt 標準の実装は「種類」列を得るために
+        ファイルごとに Windows のシェル API を呼びます。ローカルでは 0.67 ms ですが、
+        SMB 共有では <strong>46 ms</strong> かかります。ネットワーク上のパスに限り、
+        拡張子から種類名を組み立てる実装に差し替えています。
+      </p>
+    </div>
+
+    <div class="note">
+      <div class="note-h">ネットワーク運用での注意</div>
+      <p>
+        SMB 共有では、<strong>未アクセスのフォルダに初めて触るたびに約 126 ms</strong> かかります
+        （一度触れば以降は OS のキャッシュにより 0 ms）。フォルダを次々に渡り歩く使い方とは相性が良い一方、
+        多数のフォルダを一度に走査する操作は重くなります。
+      </p>
+      <p>
+        また、共有サーバーが停止している状態では Windows の API が最大 <strong>27 秒</strong> 応答を返しません。
+        起動時とセッション保存時にこれを踏まないよう、ネットワークパスに対しては
+        存在確認を行わない実装にしています。
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Suite</h2>
+    <div class="h2sub">スイート連携</div>
+    <div class="prose">
+      <p>
+        <kbd>Ctrl</kbd>+<kbd>P</kbd> のコマンドパレットから、現在のフォルダやファイル選択を引き継いだまま
+        各ツールを別プロセスで起動します。ツールの定義は <code>tools.json</code> の編集だけで追加できます。
+      </p>
+    </div>
+    <div class="suite">
+      <div class="tool"><b>ChainFlow Writer</b><span>Markdown / テキストエディタ</span></div>
+      <div class="tool"><b>ChainFlow Tool</b><span>HTML・PDF・Markdown ビューア</span></div>
+      <div class="tool"><b>Global Search</b><span>スイート横断の全文検索</span></div>
+      <div class="tool"><b>ChainFlow Sniper</b><span>画面キャプチャと OCR</span></div>
+      <div class="tool"><b>ChainFlow PDF Studio</b><span>PDF 編集・注釈</span></div>
+      <div class="tool"><b>ChainFlow PDF Compare</b><span>PDF の多面比較</span></div>
+      <div class="tool"><b>ChainFlow Zipper</b><span>並列 ZIP 圧縮</span></div>
+      <div class="tool"><b>Quick Image Tool</b><span>画像の変換とリサイズ</span></div>
+      <div class="tool"><b>ChainFlow Designer</b><span>ワークフロー・図の作成</span></div>
+      <div class="tool"><b>ChainFlow ToDo</b><span>タスク管理</span></div>
+      <div class="tool"><b>ChainFlow Pad</b><span>スクラッチパッド</span></div>
+    </div>
+    <div class="note">
+      <div class="note-h">Dual-Path 解決</div>
+      <p>
+        開発時（<code>main.py</code> 直下）とビルド後（<code>Internal/</code> 配下）でディレクトリ階層が
+        1段ずれます。両方の相対パスを順に試すことで、どちらの環境でも隣接ツールを発見できるようにしています。
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Limits</h2>
+    <div class="h2sub">設計上の制約</div>
+    <div class="prose">
+      <p>説明の際に、できないことも併せて伝えられるよう記載します。</p>
+    </div>
+    <div class="limits">
+      <div class="limit">
+        <b>起動時間は約 1 秒を下回れない</b>
+        <p>Python と Qt のランタイム初期化に要する固定費で、アプリ側の最適化では削れません。これを短縮する唯一の方法は常駐化（プロセスを終了させない設計）で、現時点では未実装です。</p>
+      </div>
+      <div class="limit">
+        <b>巨大フォルダの初回表示は数秒かかる</b>
+        <p>33,788 件で約 8.5 秒。大半は <code>QFileSystemModel</code> による列挙とファイル情報取得で、Qt の内部処理にあたります。2回目以降は 100 ms 程度です。</p>
+      </div>
+      <div class="limit">
+        <b>ネットワーク上の「種類」表示が簡素になる</b>
+        <p>速度を優先した結果、SMB 共有上のファイルは <code>JPG File</code> のような表記になります（ローカルは Windows 標準の種類名のまま）。</p>
+      </div>
+      <div class="limit">
+        <b>Windows 専用</b>
+        <p>Qt 自体はクロスプラットフォームですが、シェル連携・ダークタイトルバー・ショートカット解決に Windows 固有の API を使用しています。</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <b>ChainFlow Filer Ver. 23.7</b> — 本資料はソースコード（約 8,400 行）および実測値に基づいて作成しています。
+    性能値は特定の実行環境での計測であり、ハードウェアとネットワーク条件により変動します。
+    リポジトリ内の旧ドキュメントには、QtWebEngine の搭載や PyInstaller による単一 EXE 配布など、
+    現行の実装と異なる記述が残っています。本資料の内容を優先してください。
+  </footer>
+
+</div>

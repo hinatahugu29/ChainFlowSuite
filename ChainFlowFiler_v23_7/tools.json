@@ -1,0 +1,159 @@
+{
+    "version": "1.0",
+    "tools": [
+        {
+            "name": "ChainFlow Writer",
+            "id": "writer_tool",
+            "description": "Powerful markdown and smart text editor.",
+            "extensions": [
+                ".md",
+                ".txt",
+                ".markdown",
+                ".py",
+                ".c",
+                ".cpp",
+                ".h",
+                ".js",
+                ".css",
+                ".json"
+            ],
+            "executable_path": "../../ChainFlowWriter/ChainFlowWriter.exe",
+            "script_path": "../ChainFlowWriter/main.py",
+            "arguments": [
+                "{FILE_PATH}"
+            ]
+        },
+        {
+            "name": "ChainFlow Tool",
+            "id": "chainflow_tool",
+            "description": "Rich content viewer and editor (HTML, PDF, Markdown)",
+            "extensions": [
+                ".html",
+                ".htm",
+                ".pdf",
+                ".md"
+            ],
+            "executable_path": "../../ChainFlowTool/ChainFlowTool.exe",
+            "script_path": "../ChainFlowTool/editor.py",
+            "arguments": [
+                "--file",
+                "{FILE_PATH}"
+            ]
+        },
+        {
+            "name": "Quick Image Tool",
+            "id": "image_tool",
+            "description": "Image converter and resizer.",
+            "extensions": [
+                ".png",
+                ".jpg",
+                ".jpeg",
+                ".webp",
+                ".bmp",
+                ".gif",
+                ".tiff"
+            ],
+            "executable_path": "../../ChainFlowImage/image_tool.exe",
+            "script_path": "../ChainFlowImage/main.py",
+            "arguments": [
+                "{FILE_PATH}"
+            ]
+        },
+        {
+            "name": "ChainFlow Sniper",
+            "id": "sniper_tool",
+            "description": "Screen capture and OCR tool.",
+            "extensions": [
+                ".png",
+                ".jpg"
+            ],
+            "executable_path": "../../ChainFlowSniper/ChainFlowSniper.exe",
+            "script_path": "../ChainFlowSniper/main.py",
+            "arguments": []
+        },
+        {
+            "name": "ChainFlow Pad",
+            "id": "pad_tool",
+            "description": "Lightweight scratchpad and notes.",
+            "extensions": [
+                ".txt",
+                ".md"
+            ],
+            "executable_path": "../../ChainFlowPad/Internal/ChainFlowPad.exe",
+            "script_path": "../ChainFlowPad/main.py",
+            "arguments": []
+        },
+        {
+            "name": "Global Search",
+            "id": "search_tool",
+            "description": "Full-text search across the suite.",
+            "extensions": [],
+            "executable_path": "../../ChainFlowSearch/ChainFlowSearch.exe",
+            "script_path": "../ChainFlowSearch/main.py",
+            "arguments": [
+                "{FILE_PATH}"
+            ]
+        },
+        {
+            "name": "ChainFlow Designer",
+            "id": "designer_tool",
+            "description": "Workflow and diagram designer.",
+            "extensions": [
+                ".flow"
+            ],
+            "executable_path": "../../ChainFlowDesigner/ChainFlowDesigner.exe",
+            "script_path": "../ChainFlowDesigner/main.py",
+            "arguments": [
+                "{FILE_PATH}"
+            ]
+        },
+        {
+            "name": "ChainFlow ToDo",
+            "id": "todo_tool",
+            "description": "Task management and todo list.",
+            "extensions": [
+                ".todo"
+            ],
+            "executable_path": "../../ChainFlowToDo/ChainFlowToDo.exe",
+            "script_path": "../ChainFlowToDo/main.py",
+            "arguments": [
+                "{FILE_PATH}"
+            ]
+        },
+        {
+            "name": "ChainFlow PDF Studio",
+            "id": "pdf_studio",
+            "description": "Advanced PDF editor and annotator.",
+            "extensions": [
+                ".pdf"
+            ],
+            "executable_path": "../../ChainFlowPDFStudio/ChainFlowPDFStudio.exe",
+            "script_path": "../ChainFlowPDFStudio/main.py",
+            "arguments": [
+                "{FILE_PATH}"
+            ]
+        },
+        {
+            "name": "ChainFlow PDF Compare",
+            "id": "pdf_compare",
+            "description": "Multi-view PDF comparison tool with fractal workspaces.",
+            "extensions": [
+                ".pdf"
+            ],
+            "executable_path": "../../ChainFlowPDFCompare/ChainFlowPDFCompare.exe",
+            "script_path": "../ChainFlowPDFCompare/main.py",
+            "arguments": [
+                "{FILE_PATH}"
+            ]
+        },
+        {
+            "name": "ChainFlow Zipper",
+            "id": "zipper_tool",
+            "description": "Super fast parallel ZIP compressor",
+            "extensions": [],
+            "executable_path": "../../ChainFlowZipper/target/debug/ChainFlowZipper.exe",
+            "script_path": "",
+            "arguments": []
+        }
+    ]
+}

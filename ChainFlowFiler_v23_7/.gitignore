@@ -1,0 +1,25 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.spec
+build/
+dist/
+*.exe
+*.manifest
+*.log
+.vscode/
+.idea/
+*.swp
+
+# --- Runtime state (per-machine, not source) ---
+session.json
+favorites.json
+agent-work-log.json
+
+# --- Editor/AI scratch copies ---
+*.bak
+
+# --- Generated dumps ---
+tree出力
+build_nuitka/
+*.pyd
