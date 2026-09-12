@@ -11,7 +11,7 @@ if __name__ == "__main__":
     # Windows Taskbar Icon Fix (v23.4)
     import ctypes
     try:
-        myappid = 'ChainFlow.Filer.v23.7' # Standardized AppID
+        myappid = 'ChainFlow.Filer.v23.9' # Standardized AppID
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
     except Exception:
         pass
