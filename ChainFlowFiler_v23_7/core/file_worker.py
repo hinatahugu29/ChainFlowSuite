@@ -203,14 +203,16 @@ class FileOperationWorker(QThread):
 
         os.makedirs(dest, exist_ok=True)
 
-        for entry in os.scandir(src):
-            if self._cancelled:
-                return
-            target = os.path.join(dest, entry.name)
-            if entry.is_dir(follow_symlinks=False):
-                self._transfer_tree(entry.path, target, merge=True)
-            else:
-                self._transfer_file(entry.path, target)
+        # キャンセルで途中 return するため、with で確実にイテレータを閉じる
+        with os.scandir(src) as entries:
+            for entry in entries:
+                if self._cancelled:
+                    return
+                target = os.path.join(dest, entry.name)
+                if entry.is_dir(follow_symlinks=False):
+                    self._transfer_tree(entry.path, target, merge=True)
+                else:
+                    self._transfer_file(entry.path, target)
 
         if self.operation_type == "move" and not self._cancelled:
             # 中身を運び終わったので空になった元フォルダを片付ける
