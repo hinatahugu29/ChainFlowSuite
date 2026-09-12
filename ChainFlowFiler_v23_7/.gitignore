@@ -23,3 +23,6 @@ agent-work-log.json
 tree出力
 build_nuitka/
 *.pyd
+
+# ビルド前の退避コピー(ロールバック用。ソースではない)
+_build_backup_*/
