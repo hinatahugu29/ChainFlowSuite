@@ -43,6 +43,9 @@ class FileOperationWorker(QThread):
         self.resolutions = {}
         self._done_files = 0
         self._total_files = 0
+        # v23.9: 実際に行った操作の記録。[(元のパス, 実際の作成先), ...]
+        # Undo はここを逆再生する。衝突で連番が付いた場合も実際の名前が入る。
+        self.completed = []
         
     def cancel(self):
         """操作をキャンセルする"""
@@ -181,13 +184,20 @@ class FileOperationWorker(QThread):
         if parent and not os.path.isdir(parent):
             os.makedirs(parent, exist_ok=True)
 
+        # 上書きで既存を潰す場合、元に戻しても潰した方は復元できない。
+        # Undo 対象から外すためにここで記録しておく。
+        replaced_existing = os.path.exists(dest)
+
         if self.operation_type == "copy":
             shutil.copy2(src, dest)
         else:
             # shutil.move は移動先が既存だと失敗するため、上書き時は先に消す
-            if os.path.exists(dest):
+            if replaced_existing:
                 os.remove(dest)
             shutil.move(src, dest)
+
+        if not replaced_existing:
+            self.completed.append((src, dest))
 
         self._tick(os.path.basename(src))
 

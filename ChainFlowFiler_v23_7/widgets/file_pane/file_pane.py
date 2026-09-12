@@ -13,7 +13,8 @@ import tempfile
 from PySide6.QtGui import QAction, QDesktopServices, QKeySequence, QShortcut, QDrag, QIcon, QPixmap, QColor, QPainter, QImage
 
 from models.proxy_model import SmartSortFilterProxyModel
-from core import same_path, FileOperationWorker, logger, exists_nonblocking, move_to_trash
+from core import (same_path, FileOperationWorker, logger, exists_nonblocking,
+                  move_to_trash, MOVE, COPY)
 from core.global_model import get_global_file_system_model
 
 # v14.2 Refactoring: Classes extracted to subpackage for maintainability
@@ -1391,9 +1392,13 @@ class FilePane(QFrame):
         """v14.2 ペースト完了"""
         if hasattr(self, '_paste_progress') and self._paste_progress:
             self._paste_progress.close()
-        
-        if hasattr(self, '_paste_worker') and self._paste_worker:
-            self._paste_worker.deleteLater()
+
+        worker = getattr(self, '_paste_worker', None)
+        if worker:
+            # v23.9: Undo 用に、実際に行われた操作を履歴へ積む。
+            # ワーカーを片付ける前に取り出しておくこと。
+            self._record_history(worker)
+            worker.deleteLater()
             self._paste_worker = None
             
         # v23.8: 一部失敗していても一覧は必ず更新する（成功分が反映されないと
@@ -1404,6 +1409,17 @@ class FilePane(QFrame):
             logger.log_error(f"Paste operation reported failures: {message}")
             QMessageBox.warning(self, "ファイル操作", message)
     
+    def _record_history(self, worker):
+        """v23.9: 完了したコピー/移動を Undo 履歴へ積む"""
+        pairs = getattr(worker, "completed", None)
+        if not pairs:
+            return
+        history = getattr(self.parent_filer, "history", None)
+        if history is None:
+            return
+        kind = COPY if worker.operation_type == "copy" else MOVE
+        history.push(kind, pairs)
+
     def _on_paste_error(self, error_message):
         """v14.2 ペーストエラー"""
         if hasattr(self, '_paste_progress') and self._paste_progress:

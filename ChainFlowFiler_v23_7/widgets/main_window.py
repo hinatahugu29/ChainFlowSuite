@@ -2,7 +2,8 @@ import os
 import sys
 import json
 from PySide6.QtWidgets import (QMainWindow, QWidget, QHBoxLayout, QVBoxLayout, QSplitter, 
-                               QTabWidget, QTabBar, QApplication, QMenu, QInputDialog, QLineEdit, QMessageBox)
+                               QTabWidget, QTabBar, QApplication, QMenu, QInputDialog, QLineEdit, QMessageBox,
+                               QAbstractItemView)
 import subprocess
 from PySide6.QtCore import Qt, QSize, QEvent
 from PySide6.QtGui import QAction, QKeySequence, QShortcut, QIcon
@@ -10,8 +11,10 @@ from PySide6.QtGui import QAction, QKeySequence, QShortcut, QIcon
 from .navigation_pane import NavigationPane
 from .quick_look import QuickLookWindow
 from core.plugin_manager import PluginManager
+from core import OperationHistory, RENAME
+from core.global_model import get_global_file_system_model
 from .flow_area import FlowArea
-from core import same_path
+from core import same_path, logger
 
 class ChainFlowFiler(QMainWindow):
     def __init__(self):
@@ -40,6 +43,10 @@ class ChainFlowFiler(QMainWindow):
         self.hovered_pane = None
         self.internal_clipboard = {"paths": [], "mode": "copy"} # v6.2 一括操作用
         self.editor_processes = []  # v16.2 Track spawned editor processes
+
+        # v23.9: ファイル操作の履歴 (Ctrl+Z)
+        self.history = OperationHistory()
+        self._watch_renames()
         
         central = QWidget()
         self.setCentralWidget(central)
@@ -415,6 +422,83 @@ class ChainFlowFiler(QMainWindow):
         result = self.plugin_manager.launch_tool(tool_def, target_path, self)
         print(f"[DEBUG] launch_tool result: {result}")
 
+    def undo_last_operation(self):
+        """v23.9: 直前のファイル操作を取り消す (Ctrl+Z)
+
+        対応するのはこのアプリが行った移動 / リネーム / コピーのみ。
+        削除はゴミ箱送りなので、OS 側の「元に戻す」で復元してもらう。
+        """
+        # リネーム編集中の Ctrl+Z はテキストの取り消しであって、
+        # ファイル操作の取り消しではない。編集中は手を出さない。
+        # (LESSONS_LEARNED 1.1 と同じ罠)
+        if self._is_editing():
+            return
+
+        if not self.history.can_undo():
+            logger.log_info("Undo: 取り消せる操作はありません")
+            return
+
+        QApplication.setOverrideCursor(Qt.WaitCursor)
+        try:
+            ok, message = self.history.undo()
+        finally:
+            QApplication.restoreOverrideCursor()
+
+        # 成功時はポップアップを出さない。ファイルが戻ったこと自体が結果であり、
+        # Ctrl+Z のたびにダイアログが出るのは邪魔になるため。
+        if ok:
+            logger.log_info("Undo: " + message)
+        elif message:
+            logger.log_error("Undo failed: " + message)
+            QMessageBox.warning(self, "取り消せませんでした", message)
+
+        # 成否にかかわらず一覧を更新する(一部だけ戻っている場合があるため)
+        self.refresh_all_panes()
+
+    def _is_editing(self):
+        """どれかのビューがインライン編集中かを返す"""
+        for i in range(self.tab_widget.count()):
+            area = self.tab_widget.widget(i)
+            for lane in getattr(area, "lanes", []):
+                for pane in getattr(lane, "panes", []):
+                    for view, _, _, _ in getattr(pane, "views", []):
+                        try:
+                            if view.state() == QAbstractItemView.EditingState:
+                                return True
+                        except RuntimeError:
+                            continue
+        return False
+
+    def _watch_renames(self):
+        """v23.9: モデル経由のリネームを履歴へ積む
+
+        F2 でのリネームは QFileSystemModel が直接行うため、
+        アプリ側のファイル操作経路を通らない。モデルの通知を拾う。
+        """
+        try:
+            model = get_global_file_system_model()
+            model.fileRenamed.connect(self._on_file_renamed)
+        except Exception:
+            pass
+
+    def _on_file_renamed(self, path, old_name, new_name):
+        if not old_name or not new_name or old_name == new_name:
+            return
+        old_path = os.path.join(path, old_name)
+        new_path = os.path.join(path, new_name)
+        self.history.push(RENAME, [(old_path, new_path)])
+
+    def refresh_all_panes(self):
+        """全タブの全ペインを更新する"""
+        for i in range(self.tab_widget.count()):
+            area = self.tab_widget.widget(i)
+            for lane in getattr(area, "lanes", []):
+                for pane in getattr(lane, "panes", []):
+                    try:
+                        pane.refresh_contents()
+                    except Exception:
+                        continue
+
     def _running_file_workers(self):
         """実行中のファイル操作ワーカーを全ペインから集める"""
         running = []
@@ -662,6 +746,8 @@ class ChainFlowFiler(QMainWindow):
 
         # --- タブ・基本システム ---
         QShortcut(QKeySequence("Ctrl+T"), self).activated.connect(self.add_new_tab)
+        # v23.9: 直前のファイル操作を取り消す
+        QShortcut(QKeySequence("Ctrl+Z"), self).activated.connect(self.undo_last_operation)
         QShortcut(QKeySequence("Ctrl+W"), self).activated.connect(self.close_current_tab)
         QShortcut(QKeySequence("Ctrl+L"), self).activated.connect(self.focus_address_bar)
         QShortcut(QKeySequence("Alt+D"), self).activated.connect(self.focus_address_bar)

@@ -29,6 +29,7 @@ from .logger import (
 )
 
 from .file_worker import FileOperationWorker
+from .history import OperationHistory, MOVE, COPY, RENAME
 
 __all__ = [
     # File operations
@@ -58,5 +59,10 @@ __all__ = [
     'notify',
     # Worker
     'FileOperationWorker',
+    # History / Undo
+    'OperationHistory',
+    'MOVE',
+    'COPY',
+    'RENAME',
 ]
 
