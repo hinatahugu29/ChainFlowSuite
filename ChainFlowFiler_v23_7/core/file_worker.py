@@ -37,6 +37,12 @@ class FileOperationWorker(QThread):
         self.src_paths = []      # コピー/移動元、またはZIP対象
         self.dest_path = ""      # コピー/移動先、またはZIPファイルパス
         self.zip_base_dir = ""   # ZIP時のベースディレクトリ
+        # v23.9: 同名衝突時の方針。{src_path: "overwrite"|"skip"|"rename"}
+        # UI スレッド側で事前に決めて渡す(ダイアログをワーカーから出せないため)。
+        # 未指定のものは "rename" 扱い＝従来どおり連番を付けて退避する。
+        self.resolutions = {}
+        self._done_files = 0
+        self._total_files = 0
         
     def cancel(self):
         """操作をキャンセルする"""
@@ -67,67 +73,155 @@ class FileOperationWorker(QThread):
         """コピーまたは移動を実行
 
         v23.8: 以前は個々の失敗を stderr に print するだけで、最後に必ず
-        finished(True) を emit していた。GUI アプリでは stderr は誰の目にも
-        触れないため、移動に失敗したファイルがあっても「完了」と表示され、
-        移動できたつもりで元を失う事故につながる。失敗を集計して報告する。
+        finished(True, "N/N 件完了") を emit していた。GUI では stderr が
+        誰の目にも触れないため、移動に失敗しても「完了」と表示されていた。
+        失敗を集計して報告する。
+
+        v23.9: 衝突時の方針(resolutions)を受け取れるようにし、フォルダも
+        ファイル単位で進捗を出しながらコピーする(キャンセルを効かせるため)。
         """
-        total = len(self.src_paths)
-        completed = 0
-        succeeded = 0
-        failures = []   # (名前, 理由)
-        skipped = []    # 元が存在しない等、実行前に弾いたもの
+        # --- 1) 実行計画を立てる -------------------------------------------
+        plan = []        # (src, dest, action) action は "copy"/"merge"/"skip"
+        skipped = []     # 元が無い / ユーザーがスキップを選んだもの
+        failures = []    # (名前, 理由)
 
         for src in self.src_paths:
-            if self._cancelled:
-                self.finished.emit(False, self._build_report(succeeded, total, failures, skipped, cancelled=True))
-                return
-
             name = os.path.basename(src)
 
             if not os.path.exists(src):
                 skipped.append(name)
-                completed += 1
                 continue
 
             dest = os.path.join(self.dest_path, name)
 
-            # 自分自身（または自分の内側）への移動/コピーを弾く。
-            # これを許すと shutil が中途半端な再帰コピーを作ってしまう。
             reason = self._reject_reason(src, dest)
             if reason:
                 failures.append((name, reason))
-                completed += 1
                 continue
 
-            # 同名衝突回避
-            dest = self._resolve_conflict(dest)
+            action = self.resolutions.get(src, "rename")
 
-            self.progress.emit(completed, total, name)
+            if action == "skip":
+                skipped.append(name)
+                continue
 
+            if os.path.exists(dest):
+                if action == "overwrite":
+                    # フォルダはマージ(中身を重ねる)、ファイルは単純上書き
+                    plan.append((src, dest, "merge" if os.path.isdir(src) else "copy"))
+                else:
+                    plan.append((src, self._resolve_conflict(dest), "copy"))
+            else:
+                plan.append((src, dest, "copy"))
+
+        # --- 2) 進捗の分母をファイル単位で数える ---------------------------
+        # フォルダを1件としてしまうと、巨大フォルダのコピー中に進捗が
+        # 一切動かず、キャンセルも効かないように見えてしまう。
+        total_files = 0
+        for src, _dest, _action in plan:
+            if self._cancelled:
+                self.finished.emit(False, self._build_report(0, 0, failures, skipped, cancelled=True))
+                return
+            total_files += self._count_files(src)
+        total_files = max(total_files, 1)
+
+        # --- 3) 実行 -------------------------------------------------------
+        self._done_files = 0
+        self._total_files = total_files
+        succeeded = 0
+
+        for src, dest, action in plan:
+            if self._cancelled:
+                break
+
+            name = os.path.basename(src)
             try:
-                if self.operation_type == "copy":
-                    if os.path.isdir(src):
-                        self._copy_tree_with_progress(src, dest, completed, total)
-                    else:
-                        shutil.copy2(src, dest)
-                else:  # move
-                    shutil.move(src, dest)
+                if os.path.isdir(src):
+                    self._transfer_tree(src, dest, merge=(action == "merge"))
+                else:
+                    self._transfer_file(src, dest)
+
+                if self._cancelled:
+                    break
                 succeeded += 1
             except Exception as e:
                 failures.append((name, str(e)))
                 print(f"Operation Error ({src}): {e}", file=sys.stderr)
 
-            completed += 1
-            self.progress.emit(completed, total, name)
+        cancelled = self._cancelled
+        message = self._build_report(succeeded, len(plan), failures, skipped, cancelled=cancelled)
 
-        message = self._build_report(succeeded, total, failures, skipped)
         # 一部でも失敗したら成功扱いにしない。error ではなく finished(False) で
         # 返すのは、error 側のハンドラがワーカーを片付けてしまい finished 側の
-        # リフレッシュが走らなくなるため（成否にかかわらず一覧は更新したい）。
-        self.finished.emit(not failures, message)
+        # リフレッシュが走らなくなるため(成否にかかわらず一覧は更新したい)。
+        self.finished.emit(not failures and not cancelled, message)
+
+    def _count_files(self, src):
+        """進捗の分母用にファイル数を数える(フォルダは再帰)"""
+        try:
+            if not os.path.isdir(src):
+                return 1
+            count = 0
+            for _root, _dirs, files in os.walk(src):
+                if self._cancelled:
+                    return count
+                count += len(files)
+            return count
+        except Exception:
+            return 1
+
+    def _tick(self, name):
+        """1ファイル分の進捗を進める"""
+        self._done_files += 1
+        self.progress.emit(self._done_files, self._total_files, name)
+
+    def _transfer_file(self, src, dest):
+        """ファイル1件をコピーまたは移動する"""
+        parent = os.path.dirname(dest)
+        if parent and not os.path.isdir(parent):
+            os.makedirs(parent, exist_ok=True)
+
+        if self.operation_type == "copy":
+            shutil.copy2(src, dest)
+        else:
+            # shutil.move は移動先が既存だと失敗するため、上書き時は先に消す
+            if os.path.exists(dest):
+                os.remove(dest)
+            shutil.move(src, dest)
+
+        self._tick(os.path.basename(src))
+
+    def _transfer_tree(self, src, dest, merge=False):
+        """フォルダを再帰的にコピー/移動する。
+
+        v23.9: 以前は shutil.copytree() を呼ぶだけで、進捗が動かず
+        キャンセルも効かなかった。ファイル単位で回して両方を可能にする。
+        merge=True のときは移動先の既存フォルダに中身を重ねる。
+        """
+        if not merge and os.path.exists(dest):
+            dest = self._resolve_conflict(dest)
+
+        os.makedirs(dest, exist_ok=True)
+
+        for entry in os.scandir(src):
+            if self._cancelled:
+                return
+            target = os.path.join(dest, entry.name)
+            if entry.is_dir(follow_symlinks=False):
+                self._transfer_tree(entry.path, target, merge=True)
+            else:
+                self._transfer_file(entry.path, target)
+
+        if self.operation_type == "move" and not self._cancelled:
+            # 中身を運び終わったので空になった元フォルダを片付ける
+            try:
+                os.rmdir(src)
+            except OSError:
+                # 何か残っている(隠しファイル等)場合は消さずに残す
+                pass
 
     def _reject_reason(self, src, dest):
-        """実行前に弾くべきケースかを判定し、理由文字列を返す（問題なければ None）"""
+        """実行前に弾くべきケースかを判定し、理由文字列を返す(問題なければ None)"""
         try:
             src_abs = os.path.normcase(os.path.abspath(src))
             dest_dir_abs = os.path.normcase(os.path.abspath(self.dest_path))
@@ -150,21 +244,15 @@ class FileOperationWorker(QThread):
             parts.append("キャンセルされました")
         parts.append(f"成功 {succeeded}/{total} 件")
         if skipped:
-            parts.append(f"元が見つからずスキップ: {len(skipped)} 件")
+            parts.append(f"スキップ: {len(skipped)} 件")
         if failures:
             parts.append(f"失敗 {len(failures)} 件:")
             for name, reason in failures[:10]:
                 parts.append(f"  - {name}: {reason}")
             if len(failures) > 10:
                 parts.append(f"  ... 他 {len(failures) - 10} 件")
-        return "\n".join(parts)
+        return chr(10).join(parts)
 
-    def _copy_tree_with_progress(self, src, dest, base_completed, total):
-        """フォルダを再帰的にコピー（進捗更新付き）"""
-        # shutil.copytree はブロッキングなのでそのまま使用
-        # より細かい進捗が必要な場合は手動実装に変更可能
-        shutil.copytree(src, dest)
-    
     def _resolve_conflict(self, dest):
         """同名ファイル/フォルダの衝突を回避"""
         if not os.path.exists(dest):

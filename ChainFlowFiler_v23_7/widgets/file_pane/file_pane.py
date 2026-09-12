@@ -20,6 +20,7 @@ from core.global_model import get_global_file_system_model
 from .highlight_delegate import HighlightDelegate
 from .batch_tree_view import BatchTreeView
 from .context_menu import ContextMenuBuilder
+from widgets.conflict_dialog import resolve_conflicts
 
 
 # (HighlightDelegate, BatchTreeView, and ContextMenuBuilder moved to file_pane/ subpackage)
@@ -1347,11 +1348,19 @@ class FilePane(QFrame):
         """v14.2 スレッド化: コピー/移動をバックグラウンドで実行"""
         if not os.path.exists(dest_dir): 
             return
-        
+
+        # v23.9: 同名衝突をここで解決しておく。ワーカースレッドからは
+        # ダイアログを出せないため、開始前に UI スレッドで方針を確定させる。
+        resolutions = resolve_conflicts(self, src_paths, dest_dir)
+        if resolutions is None:
+            # ユーザーが操作全体を中止した
+            return
+
         # ワーカー作成
         self._paste_worker = FileOperationWorker("copy" if mode == "copy" else "move", self)
         self._paste_worker.src_paths = src_paths
         self._paste_worker.dest_path = dest_dir
+        self._paste_worker.resolutions = resolutions
         
         # プログレスダイアログ作成
         operation_name = "コピー中..." if mode == "copy" else "移動中..."
