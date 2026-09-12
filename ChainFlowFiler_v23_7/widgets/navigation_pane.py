@@ -8,6 +8,7 @@ from PySide6.QtCore import Qt, QDir, QUrl, QSize, QFileInfo, QEvent
 from PySide6.QtGui import QAction, QDesktopServices, QIcon
 from core.global_model import get_global_file_system_model
 from core import looks_like_dir
+from .bucket_panel import BucketMixin
 
 class DragDropListWidget(QListWidget):
     """
@@ -97,7 +98,7 @@ class SectionHeader(QToolButton):
                 QToolButton:checked { background-color: #37373d; color: #fff; }
             """)
 
-class NavigationPane(QFrame):
+class NavigationPane(BucketMixin, QFrame):
     def __init__(self, parent_filer=None):
         super().__init__()
         self.parent_filer = parent_filer
@@ -180,7 +181,11 @@ class NavigationPane(QFrame):
         fav_layout.addWidget(self.fav_list)
         self.nav_splitter.addWidget(self.fav_container) # idx 1
 
-        # --- 3. DRIVES SECTION ---
+        # --- 3. BUCKET SECTION (v23.9) ---
+        self.bucket_container = self.build_bucket_section(SectionHeader)
+        self.nav_splitter.addWidget(self.bucket_container) # idx 2
+
+        # --- 4. DRIVES SECTION ---
         self.drv_container = QWidget()
         drv_layout = QVBoxLayout(self.drv_container)
         drv_layout.setContentsMargins(0,0,0,0)
@@ -218,7 +223,7 @@ class NavigationPane(QFrame):
         
         drv_layout.addWidget(self.drv_header)
         drv_layout.addWidget(self.tree)
-        self.nav_splitter.addWidget(self.drv_container) # idx 2
+        self.nav_splitter.addWidget(self.drv_container) # idx 3
 
         # --- 4. HELP / CHEAT SHEET SECTION --- (v16.2: Disabled for now, shortcuts need review)
         # self.help_container = QWidget()
@@ -241,21 +246,23 @@ class NavigationPane(QFrame):
         # --- 4. SPACER SECTION (Important for bottom alignment) ---
         self.spacer = QWidget()
         self.spacer.setAttribute(Qt.WA_TransparentForMouseEvents) # マウスイベントを無視
-        self.nav_splitter.addWidget(self.spacer) # idx 3 (was 4)
+        self.nav_splitter.addWidget(self.spacer) # idx 4
         
         layout.addWidget(self.nav_splitter)
         
         # リサイズ制御のためにサイズポリシー設定
         self.nav_splitter.setCollapsible(0, False)
         self.nav_splitter.setCollapsible(1, False)
-        self.nav_splitter.setCollapsible(2, False)
-        self.nav_splitter.setCollapsible(3, False) # Spacer
+        self.nav_splitter.setCollapsible(2, False) # Bucket
+        self.nav_splitter.setCollapsible(3, False) # Drives
+        self.nav_splitter.setCollapsible(4, False) # Spacer
 
         # 初期伸長設定
         self.nav_splitter.setStretchFactor(0, 0)
         self.nav_splitter.setStretchFactor(1, 1) # Favorites takes main space
-        self.nav_splitter.setStretchFactor(2, 0)
-        self.nav_splitter.setStretchFactor(3, 0) # Spacer
+        self.nav_splitter.setStretchFactor(2, 1) # Bucket も伸びてよい
+        self.nav_splitter.setStretchFactor(3, 0)
+        self.nav_splitter.setStretchFactor(4, 0) # Spacer
         
         # イベントフィルター登録
         self.std_list.installEventFilter(self)
@@ -263,6 +270,7 @@ class NavigationPane(QFrame):
         self.tree.installEventFilter(self)
         
         self.load_favorites()
+        self.refresh_bucket()
 
     def populate_cheat_sheet(self):
         self.help_list.clear()

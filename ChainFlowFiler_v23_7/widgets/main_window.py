@@ -508,6 +508,7 @@ class ChainFlowFiler(QMainWindow):
             try:
                 for i, t_data in enumerate(tabs_data):
                     area = FlowArea(self)
+                    self._connect_bucket(area)
                     title = t_data.get("title", "Workspace")
                     idx = self.tab_widget.addTab(area, title)
                     
@@ -678,8 +679,27 @@ class ChainFlowFiler(QMainWindow):
             return w
         return None
 
+    def _connect_bucket(self, area):
+        """v23.9: タブの Bucket 変更をサイドバーの BUCKET セクションへ繋ぐ"""
+        if not isinstance(area, FlowArea):
+            return
+        try:
+            area.marks_changed.connect(self._on_marks_changed)
+        except Exception:
+            pass
+
+    def _on_marks_changed(self):
+        """Bucket が変わった。表示中のタブのものなら一覧を更新する。"""
+        sender = self.sender()
+        if sender is not None and sender is not self.tab_widget.currentWidget():
+            # 裏のタブの変更は、そのタブに切り替えたときに反映される
+            return
+        if getattr(self, "nav", None):
+            self.nav.refresh_bucket()
+
     def add_new_tab(self):
         new_area = FlowArea(self)
+        self._connect_bucket(new_area)
         idx = self.tab_widget.addTab(new_area, f"Workspace {self.tab_widget.count() + 1}")
         self.tab_widget.setCurrentIndex(idx)
         # v19.1: タブ追加直後に動的名前を設定
@@ -710,6 +730,10 @@ class ChainFlowFiler(QMainWindow):
             area._pending_session_state = None
             area.restore_state(state)
             self.tab_widget.setTabText(index, area.get_representative_name())
+
+        # v23.9: Bucket はタブ単位なので、切替のたびに一覧を差し替える
+        if getattr(self, "nav", None):
+            self.nav.refresh_bucket()
         
         # v21.5 Performance Fix: タブ切替時のペイント一括化
         # 全ビューの描画を一時停止してからアドレスバー等を更新し、

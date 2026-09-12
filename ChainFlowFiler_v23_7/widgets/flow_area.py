@@ -1,13 +1,19 @@
 import os
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QSplitter
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, Signal
 from .flow_lane import FlowLane
+from core import exists_nonblocking
 
 class FlowArea(QWidget):
     """
     複数のFlowLaneを垂直に並べて管理するエリア。
     タブの中身として機能する。
     """
+
+    # v23.9: Bucket(マーク済みパス)の増減を UI へ伝える。
+    # サイドバーの BUCKET セクションがこれを購読して一覧を更新する。
+    marks_changed = Signal()
+
     def __init__(self, parent_filer):
         super().__init__()
         self.parent_filer = parent_filer # Main Window
@@ -122,8 +128,15 @@ class FlowArea(QWidget):
             
         return {
             "lanes": lanes_state,
-            "active_lane_index": active_idx
+            "active_lane_index": active_idx,
+            # v23.9: Bucket をセッションに持ち越す。集めたものが再起動で
+            # 消えてしまうと「集めてからまとめて処理する」使い方が成立しない。
+            "marked_paths": sorted(self.marked_paths),
         }
+
+    def notify_marks_changed(self):
+        """Bucket の内容が変わったことを UI へ通知する"""
+        self.marks_changed.emit()
 
     def restore_state(self, state):
         """エリアの状態を復元"""
@@ -132,6 +145,18 @@ class FlowArea(QWidget):
             l = self.lanes.pop()
             l.deleteLater()
             
+        # v23.9: Bucket の復元。実体が消えているものは黙って捨てる。
+        restored_marks = state.get("marked_paths", [])
+        if restored_marks:
+            # 各ペインは self.marked_paths を「参照」で掴んでいるため、
+            # 新しい set を代入すると参照が切れてマークが反映されなくなる。
+            # 必ず中身を入れ替える形で更新すること。
+            self.marked_paths.clear()
+            self.marked_paths.update(
+                p for p in restored_marks if exists_nonblocking(p)
+            )
+            self.notify_marks_changed()
+
         lanes_data = state.get("lanes", [])
         if not lanes_data: return
         

@@ -1706,6 +1706,12 @@ class FilePane(QFrame):
         """タブ内の全ペインの全Viewの見た目をリフレッシュ（マーク色反映用）"""
         if hasattr(self, 'parent_lane') and hasattr(self.parent_lane, 'parent_area'):
             area = self.parent_lane.parent_area
+
+            # v23.9: マークの増減はここを必ず通るので、サイドバーの
+            # BUCKET セクションへの通知もここに集約する。
+            if hasattr(area, 'notify_marks_changed'):
+                area.notify_marks_changed()
+
             for lane in area.lanes:
                 for pane in lane.panes:
                     for _, p, _, _ in pane.views:
