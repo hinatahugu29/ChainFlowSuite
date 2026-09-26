@@ -47,3 +47,19 @@ nuitka-crash-report.xml
 
 # Rust build artifacts
 **/target/
+
+# ChainFlowFiler: 最新世代 (ChainFlowFiler/) のみ追跡する。
+# 旧世代はローカルに残すが、v23_7 とほぼ重複するためリポジトリには入れない。
+# 各世代の差分は CHANGELOG.md とコミット履歴を参照。
+ChainFlowFiler_v23_4/
+ChainFlowFiler_v23_5/
+ChainFlowFiler_v23_6/
+
+# 実行時に生成されるローカル状態 (セッション/キャッシュ/履歴)
+*.db
+*.db-journal
+.cfs_index.db
+**/session.json
+**/favorites.json
+**/search_history.json
+test_paths.txt
