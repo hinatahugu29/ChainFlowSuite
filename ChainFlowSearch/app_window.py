@@ -2,8 +2,8 @@
 import sys
 import os
 from datetime import datetime
-from PySide6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, 
-                               QTreeWidget, QTreeWidgetItem, QLabel, QHeaderView,
+from PySide6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLineEdit,
+                               QLabel, QHeaderView,
                                QApplication, QStyle, QMenu, QPushButton, QFileDialog, QTabWidget, QProgressBar)
 from PySide6.QtCore import Qt, QTimer, Slot, QSize, Signal, QEvent, QMimeData, QUrl
 from PySide6.QtGui import QIcon, QFont, QAction, QDrag, QKeySequence
@@ -19,6 +19,11 @@ try:
     from .search_engine import SearchWorker, CountWorker
 except ImportError:
     from search_engine import SearchWorker, CountWorker
+
+try:
+    from .search_results import SearchResultModel, SearchFilterProxyModel, DraggableTreeView
+except ImportError:
+    from search_results import SearchResultModel, SearchFilterProxyModel, DraggableTreeView
 
 def apply_dark_title_bar(window):
     """
@@ -37,40 +42,6 @@ def apply_dark_title_bar(window):
     except Exception as e:
         print(f"Failed to apply dark title bar: {e}")
 
-class DraggableTreeWidget(QTreeWidget):
-    """
-    QTreeWidget with drag support to external applications (Explorer, etc).
-    """
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setDragEnabled(True)
-        # self.setAcceptDrops(True) # If we wanted to accept drops too
-        self.setSelectionMode(QTreeWidget.ExtendedSelection)
-
-    def startDrag(self, supportedActions):
-        items = self.selectedItems()
-        if not items:
-            return
-
-        urls = []
-        for item in items:
-            # Retrieve full path stored in data(0, UserRole)
-            path = item.data(0, Qt.UserRole)
-            if path and os.path.exists(path):
-                urls.append(QUrl.fromLocalFile(path))
-        
-        if not urls:
-            return
-
-        mime_data = QMimeData()
-        mime_data.setUrls(urls)
-        
-        drag = QDrag(self)
-        drag.setMimeData(mime_data)
-        
-        # Execute drag operation
-        drag.exec(Qt.CopyAction)
-
 class SearchWidget(QWidget):
     """
     Independent widget for a single search session.
@@ -81,19 +52,67 @@ class SearchWidget(QWidget):
         self.start_dir = start_dir or self.home_dir
         self.history_manager = history_manager
         self.worker = None
+        self.count_worker = None
+        # v2 Stability: workers being asked to stop but not yet confirmed
+        # finished (see _retire_worker). Kept alive here so a still-running
+        # QThread is never garbage-collected out from under itself.
+        self._retiring_workers = []
 
         self.init_ui()
         self.setup_logic()
-        
+
         # v21.4: Track last search query to prevent redundant searches
         self.last_query = None
 
         # Initial Status
         # If we have a status bar callback or signal, we can use it.
-        # But here self.status_label is local to this widget? 
+        # But here self.status_label is local to this widget?
         # Actually standard tabbed apps have one global status bar.
         # For simplicity, let's put a status label in the bottom of this widget.
         self.status_label.setText(f"Root: {self.start_dir}")
+
+    def _retire_worker(self, worker):
+        """v2 Performance/Stability: Ask a worker to stop WITHOUT blocking the
+        UI thread on wait(). A single huge flat directory can keep a worker
+        busy for a long time between stop-flag checks; blocking on wait() here
+        used to freeze the whole UI (including the search box) until the old
+        scan noticed it should stop. Instead we disconnect its signals (so it
+        can't touch UI state anymore), let it keep running in the background
+        until it notices the stop flag on its own, and keep a reference so it
+        isn't garbage-collected while still alive."""
+        if not worker:
+            return
+        try:
+            worker.disconnect()
+        except Exception:
+            pass
+        if worker.isRunning():
+            worker.stop()
+            self._retiring_workers.append(worker)
+            worker.finished.connect(lambda w=worker: self._on_worker_retired(w))
+
+    def _on_worker_retired(self, worker):
+        worker.wait()  # finished already fired, so this returns immediately
+        if worker in self._retiring_workers:
+            self._retiring_workers.remove(worker)
+
+    def stop_workers(self):
+        """v2 Stability: Stop and wait on any running worker threads.
+        Must be called before this widget is closed/destroyed (tab close or
+        app exit), otherwise a running QThread can be garbage-collected while
+        still active, which crashes with "QThread: Destroyed while thread is
+        still running". Blocking here is fine/expected since it only runs at
+        shutdown (tab close / app exit), unlike the mid-search restart path."""
+        for attr in ("worker", "count_worker"):
+            w = getattr(self, attr, None)
+            if w and w.isRunning():
+                w.stop()
+                w.wait()
+        for w in list(self._retiring_workers):
+            if w.isRunning():
+                w.stop()
+                w.wait()
+        self._retiring_workers.clear()
 
     def init_ui(self):
         self.layout = QVBoxLayout(self)
@@ -138,16 +157,23 @@ class SearchWidget(QWidget):
         self.top_layout.addWidget(self.search_input)
         
         # 2. Result List
-        self.result_tree = DraggableTreeWidget()
-        self.result_tree.setHeaderLabels(["Name", "Path", "Size", "Date"])
-        
+        # v2: Model/View instead of QTreeWidget. All scanned rows live in
+        # result_model; result_proxy decides which are visible for the
+        # current query, so re-filtering no longer rebuilds any widgets.
+        self.result_model = SearchResultModel()
+        self.result_proxy = SearchFilterProxyModel()
+        self.result_proxy.setSourceModel(self.result_model)
+
+        self.result_tree = DraggableTreeView()
+        self.result_tree.setModel(self.result_proxy)
+
         # v21.1 Usability: Allow resizing and set better defaults
         header = self.result_tree.header()
         header.setSectionResizeMode(0, QHeaderView.Interactive)
         header.setSectionResizeMode(1, QHeaderView.Interactive)
         header.setSectionResizeMode(2, QHeaderView.Interactive)
         header.setSectionResizeMode(3, QHeaderView.Interactive)
-        
+
         self.result_tree.setColumnWidth(0, 250) # Name
         self.result_tree.setColumnWidth(1, 400) # Path
         self.result_tree.setColumnWidth(2, 80)  # Size
@@ -156,7 +182,7 @@ class SearchWidget(QWidget):
         # Enable sorting
         self.result_tree.setSortingEnabled(True)
         self.result_tree.sortByColumn(0, Qt.AscendingOrder)  # Default sort by Name
-        self.result_tree.itemDoubleClicked.connect(self.on_item_double_clicked)
+        self.result_tree.doubleClicked.connect(self.on_item_double_clicked)
         self.result_tree.setContextMenuPolicy(Qt.CustomContextMenu)
         self.result_tree.customContextMenuRequested.connect(self.show_context_menu)
         
@@ -196,22 +222,24 @@ class SearchWidget(QWidget):
         if source == self.result_tree and event.type() == QEvent.KeyPress:
             if event.key() in (Qt.Key_Return, Qt.Key_Enter):
                 # Open currently selected item
-                item = self.result_tree.currentItem()
-                if item:
-                    self.on_item_double_clicked(item, 0)
+                index = self.result_tree.currentIndex()
+                if index.isValid():
+                    self.on_item_double_clicked(index)
                 return True
-            
+
             # v21.4 Usability: Ctrl+C to copy files
             if event.matches(QKeySequence.Copy):
                 self.copy_selected_files()
                 return True
-                
+
         return super().eventFilter(source, event)
 
     def on_search_text_changed(self):
         query = self.search_input.text().strip()
         if not query:
-            self.result_tree.clear()
+            # v2: Hide all rows without discarding the already-scanned data
+            # (matches v1 behavior of clearing the visual tree only).
+            self.result_proxy.setShowNone()
             self.status_label.setText("Ready")
             return
         self.debounce_timer.start()
@@ -241,9 +269,6 @@ class SearchWidget(QWidget):
         
         # We need to know what the "base query" was for the current worker.
         # Let's assume master_query represents the query used to start the worker.
-        
-        if not hasattr(self, 'current_search_id'):
-            self.current_search_id = 0
 
         is_hybrid_filter = False
 
@@ -289,20 +314,16 @@ class SearchWidget(QWidget):
             return
 
         # --- Full Search Restart ---
-        
-        # v21.6 Stability: Disconnect old worker signals to prevent contamination
-        if self.worker:
-            try:
-                self.worker.results_found.disconnect()
-                self.worker.progress_update.disconnect()
-                self.worker.finished.disconnect()
-            except Exception:
-                pass # Already disconnected or not connected
-            
-            if self.worker.isRunning():
-                self.worker.stop()
-                self.worker.wait()
-        
+
+        # v2 Stability/Performance: Retire the old worker without blocking the
+        # UI thread (see _retire_worker docstring). It keeps scanning quietly
+        # in the background until it notices the stop flag; any results/
+        # signals it might still emit are already disconnected, and the
+        # search_id generation check below guards against contamination even
+        # if disconnect() somehow missed a queued signal.
+        self._retire_worker(self.worker)
+        self.worker = None
+
         # Increment generation ID for the new search
         self.current_search_id += 1
         current_id = self.current_search_id
@@ -313,7 +334,11 @@ class SearchWidget(QWidget):
         self.is_master_search_complete = False
         
         self.last_query = query
-        self.result_tree.clear()
+        self.result_model.clear()
+        # v2: Sync the proxy's filter to the query we're about to search for,
+        # so rows streamed in by add_results_batch() show up immediately
+        # (filtering itself now lives entirely in the proxy).
+        self.result_proxy.setParsedQuery(SearchWorker.parse_query(query))
         self.status_label.setText(f"Searching for '{query}' in {self.start_dir} ...")
         self.progress_bar.setRange(0, 0) # Start indeterminate
         self.progress_bar.show()
@@ -331,11 +356,10 @@ class SearchWidget(QWidget):
             self.history_manager.add_visit(self.start_dir)
 
         # v21.9 Progress Visualization: Start separate counting thread
-        if hasattr(self, 'count_worker') and self.count_worker:
-            if self.count_worker.isRunning():
-                self.count_worker.stop()
-                self.count_worker.wait()
-        
+        # v2 Stability/Performance: same non-blocking retire as self.worker above.
+        self._retire_worker(self.count_worker)
+        self.count_worker = None
+
         self.estimated_total = 0
         self.count_worker = CountWorker(self.start_dir)
         self.count_worker.count_updated.connect(self.on_count_updated)
@@ -372,7 +396,8 @@ class SearchWidget(QWidget):
         v21.3 Optimization: Handle batch of results.
         results: list of (name, full_path, size, mtime)
         v21.6 Stability: Check search_id to drop old results.
-        v21.8 Hybrid Search: Store in master, then filter for view.
+        v2: Filtering is handled entirely by SearchFilterProxyModel now, so
+        we just append the raw rows here; the proxy decides what's visible.
         """
         # Generation Check: Drop if this result belongs to an old search
         if search_id != self.current_search_id:
@@ -381,63 +406,27 @@ class SearchWidget(QWidget):
         # Always add to master cache
         if hasattr(self, 'master_results'):
             self.master_results.extend(results)
-            
-        # Add to view ONLY if it matches CURRENT query (Hybrid Filter)
-        current_query = self.search_input.text().strip()
-        parsed = SearchWorker.parse_query(current_query)
-        
-        items = []
-        for name, full_path, size, mtime in results:
-            # Check match against current UI query, NOT just the worker's query
-            if SearchWorker.is_match(name, parsed):
-                item = QTreeWidgetItem()
-                item.setText(0, name)
-                item.setText(1, full_path)
-                # Size: human-readable with sorting support
-                item.setText(2, self.format_size(size))
-                item.setData(2, Qt.UserRole, size)  # Store raw value for sorting
-                # Date: human-readable with sorting support
-                date_str = datetime.fromtimestamp(mtime).strftime("%Y-%m-%d %H:%M")
-                item.setText(3, date_str)
-                item.setData(3, Qt.UserRole, mtime)  # Store raw value for sorting
-                item.setData(0, Qt.UserRole, full_path)
-                items.append(item)
-            
-        if items:
-            self.result_tree.addTopLevelItems(items)
+
+        self.result_model.append_rows(results)
 
     def update_results_view(self, query):
         """
-        v21.8 Hybrid Search: Re-populates the tree from master_results based on query.
+        v21.8 Hybrid Search: Re-applies the query filter.
+        v2 Optimization: This used to clear the tree and rebuild a
+        QTreeWidgetItem per match (O(total matches) per keystroke). Now it
+        just re-points the proxy's filter at the new query - Qt only
+        re-renders the rows currently on screen, so the cost no longer scales
+        with the number of matches.
         """
-        self.result_tree.clear()
         parsed = SearchWorker.parse_query(query)
-        
-        items = []
-        # Batch creation for UI responsiveness if master_results is huge?
-        # For now, simple loop.
-        for res in self.master_results:
-            name, full_path, size, mtime = res
-            if SearchWorker.is_match(name, parsed):
-                item = QTreeWidgetItem()
-                item.setText(0, name)
-                item.setText(1, full_path)
-                item.setText(2, self.format_size(size))
-                item.setData(2, Qt.UserRole, size)
-                date_str = datetime.fromtimestamp(mtime).strftime("%Y-%m-%d %H:%M")
-                item.setText(3, date_str)
-                item.setData(3, Qt.UserRole, mtime)
-                item.setData(0, Qt.UserRole, full_path)
-                items.append(item)
-        
-        if items:
-            self.result_tree.addTopLevelItems(items)
-        
+        self.result_proxy.setParsedQuery(parsed)
+        shown = self.result_proxy.rowCount()
+
         if self.is_master_search_complete:
              if hasattr(self, 'estimated_total') and self.estimated_total > 0:
-                 self.status_label.setText(f"Found {len(items)} items (Filtered). (Scanned {self.estimated_total} items)")
+                 self.status_label.setText(f"Found {shown} items (Filtered). (Scanned {self.estimated_total} items)")
              else:
-                 self.status_label.setText(f"Found {len(items)} items (Filtered).")
+                 self.status_label.setText(f"Found {shown} items (Filtered).")
         else:
              # Still searching
              if hasattr(self, 'estimated_total') and self.estimated_total > 0:
@@ -445,46 +434,40 @@ class SearchWidget(QWidget):
              else:
                  self.status_label.setText(f"Filtering '{query}' ... ({len(self.master_results)} scanned)")
 
-    def format_size(self, size_bytes):
-        """Format bytes as human-readable size."""
-        for unit in ['B', 'KB', 'MB', 'GB']:
-            if size_bytes < 1024:
-                return f"{size_bytes:.0f} {unit}" if unit == 'B' else f"{size_bytes:.1f} {unit}"
-            size_bytes /= 1024
-        return f"{size_bytes:.1f} TB"
-
     def on_search_finished(self):
         self.progress_bar.hide()
         # Mark master search as complete so we can filter next time
         self.is_master_search_complete = True
         
         # v21.9: Stop counting if still running
-        if hasattr(self, 'count_worker') and self.count_worker:
-            if self.count_worker.isRunning():
-                self.count_worker.stop()
-                self.count_worker.wait()
-        
-        count = self.result_tree.topLevelItemCount()
+        # v2 Stability/Performance: non-blocking retire (see _retire_worker).
+        self._retire_worker(self.count_worker)
+        self.count_worker = None
+
+
+        count = self.result_proxy.rowCount()
         # Show total scanned if available
         if hasattr(self, 'estimated_total') and self.estimated_total > 0:
              self.status_label.setText(f"Found {count} items. (Scanned {self.estimated_total} items)")
         else:
              self.status_label.setText(f"Found {count} items.")
 
-    def on_item_double_clicked(self, item, column):
-        path = item.data(0, Qt.UserRole)
+    def on_item_double_clicked(self, index):
+        if not index.isValid():
+            return
+        path = index.data(Qt.UserRole)
         if path and os.path.exists(path):
             os.startfile(path)
 
     def show_context_menu(self, pos):
-        item = self.result_tree.itemAt(pos)
-        if not item: return
+        index = self.result_tree.indexAt(pos)
+        if not index.isValid(): return
 
         menu = QMenu(self)
         menu.setStyleSheet("QMenu { background-color: #252526; color: #ccc; border: 1px solid #333; } QMenu::item:selected { background-color: #094771; }")
-        
-        path = item.data(0, Qt.UserRole)
-        
+
+        path = index.data(Qt.UserRole)
+
         open_act = QAction("Open", self)
         open_act.triggered.connect(lambda: os.startfile(path))
         menu.addAction(open_act)
@@ -512,12 +495,12 @@ class SearchWidget(QWidget):
         
     def copy_selected_files(self):
         """Copy selected files to clipboard so they can be pasted in Filer."""
-        items = self.result_tree.selectedItems()
-        if not items: return
-        
+        indexes = self.result_tree.selectionModel().selectedRows(0)
+        if not indexes: return
+
         urls = []
-        for item in items:
-            path = item.data(0, Qt.UserRole)
+        for idx in indexes:
+            path = idx.data(Qt.UserRole)
             if path and os.path.exists(path):
                 urls.append(QUrl.fromLocalFile(path))
         
@@ -537,7 +520,7 @@ class SearchWidget(QWidget):
             if hasattr(self, 'last_query'):
                 self.last_query = None
                 
-            self.result_tree.clear()
+            self.result_model.clear()
             self.status_label.setText(f"Ready. Root: {self.start_dir}")
             if self.search_input.text():
                 self.start_search()
@@ -614,7 +597,7 @@ class SearchWidget(QWidget):
             
             # Reset results and last query
             self.last_query = None
-            self.result_tree.clear()
+            self.result_model.clear()
             self.status_label.setText(f"Ready. Root: {self.start_dir}")
             
             # Update Tab Name
@@ -650,7 +633,7 @@ class SearchWidget(QWidget):
 class SearchWindow(QMainWindow):
     def __init__(self, start_dir=None):
         super().__init__()
-        self.setWindowTitle("ChainFlow Search")
+        self.setWindowTitle("ChainFlow Search 2")
         
         # Initialize History Manager
         self.history_manager = HistoryManager()
@@ -683,13 +666,13 @@ class SearchWindow(QMainWindow):
                 border-radius: 4px;
             }
             QLineEdit:focus { border-color: #007acc; }
-            QTreeWidget {
+            QTreeView {
                 background-color: #252526;
                 color: #cccccc;
                 border: none;
             }
-            QTreeWidget::item:hover { background-color: #2a2d2e; }
-            QTreeWidget::item:selected { background-color: #094771; color: #ffffff; }
+            QTreeView::item:hover { background-color: #2a2d2e; }
+            QTreeView::item:selected { background-color: #094771; color: #ffffff; }
             QHeaderView::section { background-color: #333333; color: #cccccc; border: none; padding: 4px; }
             QStatusBar { background-color: #007acc; color: #ffffff; }
             QTabWidget::pane { border: 1px solid #454545; top: -1px; } 
@@ -807,6 +790,13 @@ class SearchWindow(QMainWindow):
         self.tabs.setCurrentWidget(search_widget)
 
     def close_tab(self, index):
+        # v2 Stability: Stop this tab's worker threads before removing it,
+        # otherwise a still-running QThread can be garbage-collected once the
+        # widget is dropped, which crashes the app.
+        widget = self.tabs.widget(index)
+        if widget:
+            widget.stop_workers()
+
         if self.tabs.count() > 1:
             self.tabs.removeTab(index)
         else:
@@ -814,6 +804,14 @@ class SearchWindow(QMainWindow):
             # For now, maybe just clear it or close app?
             # Let's close app if last tab is closed
             self.close()
+
+    def closeEvent(self, event):
+        """v2 Stability: Stop all tabs' worker threads before the window closes."""
+        for i in range(self.tabs.count()):
+            widget = self.tabs.widget(i)
+            if widget:
+                widget.stop_workers()
+        super().closeEvent(event)
 
     def showEvent(self, event):
         super().showEvent(event)

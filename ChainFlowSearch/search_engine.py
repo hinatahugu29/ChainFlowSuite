@@ -144,58 +144,62 @@ class SearchWorker(QThread):
     def parse_query(query):
         """
         Parses the query string into a structure for AND/OR logic.
-        Structure: List of Lists of strings.
+        Structure: List of Lists of (search_term, is_negative, has_wildcard).
         Outer list is OR (any of these lists must match).
         Inner list is AND (all of these terms must match).
-        Example: "py | txt log" -> [['py'], ['txt', 'log']]
+        Example: "py | txt log" -> [[('py', False, False)], [('txt', False, False), ('log', False, False)]]
+
+        v2 Optimization: Negation/wildcard detection and NFKC normalization of each
+        term are precomputed here (once per search) instead of inside is_match()
+        (which used to redo this for every scanned file). See is_match() below.
         """
         if not query:
             return []
-        
+
         # 1. Split by OR operator '|'
         or_groups = query.split('|')
         parsed = []
         for group in or_groups:
             # 2. Split by AND operator ' ' (whitespace)
-            terms = [t.strip() for t in group.split() if t.strip()]
-            if terms:
-                parsed.append(terms)
+            raw_terms = [t.strip() for t in group.split() if t.strip()]
+            compiled_terms = []
+            for term in raw_terms:
+                # Normalize and lower the term to ensure case-insensitivity
+                term_norm = unicodedata.normalize('NFKC', term).lower()
+
+                is_negative = term_norm.startswith('-') and len(term_norm) > 1
+                search_term = term_norm[1:] if is_negative else term_norm
+                has_wildcard = '*' in search_term or '?' in search_term
+
+                compiled_terms.append((search_term, is_negative, has_wildcard))
+            if compiled_terms:
+                parsed.append(compiled_terms)
         return parsed
 
     @staticmethod
     def is_match(filename, parsed_query):
         """
         Checks if filename matches the parsed query.
+        v2 Optimization: parsed_query terms are already normalized with
+        negation/wildcard flags precomputed by parse_query(), so this hot loop
+        (called once per scanned file) no longer redoes NFKC normalization per term.
         """
-        # Normalize filename to NFKC to match normalized query
-        filename_norm = unicodedata.normalize('NFKC', filename)
-        filename_lower = filename_norm.lower()
-        
         if not parsed_query:
             return True # Or False if we want to enforce a query. But empty query usually filtered before.
+
+        # Normalize filename to NFKC to match normalized query
+        filename_lower = unicodedata.normalize('NFKC', filename).lower()
 
         # OR Logic: Match if ANY of the AND groups match
         for and_group in parsed_query:
             # AND Logic: Match if ALL terms in group match
             group_match = True
-            for term in and_group:
-                # v21.11 Fix: Normalize and lower the term to ensure case-insensitivity
-                # The query terms should be normalized to NFKC and lower-cased.
-                term_norm = unicodedata.normalize('NFKC', term).lower()
-                
-                # Check for negation
-                is_negative = term_norm.startswith('-') and len(term_norm) > 1
-                search_term = term_norm[1:] if is_negative else term_norm
-                
-                # Check for wildcards
-                term_matches = False
-                if '*' in search_term or '?' in search_term:
-                    if fnmatch.fnmatch(filename_lower, search_term):
-                        term_matches = True
+            for search_term, is_negative, has_wildcard in and_group:
+                if has_wildcard:
+                    term_matches = fnmatch.fnmatch(filename_lower, search_term)
                 else:
-                    if search_term in filename_lower:
-                        term_matches = True
-                
+                    term_matches = search_term in filename_lower
+
                 # Apply logic
                 if is_negative:
                     if term_matches:
@@ -205,10 +209,10 @@ class SearchWorker(QThread):
                     if not term_matches:
                         group_match = False # Missing required term -> fail group
                         break
-            
+
             if group_match:
                 return True # Found a matching OR group
-        
+
         return False
     
     # Keep instance methods for compatibility but wrapping static ones

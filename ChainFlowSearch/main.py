@@ -10,13 +10,13 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from app_window import SearchWindow
 
-SERVER_NAME = "ChainFlowSearch_Instance"
+SERVER_NAME = "ChainFlowSearch2_Instance"
 
 def main():
     # Windows Taskbar Icon Fix (v21.1)
     import ctypes
     try:
-        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("ChainFlow.Search.v21")
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("ChainFlow.Search.v2")
     except Exception:
         pass
 
