@@ -1108,6 +1108,8 @@ class FilePane(QFrame):
         ok, err = move_to_trash(paths)
         if ok:
             logger.log_info(f"Moved to trash: {len(paths)} item(s)")
+            # v23.10: 変更通知が届かない共有でも消えた行を残さない
+            self._mark_vanished_everywhere(paths)
         elif err == "cancelled":
             # OS 側の警告でユーザーが中止した。追加の通知は不要。
             logger.log_info("Delete cancelled by user")
@@ -1398,6 +1400,10 @@ class FilePane(QFrame):
             # v23.9: Undo 用に、実際に行われた操作を履歴へ積む。
             # ワーカーを片付ける前に取り出しておくこと。
             self._record_history(worker)
+            # v23.10: 移動で空になった移動元を、全ペインの一覧から伏せる。
+            if worker.operation_type == "move":
+                moved_from = [src for src, _ in getattr(worker, "completed", [])]
+                self._mark_vanished_everywhere(moved_from)
             worker.deleteLater()
             self._paste_worker = None
             
@@ -1409,6 +1415,30 @@ class FilePane(QFrame):
             logger.log_error(f"Paste operation reported failures: {message}")
             QMessageBox.warning(self, "ファイル操作", message)
     
+    def _mark_vanished_everywhere(self, paths):
+        """v23.10: 消えたパスを、開いている全タブ・全ペインの一覧から伏せる。
+
+        移動元のフォルダは、貼り付けを実行したペインとは別のペインやタブで
+        開かれていることの方が多い。貼り付け先だけを更新しても移動元は
+        変更通知頼みのままで、通知が届かない共有では消えた行が残っていた。
+        """
+        if not paths:
+            return
+        filer = getattr(self, "parent_filer", None)
+        tabs = getattr(filer, "tab_widget", None)
+        if tabs is None:
+            return
+        for i in range(tabs.count()):
+            area = tabs.widget(i)
+            for lane in getattr(area, "lanes", []):
+                for pane in getattr(lane, "panes", []):
+                    for _, proxy, _, _ in getattr(pane, "views", []):
+                        if hasattr(proxy, "mark_paths_vanished"):
+                            try:
+                                proxy.mark_paths_vanished(paths)
+                            except Exception:
+                                continue
+
     def _record_history(self, worker):
         """v23.9: 完了したコピー/移動を Undo 履歴へ積む"""
         pairs = getattr(worker, "completed", None)

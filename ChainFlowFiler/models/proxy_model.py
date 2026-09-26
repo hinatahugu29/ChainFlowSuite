@@ -205,6 +205,13 @@ class SmartSortFilterProxyModel(QSortFilterProxyModel):
         self._rank_tables = {}   # (parent_internal_id, sort_col) -> {path: rank}
         self._RANK_TABLE_LIMIT = 16
 
+        # v23.10: 自分たちで消した(移動・削除した)ことが分かっているパス。
+        # QFileSystemModel はフォルダの変更通知を受けて行を消すが、SMB 共有では
+        # 通知が届かないことがあり、移動元に消えたはずの行が残り続けていた。
+        # 通知を待たず、操作した側が「これは消えた」と宣言して伏せるための集合。
+        # os.path.normcase 済みのパスを入れる。
+        self._vanished_paths = set()
+
         # v23.10: dataChanged はフォルダ読み込み中に大量に飛ぶ。1回ごとに
         # 再ソートするとロードが目に見えて重くなるため、短い間隔でまとめる。
         self._sort_refresh_timer = QTimer(self)
@@ -229,6 +236,32 @@ class SmartSortFilterProxyModel(QSortFilterProxyModel):
             # 表示を更新するが、こちらのメタデータ/ランク表は古い更新日時を
             # 抱えたままになり、日付ソートの順位が動かなかった。
             model.dataChanged.connect(self._on_source_data_changed)
+
+    def mark_paths_vanished(self, paths):
+        """v23.10: 移動・削除で消えたパスを一覧から伏せる。
+
+        ネットワーク共有では QFileSystemModel に変更通知が届かないことがあり、
+        待っていても行が消えない。実体が無いことは操作した側が知っているので、
+        存在確認(ネットワークでは重く、かつ当てにならない)はせずに宣言する。
+        """
+        if not paths:
+            return
+        for path in paths:
+            if path:
+                self._vanished_paths.add(os.path.normcase(os.path.normpath(path)))
+        self._native_cache.clear()
+        self._invalidate_rank_cache()
+        self.invalidateFilter()
+
+    def unmark_paths_vanished(self, paths):
+        """v23.10: 同じ場所に作り直された場合に、伏せるのをやめる。"""
+        if not paths or not self._vanished_paths:
+            return
+        for path in paths:
+            if path:
+                self._vanished_paths.discard(
+                    os.path.normcase(os.path.normpath(path)))
+        self.invalidateFilter()
 
     def _on_source_data_changed(self, top_left, bottom_right, roles=None):
         """v23.10: 更新された行のメタデータキャッシュを捨て、並べ替えをやり直す。
@@ -278,6 +311,19 @@ class SmartSortFilterProxyModel(QSortFilterProxyModel):
             self._invalidate_rank_cache()
 
     def _on_source_rows_inserted(self, parent, first, last):
+        # v23.10: 伏せていたパスと同じ場所にファイルが現れたら、実体が
+        # 戻ったということなので伏せるのをやめる(移動 -> 貼り直しなど)。
+        if self._vanished_paths:
+            model = self.sourceModel()
+            try:
+                for row in range(first, last + 1):
+                    path = model.filePath(model.index(row, 0, parent))
+                    if path:
+                        self._vanished_paths.discard(
+                            os.path.normcase(os.path.normpath(path)))
+            except Exception:
+                pass
+
         if not self._rank_tables:
             return
         try:
@@ -291,7 +337,11 @@ class SmartSortFilterProxyModel(QSortFilterProxyModel):
         self._invalidate_rank_cache()
 
     def clear_native_cache(self):
-        """v23.4.1: ネイティブキャッシュを強制クリアする。ファイル操作後のリフレッシュ時に使用。"""
+        """v23.4.1: ネイティブキャッシュを強制クリアする。ファイル操作後のリフレッシュ時に使用。
+
+        v23.10: _vanished_paths はここでは消さない。変更通知が届かない共有では
+        リフレッシュしても行は戻ってこないため、捨てるとゴーストが復活する。
+        """
         self._native_cache.clear()
         self._shortcut_folder_cache.clear()
         self._rank_tables.clear()
@@ -417,6 +467,13 @@ class SmartSortFilterProxyModel(QSortFilterProxyModel):
 
         if not isinstance(model, QFileSystemModel):
             return True
+
+        # v23.10: 移動・削除で消えたと分かっている行を伏せる。
+        # 集合が空のときは何もしないので、通常の表示ではコストがかからない。
+        if self._vanished_paths:
+            raw = model.filePath(idx)
+            if raw and os.path.normcase(os.path.normpath(raw)) in self._vanished_paths:
+                return False
 
         # v23.4.1: [最優先] 現在のターゲット（表示フォルダ）とその祖先は常に許可する。
         # これを最初に行うことで、検索キーワードにフォルダ名が含まれていない場合に

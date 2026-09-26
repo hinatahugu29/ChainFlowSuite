@@ -452,8 +452,31 @@ class ChainFlowFiler(QMainWindow):
             logger.log_error("Undo failed: " + message)
             QMessageBox.warning(self, "取り消せませんでした", message)
 
+        # v23.10: 変更通知が届かない共有のために一覧が自前で伏せているパスを、
+        # 取り消しの結果に合わせて付け外しする。戻ってきたものは再び見せ、
+        # 取り消しで空になった場所は伏せる。
+        self._apply_vanished(self.history.last_vanished,
+                             self.history.last_appeared)
+
         # 成否にかかわらず一覧を更新する(一部だけ戻っている場合があるため)
         self.refresh_all_panes()
+
+    def _apply_vanished(self, vanished, appeared):
+        """v23.10: 全タブ・全ペインの一覧に、消えた/戻ったパスを伝える"""
+        if not vanished and not appeared:
+            return
+        for i in range(self.tab_widget.count()):
+            area = self.tab_widget.widget(i)
+            for lane in getattr(area, "lanes", []):
+                for pane in getattr(lane, "panes", []):
+                    for _, proxy, _, _ in getattr(pane, "views", []):
+                        try:
+                            if vanished and hasattr(proxy, "mark_paths_vanished"):
+                                proxy.mark_paths_vanished(vanished)
+                            if appeared and hasattr(proxy, "unmark_paths_vanished"):
+                                proxy.unmark_paths_vanished(appeared)
+                        except Exception:
+                            continue
 
     def _is_editing(self):
         """どれかのビューがインライン編集中かを返す"""

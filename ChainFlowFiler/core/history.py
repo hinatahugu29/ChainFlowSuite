@@ -60,6 +60,12 @@ class OperationHistory:
     def __init__(self, limit=50):
         self._entries = []
         self._limit = limit
+        # v23.10: 直前の undo で「現れたパス」と「消えたパス」。
+        # 一覧側は、変更通知が届かない共有のために消えたパスを自前で
+        # 伏せている。取り消しで戻ってきたものは伏せるのをやめる必要が
+        # あるため、何がどうなったかをここから取れるようにする。
+        self.last_appeared = []
+        self.last_vanished = []
 
     def push(self, kind, pairs, label=""):
         """操作を記録する。pairs が空なら何もしない。"""
@@ -96,6 +102,8 @@ class OperationHistory:
             return False, ""
 
         entry = self._entries.pop()
+        self.last_appeared = []
+        self.last_vanished = []
 
         if entry.kind == COPY:
             return self._undo_copy(entry)
@@ -126,6 +134,8 @@ class OperationHistory:
                 else:
                     _move_any(dest, src)
                 restored += 1
+                self.last_appeared.append(src)
+                self.last_vanished.append(dest)
             except Exception as e:
                 problems.append(f"{os.path.basename(dest)}: {e}")
 
@@ -139,6 +149,7 @@ class OperationHistory:
 
         ok, err = move_to_trash(targets)
         if ok:
+            self.last_vanished = list(targets)
             return True, f"コピーした {len(targets)} 件をゴミ箱へ移動しました"
         if err == "cancelled":
             return False, ""
