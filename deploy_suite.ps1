@@ -14,7 +14,7 @@
 
         ChainFlow_V23_Suite\
             ChainFlowFiler\Internal\main.exe      <- 司令塔
-            ChainFlowFiler\ChainFlowFiler_V23.7.vbs
+            ChainFlowFiler\ChainFlowFiler.vbs
             ChainFlowWriter\ChainFlowWriter.exe
             ChainFlowPad\Internal\ChainFlowPad.exe
             ChainFlowZipper\target\release\ChainFlowZipper.exe
@@ -65,8 +65,8 @@ $ZipperFiles = @(
 
 # Filer のランチャー(Suite 直下ではなく ChainFlowFiler\ に置く)
 $LauncherFiles = @(
-    @{ Source = "ChainFlowFiler\build_nuitka\ChainFlowFiler_V23.7.vbs"; Dest = "ChainFlowFiler" }
-    @{ Source = "ChainFlowFiler\build_nuitka\ChainFlowFiler_V23.7.bat"; Dest = "ChainFlowFiler" }
+    @{ Source = "ChainFlowFiler\build_nuitka\ChainFlowFiler.vbs"; Dest = "ChainFlowFiler" }
+    @{ Source = "ChainFlowFiler\build_nuitka\ChainFlowFiler.bat"; Dest = "ChainFlowFiler" }
 )
 
 # 注意: 関数内の進捗表示は Write-Host を使うこと。
@@ -146,7 +146,7 @@ if (-not $WhatIfPreference -and (Test-Path $Suite)) {
     $size = (Get-ChildItem $Suite -Recurse -File -ErrorAction SilentlyContinue |
              Measure-Object -Property Length -Sum).Sum
     Write-Output ("完了: {0}/{1} ツール / 合計 {2:N0} MB" -f $okCount, $Manifest.Count, ($size / 1MB))
-    Write-Output ("起動: {0}\ChainFlowFiler\ChainFlowFiler_V23.7.vbs" -f $Suite)
+    Write-Output ("起動: {0}\ChainFlowFiler\ChainFlowFiler.vbs" -f $Suite)
 } else {
     Write-Output "(WhatIf: 実際のコピーは行っていません)"
 }

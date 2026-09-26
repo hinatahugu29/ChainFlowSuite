@@ -21,12 +21,12 @@ rename "build_nuitka\main.dist" "Internal"
 (
 echo Set WshShell = CreateObject^("WScript.Shell"^)
 echo WshShell.Run "Internal\main.exe", 0, False
-) > "build_nuitka\ChainFlowFiler_V23.7.vbs"
+) > "build_nuitka\ChainFlowFiler.vbs"
 
 (
 echo @echo off
 echo start "" "Internal\main.exe"
-) > "build_nuitka\ChainFlowFiler_V23.7.bat"
+) > "build_nuitka\ChainFlowFiler.bat"
 
 set "TARGET_SUITE="
 if exist "..\ChainFlow_V23_Suite" (
@@ -47,8 +47,8 @@ if exist "%TARGET_SUITE%\ChainFlowFiler" rmdir /s /q "%TARGET_SUITE%\ChainFlowFi
 mkdir "%TARGET_SUITE%\ChainFlowFiler"
 
 xcopy /E /I /Y /Q "build_nuitka\Internal" "%TARGET_SUITE%\ChainFlowFiler\Internal" >nul
-copy /y "build_nuitka\ChainFlowFiler_V23.7.vbs" "%TARGET_SUITE%\ChainFlowFiler\" >nul
-copy /y "build_nuitka\ChainFlowFiler_V23.7.bat" "%TARGET_SUITE%\ChainFlowFiler\" >nul
+copy /y "build_nuitka\ChainFlowFiler.vbs" "%TARGET_SUITE%\ChainFlowFiler\" >nul
+copy /y "build_nuitka\ChainFlowFiler.bat" "%TARGET_SUITE%\ChainFlowFiler\" >nul
 
 echo Done.
 
