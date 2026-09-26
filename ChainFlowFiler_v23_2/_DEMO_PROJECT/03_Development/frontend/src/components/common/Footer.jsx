@@ -1,1 +1,0 @@
-export const Footer = () => <footer>Copyright</footer>
