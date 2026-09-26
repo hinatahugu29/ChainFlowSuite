@@ -1,0 +1,15 @@
+[package]
+name = "sync-engine"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+walkdir = "2.5"
+rusqlite = { version = "0.31", features = ["bundled"] }
+blake3 = "1.5"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+chrono = "0.4"
+indicatif = "0.17" # Progress bar for CLI usage
+anyhow = "1.0"
+rayon = "1.10"

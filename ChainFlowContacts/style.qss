@@ -1,0 +1,199 @@
+/* メニューバーの設定 */
+QMenuBar {
+    background-color: #1E1E1E;
+    color: #CCCCCC;
+    border-bottom: 1px solid #2D2D30;
+}
+QMenuBar::item {
+    background-color: transparent;
+    padding: 6px 10px;
+}
+QMenuBar::item:selected {
+    background-color: #2D2D30;
+    color: #FFFFFF;
+}
+
+/* メニュー項目の設定 */
+QMenu {
+    background-color: #1E1E1E;
+    color: #CCCCCC;
+    border: 1px solid #2D2D30;
+}
+QMenu::item {
+    padding: 6px 20px;
+}
+QMenu::item:selected {
+    background-color: #094771;
+    color: #FFFFFF;
+}
+QMenu::separator {
+    height: 1px;
+    background-color: #2D2D30;
+    margin: 4px 0;
+}
+
+/* 全体の共通設定 */
+QMainWindow {
+    background-color: #1E1E1E;
+}
+
+QWidget {
+    color: #CCCCCC;
+    font-family: "Segoe UI", "Yu Gothic UI", "Meiryo", sans-serif;
+    font-size: 12px;
+}
+
+/* 分割境界線 */
+QSplitter::handle {
+    background-color: #2D2D30;
+}
+QSplitter::handle:horizontal {
+    width: 1px;
+}
+
+/* 入力フィールド */
+QLineEdit {
+    background-color: #2D2D30;
+    color: #FFFFFF;
+    border: 1px solid #3E3E42;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 12px;
+}
+QLineEdit:focus {
+    border: 1px solid #007ACC;
+    background-color: #1E1E1E;
+}
+QLineEdit::placeholder {
+    color: #6A6A6D;
+}
+
+QTextEdit {
+    background-color: #2D2D30;
+    color: #FFFFFF;
+    border: 1px solid #3E3E42;
+    border-radius: 4px;
+    padding: 6px;
+    font-size: 12px;
+}
+QTextEdit:focus {
+    border: 1px solid #007ACC;
+    background-color: #1E1E1E;
+}
+
+/* ラベル関係 */
+QLabel {
+    color: #8F8F8F;
+    font-weight: normal;
+}
+QLabel#formHeader {
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: 1px solid #3E3E42;
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+}
+
+/* ボタン関連 */
+QPushButton {
+    background-color: #333337;
+    color: #F1F1F1;
+    border: 1px solid #3E3E42;
+    border-radius: 4px;
+    padding: 6px 14px;
+    font-weight: bold;
+}
+QPushButton:hover {
+    background-color: #3F3F46;
+    border-color: #55555A;
+}
+QPushButton:pressed {
+    background-color: #007ACC;
+    color: #FFFFFF;
+    border-color: #007ACC;
+}
+
+QPushButton#saveButton {
+    background-color: #0E639C;
+    color: #FFFFFF;
+    border: 1px solid #1177BB;
+}
+QPushButton#saveButton:hover {
+    background-color: #1177BB;
+}
+QPushButton#saveButton:pressed {
+    background-color: #094771;
+}
+
+QPushButton#newButton {
+    background-color: #16825D;
+    color: #FFFFFF;
+    border: 1px solid #1A9E70;
+}
+QPushButton#newButton:hover {
+    background-color: #1A9E70;
+}
+QPushButton#newButton:pressed {
+    background-color: #0F5F44;
+}
+
+QPushButton#deleteButton {
+    background-color: #8A1F1F;
+    color: #FFFFFF;
+    border: 1px solid #A62424;
+}
+QPushButton#deleteButton:hover {
+    background-color: #A62424;
+}
+QPushButton#deleteButton:pressed {
+    background-color: #6E1212;
+}
+
+/* リスト表示 (QTreeView) */
+QTreeView {
+    background-color: #252526;
+    border: 1px solid #2D2D30;
+    outline: none;
+    color: #CCCCCC;
+}
+QTreeView::item {
+    padding: 8px 6px;
+    border-bottom: 1px solid #2D2D30;
+}
+QTreeView::item:hover {
+    background-color: #2A2D2E;
+    color: #FFFFFF;
+}
+QTreeView::item:selected {
+    background-color: #094771;
+    color: #FFFFFF;
+}
+QHeaderView::section {
+    background-color: #2D2D30;
+    color: #8F8F8F;
+    padding: 6px;
+    border: none;
+    border-right: 1px solid #252526;
+    border-bottom: 1px solid #3E3E42;
+    font-weight: bold;
+}
+
+/* スクロールバー */
+QScrollBar:vertical {
+    border: none;
+    background: #1E1E1E;
+    width: 10px;
+    margin: 0px;
+}
+QScrollBar::handle:vertical {
+    background: #424242;
+    min-height: 20px;
+    border-radius: 5px;
+}
+QScrollBar::handle:vertical:hover {
+    background: #4F4F4F;
+}
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0px;
+}

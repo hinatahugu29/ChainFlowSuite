@@ -1,0 +1,130 @@
+/* プレミアムなダークテーマ */
+QMainWindow {
+    background-color: #1e1e2e;
+}
+
+QSplitter::handle {
+    background-color: #313244;
+    width: 2px;
+}
+
+QListWidget {
+    background-color: #181825;
+    color: #cdd6f4;
+    border: none;
+    font-size: 13px;
+    padding: 5px;
+    outline: none;
+}
+
+QListWidget::item {
+    padding: 8px;
+    border-bottom: 1px solid #313244;
+}
+
+QListWidget::item:selected {
+    background-color: rgba(137, 180, 250, 0.15);
+    border-left: 3px solid #89b4fa;
+    color: #cdd6f4;
+}
+
+QListWidget#extractionList::item:selected {
+    color: transparent;
+}
+
+QLineEdit {
+    background-color: #181825;
+    color: #cdd6f4;
+    border: 1px solid #313244;
+    border-radius: 4px;
+    padding: 6px;
+    font-size: 14px;
+    margin: 4px;
+}
+
+QLineEdit:focus {
+    border: 1px solid #89b4fa;
+}
+
+QLabel#sectionHeader {
+    color: #89b4fa;
+    font-weight: bold;
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-top: 5px;
+    margin-bottom: 2px;
+}
+
+QPushButton#detachButton {
+    background-color: #313244;
+    color: #cdd6f4;
+    border: none;
+    border-radius: 3px;
+    font-size: 10px;
+    padding: 2px 5px;
+}
+
+QPushButton#detachButton:hover {
+    background-color: #45475a;
+}
+
+QPushButton#favControlBtn {
+    background-color: #313244;
+    color: #cdd6f4;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+QPushButton#favControlBtn:hover {
+    background-color: #45475a;
+}
+
+/* TabWidget Styles */
+QTabWidget::pane {
+    border-top: 1px solid #313244;
+    background: #181825;
+}
+
+QTabBar::tab {
+    background-color: #1e1e2e;
+    color: #cdd6f4;
+    padding: 6px 12px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    margin-right: 2px;
+    min-width: 100px;
+    font-size: 12px;
+}
+
+QTabBar::tab:selected {
+    background-color: #181825;
+    border-bottom: 2px solid #89b4fa;
+}
+
+QTabBar::tab:hover:!selected {
+    background-color: #313244;
+}
+
+QTabBar::close-button {
+    image: url(no-image); /* Placeholder, ideally use an icon */
+    subcontrol-position: right;
+}
+
+QTabBar::close-button:hover {
+    background-color: rgba(235, 160, 172, 0.2); /* Soft red */
+    border-radius: 2px;
+}
+
+/* HTML Badge for Style Snipe */
+QLabel#htmlBadge {
+    color: #b4befe;
+    font-size: 9px;
+    font-weight: bold;
+    background-color: rgba(180, 190, 254, 0.1);
+    border: 1px solid #b4befe;
+    border-radius: 2px;
+    padding: 1px 4px;
+}
+

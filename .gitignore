@@ -63,3 +63,7 @@ ChainFlowFiler_v23_6/
 **/favorites.json
 **/search_history.json
 test_paths.txt
+
+# ChainFlowSniper が使う Chromium プロファイル。
+# キャッシュ・Cookie・Local Storage などの閲覧データが入るため追跡しない。
+**/.web_data/

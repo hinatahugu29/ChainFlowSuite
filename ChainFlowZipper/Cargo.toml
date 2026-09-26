@@ -1,0 +1,17 @@
+[package]
+name = "ChainFlowZipper"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+zip = { package = "zip_next", version = "0.10.2", features = ["deflate-zlib-ng", "zstd"] }
+flate2 = { version = "1.0.28", features = ["zlib-ng"] }
+rayon = "1.8.0"
+ignore = "0.4.22"
+clap = { version = "4.4.18", features = ["derive"] }
+egui = "0.22.0"
+eframe = "0.22.0"
+glob = "0.3.1"
+winapi = { version = "0.3.9", features = ["winuser", "windef", "wingdi"] }
+rfd = "0.12"
+
