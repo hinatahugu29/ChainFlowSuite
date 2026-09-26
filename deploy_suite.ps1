@@ -42,7 +42,7 @@ $Suite = Join-Path $Root $SuiteName
 # 送り元(Root からの相対) -> Suite 内の配置先
 # Source に指定したフォルダの「中身」が Dest フォルダへ入る。
 $Manifest = @(
-    @{ Name = "ChainFlow Filer";       Source = "ChainFlowFiler_v23_7\build_nuitka\Internal";        Dest = "ChainFlowFiler\Internal" }
+    @{ Name = "ChainFlow Filer";       Source = "ChainFlowFiler\build_nuitka\Internal";        Dest = "ChainFlowFiler\Internal" }
     @{ Name = "ChainFlow Writer";      Source = "ChainFlowWriter\dist\ChainFlowWriter";              Dest = "ChainFlowWriter" }
     @{ Name = "ChainFlow Tool";        Source = "ChainFlowTool\dist\ChainFlowTool";                  Dest = "ChainFlowTool" }
     @{ Name = "Quick Image Tool";      Source = "ChainFlowImage\dist\ChainFlowImage";                Dest = "ChainFlowImage" }
@@ -65,8 +65,8 @@ $ZipperFiles = @(
 
 # Filer のランチャー(Suite 直下ではなく ChainFlowFiler\ に置く)
 $LauncherFiles = @(
-    @{ Source = "ChainFlowFiler_v23_7\build_nuitka\ChainFlowFiler_V23.7.vbs"; Dest = "ChainFlowFiler" }
-    @{ Source = "ChainFlowFiler_v23_7\build_nuitka\ChainFlowFiler_V23.7.bat"; Dest = "ChainFlowFiler" }
+    @{ Source = "ChainFlowFiler\build_nuitka\ChainFlowFiler_V23.7.vbs"; Dest = "ChainFlowFiler" }
+    @{ Source = "ChainFlowFiler\build_nuitka\ChainFlowFiler_V23.7.bat"; Dest = "ChainFlowFiler" }
 )
 
 # 注意: 関数内の進捗表示は Write-Host を使うこと。
