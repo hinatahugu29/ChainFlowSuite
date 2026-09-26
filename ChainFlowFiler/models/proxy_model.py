@@ -230,6 +230,10 @@ class SmartSortFilterProxyModel(QSortFilterProxyModel):
             # 全内容（新規行込み）でキャッシュが再構築される
             model.rowsAboutToBeInserted.connect(self._on_source_rows_inserted)
             model.rowsAboutToBeRemoved.connect(self._on_source_rows_removed)
+            # v23.10: 伏せ札の外し判定は「挿入後」でなければならない。
+            # rowsAboutToBeInserted の時点では行がまだ無く、filePath() が
+            # 目的のパスを返さないため判定できない。
+            model.rowsInserted.connect(self._on_source_rows_did_insert)
             # v23.10: 既存ファイルの中身が書き換わった場合 (ZIP の作り直し、
             # 同名への上書きコピーなど) は行の増減が起きないため、上の3つの
             # シグナルはどれも飛ばない。QFileSystemModel 自体は監視で気付いて
@@ -263,6 +267,34 @@ class SmartSortFilterProxyModel(QSortFilterProxyModel):
                     os.path.normcase(os.path.normpath(path)))
         self.invalidateFilter()
 
+    def _revalidate_vanished(self, candidates):
+        """v23.10: 伏せている行に動きがあったら、実体が戻っていないか確かめる。
+
+        同じ名前で作り直された場合 (ZIP の作り直しなど)、Qt は行を消して
+        足し直すのではなく、元の行を更新するだけで済ませることがある。
+        その場合 rowsInserted が飛ばないため、伏せたままになって
+        「実体はあるのに一覧に出ない」状態になっていた。
+
+        存在確認をするのは伏せている数件だけで、一覧の全行は見ない。
+        ネットワーク上でも件数が知れているため、ここでは確認してよい。
+        """
+        if not self._vanished_paths or not candidates:
+            return False
+        restored = [key for key in candidates
+                    if key in self._vanished_paths and os.path.exists(key)]
+        if not restored:
+            return False
+        for key in restored:
+            self._vanished_paths.discard(key)
+        return True
+
+    def revalidate_all_vanished(self):
+        """v23.10: 伏せている全パスを確かめ直す。F5 のときに呼ばれる。"""
+        if not self._vanished_paths:
+            return
+        if self._revalidate_vanished(list(self._vanished_paths)):
+            self.invalidateFilter()
+
     def _on_source_data_changed(self, top_left, bottom_right, roles=None):
         """v23.10: 更新された行のメタデータキャッシュを捨て、並べ替えをやり直す。
 
@@ -277,15 +309,24 @@ class SmartSortFilterProxyModel(QSortFilterProxyModel):
             return
 
         parent = top_left.parent()
+        touched = []
         try:
             for row in range(top_left.row(), bottom_right.row() + 1):
                 path = model.filePath(model.index(row, 0, parent))
                 if path:
                     self._native_cache.pop(path, None)
+                    if self._vanished_paths:
+                        touched.append(
+                            os.path.normcase(os.path.normpath(path)))
             self._drop_rank_tables_for(parent.internalId())
         except Exception:
             self._native_cache.clear()
             self._invalidate_rank_cache()
+
+        # v23.10: 伏せている行が更新されたなら、同じ名前で作り直された
+        # 可能性がある。実体が戻っていれば再び見せる。
+        if touched and self._revalidate_vanished(touched):
+            self.invalidateFilter()
 
         # 連続して飛んでくる dataChanged を1回の再ソートにまとめる
         self._sort_refresh_timer.start()
@@ -310,20 +351,27 @@ class SmartSortFilterProxyModel(QSortFilterProxyModel):
         except Exception:
             self._invalidate_rank_cache()
 
-    def _on_source_rows_inserted(self, parent, first, last):
-        # v23.10: 伏せていたパスと同じ場所にファイルが現れたら、実体が
-        # 戻ったということなので伏せるのをやめる(移動 -> 貼り直しなど)。
-        if self._vanished_paths:
-            model = self.sourceModel()
-            try:
-                for row in range(first, last + 1):
-                    path = model.filePath(model.index(row, 0, parent))
-                    if path:
-                        self._vanished_paths.discard(
-                            os.path.normcase(os.path.normpath(path)))
-            except Exception:
-                pass
+    def _on_source_rows_did_insert(self, parent, first, last):
+        """v23.10: 行が実際に入ったあとで、伏せ札を外せるか確かめる。
 
+        伏せていたパスと同じ場所にファイルが現れたら、実体が戻ったという
+        ことなので再び見せる(ZIP の作り直し、移動 -> 貼り直しなど)。
+        """
+        if not self._vanished_paths:
+            return
+        model = self.sourceModel()
+        try:
+            inserted = []
+            for row in range(first, last + 1):
+                path = model.filePath(model.index(row, 0, parent))
+                if path:
+                    inserted.append(os.path.normcase(os.path.normpath(path)))
+            if self._revalidate_vanished(inserted):
+                self.invalidateFilter()
+        except Exception:
+            pass
+
+    def _on_source_rows_inserted(self, parent, first, last):
         if not self._rank_tables:
             return
         try:
@@ -345,6 +393,9 @@ class SmartSortFilterProxyModel(QSortFilterProxyModel):
         self._native_cache.clear()
         self._shortcut_folder_cache.clear()
         self._rank_tables.clear()
+        # v23.10: 伏せている数件だけは確かめ直す。取りこぼしがあっても
+        # F5 で必ず正しい状態に戻れるようにするための逃げ道。
+        self.revalidate_all_vanished()
 
     def setTargetRootPath(self, path):
         # v23.1: Windowsのパス揺らぎを防ぐため、完全に正規化して保持

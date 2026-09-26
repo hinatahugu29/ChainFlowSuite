@@ -17,7 +17,7 @@
 - **Model**: `QFileSystemModel` と連動し、アイコンキャッシュやカスタム描画を備えた最適化済みプロキシ。
 - **Core Engine**: Rust (PyO3) によるネイティブ拡張 `chainflow_core.pyd` を搭載。OSレベルのファイル高速ソートを実現。
 - **Build System**: Nuitka によるPythonコードのC言語コンパイルで、起動速度と動作パフォーマンスを最大化。
-- **Tests**: `py -m unittest discover -s tests -v` で、ファイル操作・削除・Undo・並べ替えの単体テスト(48件)を実行できます。
+- **Tests**: `py -m unittest discover -s tests -v` で、ファイル操作・削除・Undo・並べ替えの単体テスト(51件)を実行できます。
 
 ### ⌨️ 操作方法 / Shortcuts
 - `Ctrl + P`: スラッシュメニュー（コマンド実行）
