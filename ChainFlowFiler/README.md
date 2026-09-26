@@ -1,4 +1,4 @@
-# ChainFlow Filer (v23.9) 📁
+# ChainFlow Filer (v23.10) 📁
 
 **ChainFlow Filer** は、キーボード駆動のワークフローと、大規模ファイルシステムにも耐えうるRust製Native Coreを利用した強力な非同期エンジンを融合させた、プロフェッショナル仕様のファイラーです。
 
@@ -17,7 +17,7 @@
 - **Model**: `QFileSystemModel` と連動し、アイコンキャッシュやカスタム描画を備えた最適化済みプロキシ。
 - **Core Engine**: Rust (PyO3) によるネイティブ拡張 `chainflow_core.pyd` を搭載。OSレベルのファイル高速ソートを実現。
 - **Build System**: Nuitka によるPythonコードのC言語コンパイルで、起動速度と動作パフォーマンスを最大化。
-- **Tests**: `py -m unittest discover -s tests -v` で、ファイル操作・削除・Undo の単体テスト(43件)を実行できます。
+- **Tests**: `py -m unittest discover -s tests -v` で、ファイル操作・削除・Undo・並べ替えの単体テスト(44件)を実行できます。
 
 ### ⌨️ 操作方法 / Shortcuts
 - `Ctrl + P`: スラッシュメニュー（コマンド実行）

@@ -20,7 +20,7 @@ class ChainFlowFiler(QMainWindow):
     def __init__(self):
         super().__init__()
         self.plugin_manager = PluginManager()
-        self.setWindowTitle("ChainFlow Filer v23.9")
+        self.setWindowTitle("ChainFlow Filer v23.10")
         self.resize(1800, 950)
         
         # Dark Title Bar moved to showEvent for Windows compatibility (v20.0)

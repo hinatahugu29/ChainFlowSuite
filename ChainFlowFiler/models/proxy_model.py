@@ -205,6 +205,13 @@ class SmartSortFilterProxyModel(QSortFilterProxyModel):
         self._rank_tables = {}   # (parent_internal_id, sort_col) -> {path: rank}
         self._RANK_TABLE_LIMIT = 16
 
+        # v23.10: dataChanged はフォルダ読み込み中に大量に飛ぶ。1回ごとに
+        # 再ソートするとロードが目に見えて重くなるため、短い間隔でまとめる。
+        self._sort_refresh_timer = QTimer(self)
+        self._sort_refresh_timer.setSingleShot(True)
+        self._sort_refresh_timer.setInterval(120)
+        self._sort_refresh_timer.timeout.connect(self.invalidate)
+
     def setSourceModel(self, model):
         super().setSourceModel(model)
         # v23.6: QFileSystemModelは非同期に行を追加するため、表示中フォルダの内容が
@@ -216,6 +223,39 @@ class SmartSortFilterProxyModel(QSortFilterProxyModel):
             # 全内容（新規行込み）でキャッシュが再構築される
             model.rowsAboutToBeInserted.connect(self._on_source_rows_inserted)
             model.rowsAboutToBeRemoved.connect(self._on_source_rows_removed)
+            # v23.10: 既存ファイルの中身が書き換わった場合 (ZIP の作り直し、
+            # 同名への上書きコピーなど) は行の増減が起きないため、上の3つの
+            # シグナルはどれも飛ばない。QFileSystemModel 自体は監視で気付いて
+            # 表示を更新するが、こちらのメタデータ/ランク表は古い更新日時を
+            # 抱えたままになり、日付ソートの順位が動かなかった。
+            model.dataChanged.connect(self._on_source_data_changed)
+
+    def _on_source_data_changed(self, top_left, bottom_right, roles=None):
+        """v23.10: 更新された行のメタデータキャッシュを捨て、並べ替えをやり直す。
+
+        フォルダの読み込み中は行ごとに何度も飛んでくるため、ここでは捨てるだけに
+        留め、実際の再ソートは _sort_refresh_timer で一度にまとめる。
+        """
+        if not top_left.isValid():
+            return
+
+        model = self.sourceModel()
+        if not isinstance(model, QFileSystemModel):
+            return
+
+        parent = top_left.parent()
+        try:
+            for row in range(top_left.row(), bottom_right.row() + 1):
+                path = model.filePath(model.index(row, 0, parent))
+                if path:
+                    self._native_cache.pop(path, None)
+            self._drop_rank_tables_for(parent.internalId())
+        except Exception:
+            self._native_cache.clear()
+            self._invalidate_rank_cache()
+
+        # 連続して飛んでくる dataChanged を1回の再ソートにまとめる
+        self._sort_refresh_timer.start()
 
     def _invalidate_rank_cache(self):
         self._rank_tables.clear()

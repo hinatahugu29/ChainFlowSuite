@@ -24,12 +24,11 @@ import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from PySide6.QtCore import QCoreApplication
-
 from core.file_worker import FileOperationWorker
 
-# QThread を作るのに QCoreApplication が要る(1度だけ作れば使い回せる)
-_app = QCoreApplication.instance() or QCoreApplication(sys.argv)
+# QThread を作るのに Qt アプリケーションが要る。ウィジェットを使うテストと
+# 同居できるよう、生成は tests/__init__.py に一本化している。
+from tests import qt_app as _app
 
 
 class CopyMoveTestCase(unittest.TestCase):
