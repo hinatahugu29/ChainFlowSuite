@@ -16,6 +16,7 @@ from models.proxy_model import SmartSortFilterProxyModel
 from core import (same_path, FileOperationWorker, logger, exists_nonblocking,
                   move_to_trash, MOVE, COPY)
 from core.global_model import get_global_file_system_model
+from core import live_watch
 
 # v14.2 Refactoring: Classes extracted to subpackage for maintainability
 from .highlight_delegate import HighlightDelegate
@@ -112,6 +113,15 @@ class FilePane(QFrame):
         
         self.views = [] # (view, proxy, path, sep_widget) のタプルを保持
         self.current_paths = []
+
+        # v23.11 Live Watch: 外部からのコピー・移動を即座に反映するための監視
+        self._watched_paths = set()  # live_watchにacquire済みの正規化パス
+        self._live_refresh_timer = QTimer(self)
+        self._live_refresh_timer.setSingleShot(True)
+        self._live_refresh_timer.setInterval(150)  # 連続イベントをまとめてから1回だけ更新
+        self._live_refresh_timer.timeout.connect(self.refresh_contents)
+        live_watch.connect(self._on_external_change)
+        self.destroyed.connect(self._release_all_live_watches)
         self.last_selected_paths = [] # 前回選択されていたパス（順序維持用）
         self.is_compact = False # コンパクトモード状態
         # v7.2 Alt+Clickでマークされたパス（永続選択）。
@@ -396,6 +406,7 @@ class FilePane(QFrame):
 
     def display_folders(self, paths):
         self.current_paths = [os.path.abspath(p) for p in paths]
+        self._sync_live_watches()
         # v7.2 マーク機能の参照を確実にリンクする（タブ間移動などで親が変わる可能性に備え）
         if self._marked_paths_ref is None and hasattr(self, 'parent_lane'):
             if hasattr(self.parent_lane, 'parent_area'):
@@ -751,6 +762,30 @@ class FilePane(QFrame):
             container = view.parentWidget()
             if container:
                 container.setStyleSheet("") # スタイル解除
+
+    def _sync_live_watches(self):
+        """v23.11 Live Watch: 表示中パスの変化に合わせて監視を追従させる。
+
+        Trayceのwatch_dir/unwatch_dirと同じ参照カウント方式（core.live_watch）を
+        使い、このペインが「今見ているフォルダ」だけを監視対象に保つ。
+        """
+        new_set = {os.path.normcase(os.path.normpath(p)) for p in self.current_paths}
+        for old in self._watched_paths - new_set:
+            live_watch.release(old)
+        for new in new_set - self._watched_paths:
+            live_watch.acquire(new)
+        self._watched_paths = new_set
+
+    def _release_all_live_watches(self):
+        """ペイン破棄時に監視を全て手放す（destroyedシグナルから呼ばれる）。"""
+        for path in self._watched_paths:
+            live_watch.release(path)
+        self._watched_paths = set()
+
+    def _on_external_change(self, changed_path):
+        """live_watchからの通知。自分が今見ているフォルダの変化だけに反応する。"""
+        if changed_path in self._watched_paths:
+            self._live_refresh_timer.start()
 
     def refresh_contents(self):
         """v14.0 F5リフレッシュ: 現在表示中のフォルダ内容を再読み込み"""
